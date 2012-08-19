@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <title>Facebook Authentication 0.9</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
+        <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
+    <script type="text/javascript">
+function addJsClass(el) {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+    </head>
+
+    <body class="body" onload="addJsClass();">
+        <div id="navigation">
+            <ul>
+                <li>
+                    <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                        <a href="../guide/index.html" class="button">Table of contents</a>
+                        <div id="nav-summary-childs" style="display:none;">
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#1%20Introduction"><strong>1</strong><span>Introduction</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#2%20Intallation"><strong>2</strong><span>Intallation</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#3%20Using%20FacebookAuthService"><strong>3</strong><span>Using FacebookAuthService</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#4%20Filters"><strong>4</strong><span>Filters</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#5%20Configuration"><strong>5</strong><span>Configuration</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#6%20Common%20Issues"><strong>6</strong><span>Common Issues</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#8%20Taglib"><strong>7</strong><span>Taglib</span></a></div>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li class="separator selected">
+                    <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+                </li>
+            </ul>
+        </div>
+        <div id="header">
+            <div class="images clearfix">
+                
+                
+            </div>
+            <p>Facebook Connect authentication support for the Spring Security plugin.</p>
+        </div>
+
+
+        <table id="colset" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td id="col1">
+                    <div id="main" class="corner-all">
+
+                        <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                        <div class="project">
+                            <h1>Facebook Authentication - Reference Documentation</h1>
+                            <p><strong>Authors:</strong> Igor Artamonov</p>
+                            <p><strong>Version:</strong> 0.9</p>
+                            
+                        </div>
+
+                        
+                        <div id="table-of-content">
+                            <h2>Table of Contents</h2>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#1%20Introduction"><strong>1</strong><span>Introduction</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#2%20Intallation"><strong>2</strong><span>Intallation</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#3%20Using%20FacebookAuthService"><strong>3</strong><span>Using FacebookAuthService</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#4%20Filters"><strong>4</strong><span>Filters</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#5%20Configuration"><strong>5</strong><span>Configuration</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#6%20Common%20Issues"><strong>6</strong><span>Common Issues</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#8%20Taglib"><strong>7</strong><span>Taglib</span></a></div>
+                            
+                            <div style="clear:both" ></div>
+                        </div>
+                        
+                        
+
+<h1 id="1 Introduction">1 Introduction</h1>
+Grails plugin for Facebook Authentication, as extension to Grails Spring Security Core plugin.<p class="paragraph"/><h1>Introduction</h1><p class="paragraph"/>Sources: <a href="../ref/Httpsgithubcomsplixgrailsspringsecurityfacebook/https://github.com/splix/grails-spring-security-facebook.html" class="https://github.com/splix/grails-spring-security-facebook">https://github.com/splix/grails-spring-security-facebook</a><p class="paragraph"/><h2>Requirements:</h2>
+<ul class="star">
+<li>grails 2.0.0</li>
+<li>spring-security-core plugin 1.2.7.2</li>
+</ul><p class="paragraph"/><h2>Examples:</h2>
+<ul class="star">
+<li><a href="../ref/Httpsgithubcomsplixs2facebookexample/https://github.com/splix/s2-facebook-example.html" class="https://github.com/splix/s2-facebook-example">https://github.com/splix/s2-facebook-example</a> - Example app (based on Grails 2.0.3)</li>
+</ul><p class="paragraph"/>
+
+
+<h1 id="2 Intallation">2 Intallation</h1>
+<h2>How to install:</h2><p class="paragraph"/><div class="code"><pre>grails install&#45;plugin spring&#45;security&#45;core
+grails s2&#45;quickstart
+grails install&#45;plugin spring&#45;security&#45;facebook
+grails s2&#45;init&#45;facebook</pre></div>
+
+
+
+<h1 id="3 Using FacebookAuthService">3 Using FacebookAuthService</h1>
+<h2>How it works</h2><p class="paragraph"/>If you need to add some specific logic to default plugin behaviour you have to create your own
+service called `FacebookAuthService`. Plugin will check for know methods of this service, and if
+they're exist - use them instead of own.<p class="paragraph"/>It's some kind of extending an abstract class. You don't need to create all methods, just what you need.<p class="paragraph"/>Used objects:
+<ul class="star">
+<li>&#60;FacebookUser&#62; - domain class for your facebook user. It's your own class, can have other name, it's just a example</li>
+<li>&#60;Person&#62; - general user, used by Spring Security. It's your own class, can have other name, it's just a example</li>
+<li>FacebookAuthToken - token provided by plugin</li>
+</ul><p class="paragraph"/>&#60;FacebookUser&#62; and &#60;Person&#62; can be same object, or can be two different object (with a relation), depends
+on your architecture.<p class="paragraph"/><h2>List of possible methods:</h2><p class="paragraph"/><h3>void onCreate(&#60;FacebookUser&#62; user, FacebookAuthToken token)</h3><p class="paragraph"/>Called after user was created by plugin, just before saving into database. You can fill user object
+with some extra values.<p class="paragraph"/>Not called if you have implemented method <code>create(..)</code><p class="paragraph"/>Where:
+<ul class="star">
+<li>user - your domain for Facebook User</li>
+<li>token - com.the6hours.grails.springsecurity.facebook.FacebookAuthToken</li>
+</ul><p class="paragraph"/><h3>void afterCreate(&#60;FacebookUser&#62; user, FacebookAuthToken token)</h3><p class="paragraph"/>Called after user was created by plugin, and when it's already saved into database.<p class="paragraph"/>Not called if you have implemented method <code>create(..)</code><p class="paragraph"/>Where:
+<ul class="star">
+<li>user - your domain for Facebook User</li>
+<li>token - com.the6hours.grails.springsecurity.facebook.FacebookAuthToken</li>
+</ul><p class="paragraph"/><h3>&#60;FacebookUser&#62; findUser(Long uid)</h3><p class="paragraph"/>Called when facebook user is authenticated (on every request), must return existing instance
+for specified facebook uid, if exits. If doesn't - return null<p class="paragraph"/>Where:
+<ul class="star">
+<li>uid - facebook user id</li>
+</ul><p class="paragraph"/><h3>&#60;FacebookUser&#62; create(FacebookAuthToken token)</h3><p class="paragraph"/>Called when we have a new facebook user, called on first login to create all required
+data structures.<p class="paragraph"/>Where:
+<ul class="star">
+<li>token - com.the6hours.grails.springsecurity.facebook.FacebookAuthToken</li>
+</ul><p class="paragraph"/>Notice, that if you have such method, all other method for user creation will no be called:
+<ul class="star">
+<li>createAppUser</li>
+<li>prepopulateAppUser</li>
+<li>onCreate</li>
+<li>afterCreate</li>
+<li>createRoles</li>
+</ul><p class="paragraph"/><h3>&#60;Person&#62; createAppUser(&#60;FacebookUser&#62; user, FacebookAuthToken token)</h3><p class="paragraph"/>Called when we have a new facebook user, called on first login to create main app User domain (when
+we store Facebook User details in different domain).<p class="paragraph"/>Not called if you have implemented method <code>create(..)</code><p class="paragraph"/>Where:
+<ul class="star">
+<li>user - your domain for Facebook User</li>
+<li>token - com.the6hours.grails.springsecurity.facebook.FacebookAuthToken</li>
+</ul><p class="paragraph"/><h3>void createRoles(&#60;FacebookUser&#62; user)</h3><p class="paragraph"/>Called when we have a new facebook user, called on first login to create roles list for new user<p class="paragraph"/>Where:
+<ul class="star">
+<li>user - your domain for Facebook User</li>
+</ul><p class="paragraph"/><h3>def getPrincipal(&#60;FacebookUser&#62; user)</h3><p class="paragraph"/>Must return object to store in security context for specified facebook user (can return itself)<p class="paragraph"/>Where:
+<ul class="star">
+<li>user - your domain for Facebook User</li>
+</ul><p class="paragraph"/><h3>&#60;FacebookUser&#62; get&#60;FacebookUser&#62;(&#60;Person&#62; person)</h3><p class="paragraph"/>Must return instance of your domain object for facebook user for specified person (if it's not a same object)<p class="paragraph"/>Where:
+<ul class="star">
+<li>person - your domain for &#60;Person&#62;</li>
+</ul><p class="paragraph"/><h3>Collection&#60;GrantedAuthority&#62; getRoles(&#60;FacebookUser&#62; user)</h3><p class="paragraph"/>Must return roles list for specified facebook user<p class="paragraph"/>Where:
+<ul class="star">
+<li>user - your domain for Facebook User</li>
+</ul><p class="paragraph"/><h3>void prepopulateAppUser(&#60;Person&#62; person, FacebookAuthToken token)</h3><p class="paragraph"/>Must return roles list for specified facebook user<p class="paragraph"/>Where:
+<ul class="star">
+<li>person - your domain for &#60;Person&#62;</li>
+<li>token - com.the6hours.grails.springsecurity.facebook.FacebookAuthToken</li>
+</ul><p class="paragraph"/><h2>How to use</h2>
+
+
+<h1 id="4 Filters">4 Filters</h1>
+
+
+
+<h1 id="5 Configuration">5 Configuration</h1>
+<h2>Basic Configuration</h2><p class="paragraph"/>Calling `grails s2-init-facebook` will make default configuration of plugin for you, make sure
+that you have configuration in your `Config.groovy` like:<p class="paragraph"/><div class="code"><pre>grails.plugins.springsecurity.facebook.domain.class='&#60;your FacebookUser domain&#62;'
+grails.plugins.springsecurity.facebook.secret = '&#60;Facebook secret <span class="java&#45;keyword">for</span> your app&#62;'
+grails.plugins.springsecurity.facebook.appId = '&#60;Facebooks's app ID&#62;'</pre></div><p class="paragraph"/>and now you can put Facebook Connect button in you GSP:
+<div class="code"><pre>&#60;facebookAuth:connect permissions=<span class="java&#45;quote">"email,user_about_me"</span>/&#62;</pre></div><p class="paragraph"/>You don't need to add anything else, just make sure that FB button is configured with cookie:true.
+
+
+
+<h1 id="6 Common Issues">6 Common Issues</h1>
+<h2>Please enable logging</h2><p class="paragraph"/>If you have troubles with plugin, please enabled logging, so you can see what's happening:
+<div class="code"><pre>log4j = &#123;
+  debug 'com.the6hours'
+&#125;</pre></div><p class="paragraph"/><h2>Can't find a cookie / user not authenticated by plugin</h2><p class="paragraph"/>Make sure that you're using some kind of domain, not <code>localhost</code>, because Facebook can't setup
+cookie for localhost. Avoid <code>.local</code> domains as well.<p class="paragraph"/>You can use domain like <code>myapp.dev</code>, that you should setup at file <code>/etc/hosts</code> (or
+<code>C:/Windows/system32/etc/hosts</code> on Windows), by adding following line:
+<div class="code"><pre>127.0.0.1  myapp.dev</pre></div><p class="paragraph"/>Notice: if you already have line starting with <code>127.0.0.1</code>, then put your <code>myapp.dev</code> domain in this line too (it can
+have multiply associated domains)<p class="paragraph"/>After that, you should configure your Grails app to use this domain, by adding following line into <code>Config.groovy</code>:
+<div class="code"><pre>grails.serverURL = <span class="java&#45;quote">"http://myapp.dev:8080/$&#123;appName&#125;"</span></pre></div><p class="paragraph"/>Of course, you need to use this domain only for development, so put this configuration into <code>development</code>
+environment config:
+<div class="code"><pre>environments &#123;
+    development &#123;
+      grails.serverURL = <span class="java&#45;quote">"http://myapp.dev:8080/$&#123;appName&#125;"</span>
+    &#125;
+&#125;</pre></div>
+
+
+<h1 id="8 Taglib">7 Taglib</h1>
+
+
+                    </div>
+                </td>
+                <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                </div>
+            </div>
+        </td>
+            </tr>
+        </table>
+
+        <div id="footer">
+            
+            
+        </div>
+
+
+
+<script type="text/javascript" src="../js/docs.js"></script>
+
+    </body>
+</html>
