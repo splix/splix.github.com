@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>6 Common Issues 0.9</title>
+    <title>6 Taglib 0.9</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -39,10 +39,10 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../guide/5%20Configuration.html"><strong>5</strong><span>Configuration</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/6%20Common%20Issues.html"><strong>6</strong><span>Common Issues</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/6%20Taglib.html"><strong>6</strong><span>Taglib</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/8%20Taglib.html"><strong>7</strong><span>Taglib</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/8%20Common%20Issues.html"><strong>7</strong><span>Common Issues</span></a>
                     </div>
                     
                 </div>
@@ -74,12 +74,12 @@ function addJsClass() {
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../guide/8%20Taglib.html"><strong>7</strong><span>Taglib</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/8%20Common%20Issues.html"><strong>7</strong><span>Common Issues</span> >></a></div>
                 
 
 
                 <div class="project">
-                    <h1>6 Common Issues - Reference Documentation</h1>
+                    <h1>6 Taglib - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
@@ -92,29 +92,17 @@ function addJsClass() {
 
                 
 
-<h1 id="6 Common Issues">6 Common Issues</h1>
-<h2>Please enable logging</h2><p class="paragraph"/>If you have troubles with plugin, please enabled logging, so you can see what's happening:
-<div class="code"><pre>log4j = &#123;
-  debug 'com.the6hours'
-&#125;</pre></div><p class="paragraph"/><h2>Can't find a cookie / user not authenticated by plugin</h2><p class="paragraph"/>Make sure that you're using some kind of domain, not <code>localhost</code>, because Facebook can't setup
-cookie for localhost. Avoid <code>.local</code> domains as well.<p class="paragraph"/>You can use domain like <code>myapp.dev</code>, that you should setup at file <code>/etc/hosts</code> (or
-<code>C:/Windows/system32/etc/hosts</code> on Windows), by adding following line:
-<div class="code"><pre>127.0.0.1  myapp.dev</pre></div><p class="paragraph"/>Notice: if you already have line starting with <code>127.0.0.1</code>, then put your <code>myapp.dev</code> domain in this line too (it can
-have multiply associated domains)<p class="paragraph"/>After that, you should configure your Grails app to use this domain, by adding following line into <code>Config.groovy</code>:
-<div class="code"><pre>grails.serverURL = <span class="java&#45;quote">"http://myapp.dev:8080/$&#123;appName&#125;"</span></pre></div><p class="paragraph"/>Of course, you need to use this domain only for development, so put this configuration into <code>development</code>
-environment config:
-<div class="code"><pre>environments &#123;
-    development &#123;
-      grails.serverURL = <span class="java&#45;quote">"http://myapp.dev:8080/$&#123;appName&#125;"</span>
-    &#125;
-&#125;</pre></div>
+<h1 id="6 Taglib">6 Taglib</h1>
+<h2>:init</h2><p class="paragraph"/>Usage: &#60;facebookAuth:init /&#62;<p class="paragraph"/>Puts Facebook Javascript SDK initialization code. Puts this code only once per page, feel free to call
+it when you need<p class="paragraph"/><h2>:connect</h2><p class="paragraph"/>Usage: &#60;facebookAuth:connect /&#62;<p class="paragraph"/>Puts Facebook Connect button. If Facebook Javascript SDK initialization code wasn't added into current page,
+ then calling of this tag will call <code>:init</code> automatically.<p class="paragraph"/>
 
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
                     <div class="toc-item prev-left"><a href="../guide/5%20Configuration.html">&lt;&lt; <strong>5</strong><span>Configuration</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../guide/8%20Taglib.html"><strong>7</strong><span>Taglib</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/8%20Common%20Issues.html"><strong>7</strong><span>Common Issues</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>

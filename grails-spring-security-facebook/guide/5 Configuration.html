@@ -39,10 +39,10 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../guide/5%20Configuration.html"><strong>5</strong><span>Configuration</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/6%20Common%20Issues.html"><strong>6</strong><span>Common Issues</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/6%20Taglib.html"><strong>6</strong><span>Taglib</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/8%20Taglib.html"><strong>7</strong><span>Taglib</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/8%20Common%20Issues.html"><strong>7</strong><span>Common Issues</span></a>
                     </div>
                     
                 </div>
@@ -74,7 +74,7 @@ function addJsClass() {
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../guide/6%20Common%20Issues.html"><strong>6</strong><span>Common Issues</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/6%20Taglib.html"><strong>6</strong><span>Taglib</span> >></a></div>
                 
 
 
@@ -93,11 +93,13 @@ function addJsClass() {
                 
 
 <h1 id="5 Configuration">5 Configuration</h1>
-<h2>Basic Configuration</h2><p class="paragraph"/>Calling `grails s2-init-facebook` will make default configuration of plugin for you, make sure
+<h2>Basic Configuration</h2><p class="paragraph"/><blockquote class="note">
+Make sure that you have installed and configured spring-security-core plugin before this step.
+</blockquote><p class="paragraph"/>Calling `grails s2-init-facebook` will make default configuration of plugin for you, make sure
 that you have configuration in your `Config.groovy` like:<p class="paragraph"/><div class="code"><pre>grails.plugins.springsecurity.facebook.domain.class='&#60;your FacebookUser domain&#62;'
 grails.plugins.springsecurity.facebook.secret = '&#60;Facebook secret <span class="java&#45;keyword">for</span> your app&#62;'
-grails.plugins.springsecurity.facebook.appId = '&#60;Facebooks's app ID&#62;'</pre></div><p class="paragraph"/>and now you can put Facebook Connect button in you GSP:
-<div class="code"><pre>&#60;facebookAuth:connect permissions=<span class="java&#45;quote">"email,user_about_me"</span>/&#62;</pre></div><p class="paragraph"/>You don't need to add anything else, just make sure that FB button is configured with cookie:true.
+grails.plugins.springsecurity.facebook.appId = '&#60;Facebooks's app ID&#62;'</pre></div><p class="paragraph"/>Or you can skip `grails s2-init-facebook` step, and make such configuration by yourself.<p class="paragraph"/>When you have valid configuration you can put Facebook Connect button in you GSP:
+<div class="code"><pre>&#60;facebookAuth:connect permissions=<span class="java&#45;quote">"email,user_about_me"</span>/&#62;</pre></div><p class="paragraph"/>You don't need to add anything else.
 
 
 
@@ -105,7 +107,7 @@ grails.plugins.springsecurity.facebook.appId = '&#60;Facebooks's app ID&#62;'</p
                 
                     <div class="toc-item prev-left"><a href="../guide/4%20Filters.html">&lt;&lt; <strong>4</strong><span>Filters</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../guide/6%20Common%20Issues.html"><strong>6</strong><span>Common Issues</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/6%20Taglib.html"><strong>6</strong><span>Taglib</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>

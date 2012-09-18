@@ -33,9 +33,9 @@ function addJsClass(el) {
                             
                             <div class="toc-item" style="margin-left:0"><a href="#5%20Configuration"><strong>5</strong><span>Configuration</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:0"><a href="#6%20Common%20Issues"><strong>6</strong><span>Common Issues</span></a></div>
+                            <div class="toc-item" style="margin-left:0"><a href="#6%20Taglib"><strong>6</strong><span>Taglib</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:0"><a href="#8%20Taglib"><strong>7</strong><span>Taglib</span></a></div>
+                            <div class="toc-item" style="margin-left:0"><a href="#8%20Common%20Issues"><strong>7</strong><span>Common Issues</span></a></div>
                             
                         </div>
                     </div>
@@ -82,9 +82,9 @@ function addJsClass(el) {
                             
                             <div class="toc-item" style="margin-left:0px"><a href="#5%20Configuration"><strong>5</strong><span>Configuration</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:0px"><a href="#6%20Common%20Issues"><strong>6</strong><span>Common Issues</span></a></div>
+                            <div class="toc-item" style="margin-left:0px"><a href="#6%20Taglib"><strong>6</strong><span>Taglib</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:0px"><a href="#8%20Taglib"><strong>7</strong><span>Taglib</span></a></div>
+                            <div class="toc-item" style="margin-left:0px"><a href="#8%20Common%20Issues"><strong>7</strong><span>Common Issues</span></a></div>
                             
                             <div style="clear:both" ></div>
                         </div>
@@ -92,13 +92,13 @@ function addJsClass(el) {
                         
 
 <h1 id="1 Introduction">1 Introduction</h1>
-Grails plugin for Facebook Authentication, as extension to Grails Spring Security Core plugin.<p class="paragraph"/><h1>Introduction</h1><p class="paragraph"/>Sources: <a href="../ref/Httpsgithubcomsplixgrailsspringsecurityfacebook/https://github.com/splix/grails-spring-security-facebook.html" class="https://github.com/splix/grails-spring-security-facebook">https://github.com/splix/grails-spring-security-facebook</a><p class="paragraph"/><h2>Requirements:</h2>
+Grails plugin for Facebook Authentication, as extension to Grails Spring Security Core plugin.<p class="paragraph"/><h1>Introduction</h1><p class="paragraph"/>Sources: <a href="https://github.com/splix/grails-spring-security-facebook" target="blank">https://github.com/splix/grails-spring-security-facebook</a><p class="paragraph"/><h2>Requirements:</h2>
 <ul class="star">
 <li>grails 2.0.0</li>
 <li>spring-security-core plugin 1.2.7.2</li>
 </ul><p class="paragraph"/><h2>Examples:</h2>
 <ul class="star">
-<li><a href="../ref/Httpsgithubcomsplixs2facebookexample/https://github.com/splix/s2-facebook-example.html" class="https://github.com/splix/s2-facebook-example">https://github.com/splix/s2-facebook-example</a> - Example app (based on Grails 2.0.3)</li>
+<li><a href="https://github.com/splix/s2-facebook-example" target="blank">https://github.com/splix/s2-facebook-example</a> - Example app (based on Grails 2.0.3)</li>
 </ul><p class="paragraph"/>
 
 
@@ -168,19 +168,36 @@ we store Facebook User details in different domain).<p class="paragraph"/>Not ca
 
 
 <h1 id="4 Filters">4 Filters</h1>
-
+There are two types of authorization, and two filters.<p class="paragraph"/><h2>Transparent cookie based authorization / FacebookAuthCookieTransparentFilter</h2><p class="paragraph"/>Based on <a href="https://developers.facebook.com/docs/reference/javascript/" target="blank">Facebook Javascript SDK</a> authorization. On
+client side it makes Facebook authorization and put Facebook Cookie (it's made by Facebook Javascript,
+you don't need anything special)<p class="paragraph"/>After successful authorization on client side, the browser should reload current page. Or open any other page.<p class="paragraph"/>This filter will <strong class="bold">process each request</strong>, and if it sees valid Facebook cookie, it makes authorization for
+current user. If it's a new user, it creates a new one for application, with provided Facebook credentials.<p class="paragraph"/><blockquote class="note">
+It's per-request authorization.
+</blockquote><p class="paragraph"/><h2>Manual cookie based authorization / FacebookAuthCookieDirectFilter</h2><p class="paragraph"/>Based on <a href="https://developers.facebook.com/docs/reference/javascript/" target="blank">Facebook Javascript SDK</a> authorization. On
+client side it makes Facebook authorization and put Facebook Cookie (it's made by Facebook Javascript,
+you don't need anything special)<p class="paragraph"/>Same as FacebookAuthCookieTransparentFilter, it parse Facebook cookie, but only for specified url. Like
+username/password filter from spring-security-core or similar. After successful authorization it
+can redirect user to specified url.
 
 
 <h1 id="5 Configuration">5 Configuration</h1>
-<h2>Basic Configuration</h2><p class="paragraph"/>Calling `grails s2-init-facebook` will make default configuration of plugin for you, make sure
+<h2>Basic Configuration</h2><p class="paragraph"/><blockquote class="note">
+Make sure that you have installed and configured spring-security-core plugin before this step.
+</blockquote><p class="paragraph"/>Calling `grails s2-init-facebook` will make default configuration of plugin for you, make sure
 that you have configuration in your `Config.groovy` like:<p class="paragraph"/><div class="code"><pre>grails.plugins.springsecurity.facebook.domain.class='&#60;your FacebookUser domain&#62;'
 grails.plugins.springsecurity.facebook.secret = '&#60;Facebook secret <span class="java&#45;keyword">for</span> your app&#62;'
-grails.plugins.springsecurity.facebook.appId = '&#60;Facebooks's app ID&#62;'</pre></div><p class="paragraph"/>and now you can put Facebook Connect button in you GSP:
-<div class="code"><pre>&#60;facebookAuth:connect permissions=<span class="java&#45;quote">"email,user_about_me"</span>/&#62;</pre></div><p class="paragraph"/>You don't need to add anything else, just make sure that FB button is configured with cookie:true.
+grails.plugins.springsecurity.facebook.appId = '&#60;Facebooks's app ID&#62;'</pre></div><p class="paragraph"/>Or you can skip `grails s2-init-facebook` step, and make such configuration by yourself.<p class="paragraph"/>When you have valid configuration you can put Facebook Connect button in you GSP:
+<div class="code"><pre>&#60;facebookAuth:connect permissions=<span class="java&#45;quote">"email,user_about_me"</span>/&#62;</pre></div><p class="paragraph"/>You don't need to add anything else.
 
 
 
-<h1 id="6 Common Issues">6 Common Issues</h1>
+<h1 id="6 Taglib">6 Taglib</h1>
+<h2>:init</h2><p class="paragraph"/>Usage: &#60;facebookAuth:init /&#62;<p class="paragraph"/>Puts Facebook Javascript SDK initialization code. Puts this code only once per page, feel free to call
+it when you need<p class="paragraph"/><h2>:connect</h2><p class="paragraph"/>Usage: &#60;facebookAuth:connect /&#62;<p class="paragraph"/>Puts Facebook Connect button. If Facebook Javascript SDK initialization code wasn't added into current page,
+ then calling of this tag will call <code>:init</code> automatically.<p class="paragraph"/>
+
+
+<h1 id="8 Common Issues">7 Common Issues</h1>
 <h2>Please enable logging</h2><p class="paragraph"/>If you have troubles with plugin, please enabled logging, so you can see what's happening:
 <div class="code"><pre>log4j = &#123;
   debug 'com.the6hours'
@@ -196,10 +213,6 @@ environment config:
       grails.serverURL = <span class="java&#45;quote">"http://myapp.dev:8080/$&#123;appName&#125;"</span>
     &#125;
 &#125;</pre></div>
-
-
-<h1 id="8 Taglib">7 Taglib</h1>
-
 
                     </div>
                 </td>
