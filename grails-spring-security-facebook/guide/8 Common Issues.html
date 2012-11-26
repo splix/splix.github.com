@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>7 Common Issues 0.9</title>
+    <title>7 Common Issues 0.10</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -30,13 +30,13 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../guide/2%20Intallation.html"><strong>2</strong><span>Intallation</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/3%20Using%20FacebookAuthService.html"><strong>3</strong><span>Using FacebookAuthService</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/3%20Usage.html"><strong>3</strong><span>Usage</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/4%20Filters.html"><strong>4</strong><span>Filters</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/4%20Configuration.html"><strong>4</strong><span>Configuration</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/5%20Configuration.html"><strong>5</strong><span>Configuration</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/5%20Customization.html"><strong>5</strong><span>Customization</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:0"><a href="../guide/6%20Taglib.html"><strong>6</strong><span>Taglib</span></a>
@@ -81,7 +81,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
-                    <p><strong>Version:</strong> 0.9</p>
+                    <p><strong>Version:</strong> 0.10</p>
 
                     
                 </div>
@@ -93,8 +93,8 @@ function addJsClass() {
 <h1 id="8 Common Issues">7 Common Issues</h1>
 <h2>Please enable logging</h2><p class="paragraph"/>If you have troubles with plugin, please enabled logging, so you can see what's happening:
 <div class="code"><pre>log4j = &#123;
-  debug 'com.the6hours'
-&#125;</pre></div><p class="paragraph"/><h2>Can't find a cookie / user not authenticated by plugin</h2><p class="paragraph"/>Make sure that you're using some kind of domain, not <code>localhost</code>, because Facebook can't setup
+  debug 'com.the6hours', 'grails.app.taglib.com.the6hours'
+&#125;</pre></div><p class="paragraph"/><h2>Can't find a cookie / user not authenticated by plugin (client side authentication)</h2><p class="paragraph"/>Make sure that you're using any domain name for you application. Not a <code>localhost</code>, because Facebook can't setup
 cookie for localhost. Avoid <code>.local</code> domains as well.<p class="paragraph"/>You can use domain like <code>myapp.dev</code>, that you should setup at file <code>/etc/hosts</code> (or
 <code>C:/Windows/system32/etc/hosts</code> on Windows), by adding following line:
 <div class="code"><pre>127.0.0.1  myapp.dev</pre></div><p class="paragraph"/>Notice: if you already have line starting with <code>127.0.0.1</code>, then put your <code>myapp.dev</code> domain in this line too (it can

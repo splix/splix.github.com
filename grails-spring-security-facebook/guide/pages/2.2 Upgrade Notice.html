@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>6 Taglib 0.10</title>
+    <title>2.2 Upgrade Notice 0.10</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -20,29 +20,29 @@ function addJsClass() {
     <ul>
         <li>
             <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
-                <a href="../guide/index.html" class="button">Table of contents</a>
+                <a href="../../guide/index.html" class="button">Table of contents</a>
 
                 <div id="nav-summary-childs" style="display:none;">
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/1%20Introduction.html"><strong>1</strong><span>Introduction</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/1%20Introduction.html"><strong>1</strong><span>Introduction</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/2%20Intallation.html"><strong>2</strong><span>Intallation</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/2%20Intallation.html"><strong>2</strong><span>Intallation</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/3%20Usage.html"><strong>3</strong><span>Usage</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/3%20Usage.html"><strong>3</strong><span>Usage</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/4%20Configuration.html"><strong>4</strong><span>Configuration</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/4%20Configuration.html"><strong>4</strong><span>Configuration</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/5%20Customization.html"><strong>5</strong><span>Customization</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/5%20Customization.html"><strong>5</strong><span>Customization</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/6%20Taglib.html"><strong>6</strong><span>Taglib</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/6%20Taglib.html"><strong>6</strong><span>Taglib</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/8%20Common%20Issues.html"><strong>7</strong><span>Common Issues</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/8%20Common%20Issues.html"><strong>7</strong><span>Common Issues</span></a>
                     </div>
                     
                 </div>
@@ -68,18 +68,18 @@ function addJsClass() {
             <div id="main" class="corner-all">
 
                 
-                    <div class="toc-item prev-left"><a href="../guide/5%20Customization.html">&lt;&lt; <strong>5</strong><span>Customization</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/1%20Introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
                 
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../guide/8%20Common%20Issues.html"><strong>7</strong><span>Common Issues</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/3%20Usage.html"><strong>3</strong><span>Usage</span> >></a></div>
                 
 
 
                 <div class="project">
-                    <h1>6 Taglib - Reference Documentation</h1>
+                    <h1>2.2 Upgrade Notice - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
@@ -92,17 +92,18 @@ function addJsClass() {
 
                 
 
-<h1 id="6 Taglib">6 Taglib</h1>
-<h2>:init</h2><p class="paragraph"/>Usage: &#60;facebookAuth:init /&#62;<p class="paragraph"/>Puts Facebook Javascript SDK initialization code. Puts this code only once per page, feel free to call
-it when you need<p class="paragraph"/><h2>:connect</h2><p class="paragraph"/>Usage: &#60;facebookAuth:connect /&#62;<p class="paragraph"/>Puts Facebook Connect button. If Facebook Javascript SDK initialization code wasn't added into current page,
- then calling of this tag will call <code>:init</code> automatically.<p class="paragraph"/>
+<h2 id="2.2 Upgrade Notice">2.2 Upgrade Notice</h2>
+<h3>Upgrading from version 0.9</h3><p class="paragraph"/>Since version 0.10 plugin have started to use Server Side authentication by default, instead of
+Client Side authentication (based on Facebook JS SDK) that was default implementation for version 0.9 and earlier.<p class="paragraph"/>If you want to continue using Client Side authentication, you should add following configuration into <code>Config.groovy</code>:
+<div class="code"><pre>grails.plugins.springsecurity.facebook.filter.type='transparent,cookieDirect'</pre></div><p class="paragraph"/>See <a href="../guide/single.html#3.2%20Filters" class="guide">Filters guide</a> for details.
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
-                    <div class="toc-item prev-left"><a href="../guide/5%20Customization.html">&lt;&lt; <strong>5</strong><span>Customization</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/1%20Introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../guide/8%20Common%20Issues.html"><strong>7</strong><span>Common Issues</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/3%20Usage.html"><strong>3</strong><span>Usage</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
@@ -110,7 +111,7 @@ it when you need<p class="paragraph"/><h2>:connect</h2><p class="paragraph"/>Usa
         <td id="col2">
             <div class="local clearfix">
                 <div class="local-title">
-                    <a href="../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <a href="../../guide/index.html" target="mainFrame">Quick Reference</a>
                     <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
                 </div>
                 <div class="menu">

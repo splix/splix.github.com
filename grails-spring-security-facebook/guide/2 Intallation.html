@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>2 Intallation 0.9</title>
+    <title>2 Intallation 0.10</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -30,13 +30,13 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../guide/2%20Intallation.html"><strong>2</strong><span>Intallation</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/3%20Using%20FacebookAuthService.html"><strong>3</strong><span>Using FacebookAuthService</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/3%20Usage.html"><strong>3</strong><span>Usage</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/4%20Filters.html"><strong>4</strong><span>Filters</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/4%20Configuration.html"><strong>4</strong><span>Configuration</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/5%20Configuration.html"><strong>5</strong><span>Configuration</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/5%20Customization.html"><strong>5</strong><span>Customization</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:0"><a href="../guide/6%20Taglib.html"><strong>6</strong><span>Taglib</span></a>
@@ -74,7 +74,7 @@ function addJsClass() {
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../guide/3%20Using%20FacebookAuthService.html"><strong>3</strong><span>Using FacebookAuthService</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/3%20Usage.html"><strong>3</strong><span>Usage</span> >></a></div>
                 
 
 
@@ -83,20 +83,41 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
-                    <p><strong>Version:</strong> 0.9</p>
+                    <p><strong>Version:</strong> 0.10</p>
 
                     
                 </div>
 
                 
+                <div id="table-of-content">
+                    <h2>Table of Contents</h2>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#2.1%20Installation"><strong>2.1</strong><span>Installation</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#2.2%20Upgrade%20Notice"><strong>2.2</strong><span>Upgrade Notice</span></a>
+                    </div>
+                    
+                </div>
+                
 
                 
 
 <h1 id="2 Intallation">2 Intallation</h1>
-<h2>How to install:</h2><p class="paragraph"/><div class="code"><pre>grails install&#45;plugin spring&#45;security&#45;core
+
+
+
+<h2 id="2.1 Installation">2.1 Installation</h2>
+<h3>Install plugin</h3><p class="paragraph"/>Basically it's just a:<p class="paragraph"/><div class="code"><pre>grails install&#45;plugin spring&#45;security&#45;core
 grails s2&#45;quickstart
 grails install&#45;plugin spring&#45;security&#45;facebook
-grails s2&#45;init&#45;facebook</pre></div>
+grails s2&#45;init&#45;facebook</pre></div><p class="paragraph"/>Last step `s2-init-facebook` is optional, useful only if you need an step-by-step wizard to make configuration.<p class="paragraph"/>Follow <a href="../guide/single.html#3.1%20Basic%20Usage" class="guide">Basic Usage</a> guide for next steps.
+
+
+<h2 id="2.2 Upgrade Notice">2.2 Upgrade Notice</h2>
+<h3>Upgrading from version 0.9</h3><p class="paragraph"/>Since version 0.10 plugin have started to use Server Side authentication by default, instead of
+Client Side authentication (based on Facebook JS SDK) that was default implementation for version 0.9 and earlier.<p class="paragraph"/>If you want to continue using Client Side authentication, you should add following configuration into <code>Config.groovy</code>:
+<div class="code"><pre>grails.plugins.springsecurity.facebook.filter.type='transparent,cookieDirect'</pre></div><p class="paragraph"/>See <a href="../guide/single.html#3.2%20Filters" class="guide">Filters guide</a> for details.
 
 
 
@@ -104,7 +125,7 @@ grails s2&#45;init&#45;facebook</pre></div>
                 
                     <div class="toc-item prev-left"><a href="../guide/1%20Introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../guide/3%20Using%20FacebookAuthService.html"><strong>3</strong><span>Using FacebookAuthService</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/3%20Usage.html"><strong>3</strong><span>Usage</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
