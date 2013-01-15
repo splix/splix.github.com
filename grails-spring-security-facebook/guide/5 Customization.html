@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>5 Customization 0.10</title>
+    <title>5 Customization 0.10.3</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -83,7 +83,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
-                    <p><strong>Version:</strong> 0.10</p>
+                    <p><strong>Version:</strong> 0.10.3</p>
 
                     
                 </div>
@@ -113,7 +113,8 @@ they're exist - use them instead of own.<p class="paragraph"/>It's some kind of 
 <li>&#60;Person&#62; - general user, used by Spring Security. It's your own class, can have other name, it's just a example</li>
 <li>FacebookAuthToken - token provided by plugin</li>
 </ul><p class="paragraph"/>&#60;FacebookUser&#62; and &#60;Person&#62; can be same object, or can be two different object (with a relation), depends
-on your architecture.<p class="paragraph"/><h2>List of possible methods:</h2><p class="paragraph"/><h3>void onCreate(&#60;FacebookUser&#62; user, FacebookAuthToken token)</h3><p class="paragraph"/>Called after user was created by plugin, just before saving into database. You can fill user object
+on your architecture.<p class="paragraph"/><h2>Take a look at sources</h2><p class="paragraph"/>Please, take a look at sources of <a href="https://github.com/splix/grails-spring-security-facebook/blob/master/src/groovy/com/the6hours/grails/springsecurity/facebook/DefaultFacebookAuthDao.groovy" target="blank">DefaultFacebookAuthDao</a>
+to understand how it works, and which methods you can use for customization<p class="paragraph"/><h2>List of possible methods:</h2><p class="paragraph"/><h3>void onCreate(&#60;FacebookUser&#62; user, FacebookAuthToken token)</h3><p class="paragraph"/>Called after user was created by plugin, just before saving into database. You can fill user object
 with some extra values.<p class="paragraph"/>Not called if you have implemented method <code>create(..)</code><p class="paragraph"/>Where:
 <ul class="star">
 <li>user - your domain for Facebook User</li>

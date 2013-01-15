@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>3.2 Filters 0.10</title>
+    <title>3.2 Filters 0.10.3</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -83,7 +83,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
-                    <p><strong>Version:</strong> 0.10</p>
+                    <p><strong>Version:</strong> 0.10.3</p>
 
                     
                 </div>
@@ -99,14 +99,14 @@ function addJsClass() {
 <li>FacebookAuthRedirectFilter - server-side authorization (used by default)</li>
 <li>FacebookAuthCookieTransparentFilter - automatic client-side authorization</li>
 <li>FacebookAuthCookieDirectFilter - manual client-side authorization</li>
-</ul><p class="paragraph"/><h2>Server-Side authorization (FacebookAuthRedirectFilter)</h2><p class="paragraph"/>It's a standard <a href="../ref/Httpsdevelopersfacebookcomdocshowtosloginserversidelogin/Login for Server-side Apps.html" class="https://developers.facebook.com/docs/howtos/login/server-side-login/">Login for Server-side Apps</a>.
+</ul><p class="paragraph"/><h2>Server-Side authorization (FacebookAuthRedirectFilter)</h2><p class="paragraph"/>It's a standard <a href="https://developers.facebook.com/docs/howtos/login/server-side-login/" target="blank">Login for Server-side Apps</a>.
 After clicking on 'connect button' user gets redirected to special Facebook page, for authentication, and then
-redirected back to your app.<p class="paragraph"/><h2>Transparent cookie based authorization (FacebookAuthCookieTransparentFilter)</h2><p class="paragraph"/>Based on <a href="../ref/Httpsdevelopersfacebookcomdocsreferencejavascript/Facebook Javascript SDK.html" class="https://developers.facebook.com/docs/reference/javascript/">Facebook Javascript SDK</a> authorization. On
+redirected back to your app.<p class="paragraph"/><h2>Transparent cookie based authorization (FacebookAuthCookieTransparentFilter)</h2><p class="paragraph"/>Based on <a href="https://developers.facebook.com/docs/reference/javascript/" target="blank">Facebook Javascript SDK</a> authorization. On
 client side it makes Facebook authorization and put Facebook Cookie (it's made by Facebook Javascript,
 you don't need anything special)<p class="paragraph"/>After successful authorization on client side, the browser should reload current page. Or open any other page.<p class="paragraph"/>This filter will <strong class="bold">process each request</strong>, and if it sees valid Facebook cookie, it makes authorization for
 current user. If it's a new user, it creates a new one for application, with provided Facebook credentials.<p class="paragraph"/><blockquote class="note">
 It's per-request authorization. That means that this filter will try to authorize user on each page request.
-</blockquote><p class="paragraph"/><h2>Manual cookie based authorization (FacebookAuthCookieDirectFilter)</h2><p class="paragraph"/>Based on <a href="../ref/Httpsdevelopersfacebookcomdocsreferencejavascript/Facebook Javascript SDK.html" class="https://developers.facebook.com/docs/reference/javascript/">Facebook Javascript SDK</a> authorization. On
+</blockquote><p class="paragraph"/><h2>Manual cookie based authorization (FacebookAuthCookieDirectFilter)</h2><p class="paragraph"/>Based on <a href="https://developers.facebook.com/docs/reference/javascript/" target="blank">Facebook Javascript SDK</a> authorization. On
 client side it makes Facebook authorization and put Facebook Cookie (it's made by Facebook Javascript,
 you don't need anything special)<p class="paragraph"/>Same as FacebookAuthCookieTransparentFilter, it parse Facebook cookie, but only for specified url. Like
 username/password filter from spring-security-core or similar. After successful authorization it

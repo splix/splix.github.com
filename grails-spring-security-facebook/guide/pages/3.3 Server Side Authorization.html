@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>3.3 Server Side Authorization 0.10</title>
+    <title>3.3 Server Side Authorization 0.10.3</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -83,7 +83,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
-                    <p><strong>Version:</strong> 0.10</p>
+                    <p><strong>Version:</strong> 0.10.3</p>
 
                     
                 </div>
@@ -93,7 +93,10 @@ function addJsClass() {
                 
 
 <h2 id="3.3 Server Side Authorization">3.3 Server Side Authorization</h2>
-
+It's the `FacebookAuthRedirectFilter`, enabled by default.<p class="paragraph"/>It's preferred and a standard <a href="https://developers.facebook.com/docs/howtos/login/server-side-login/" target="blank">Login for Server-side Apps</a>.
+After clicking on 'connect button' user gets redirected to special Facebook page, for authentication, and then
+redirected back to your app.<p class="paragraph"/>Note, that user going to see Facebook Authentication screen only in first time (if not security modification was made).
+Next time user should be redirected back from Facebook to your application, without showing any Facebook screen.
 
 
                 <div style="clear:both;margin-top:15px;"></div>
