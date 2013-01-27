@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>2.1 Installation 0.11</title>
+    <title>4.2 Domains 0.11</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -68,18 +68,18 @@ function addJsClass() {
             <div id="main" class="corner-all">
 
                 
-                    <div class="toc-item prev-left"><a href="../../guide/1%20Introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/3%20Usage.html">&lt;&lt; <strong>3</strong><span>Usage</span></a></div>
                 
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../../guide/3%20Usage.html"><strong>3</strong><span>Usage</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/5%20Customization.html"><strong>5</strong><span>Customization</span> >></a></div>
                 
 
 
                 <div class="project">
-                    <h1>2.1 Installation - Reference Documentation</h1>
+                    <h1>4.2 Domains - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
@@ -92,20 +92,27 @@ function addJsClass() {
 
                 
 
-<h2 id="2.1 Installation">2.1 Installation</h2>
-<h3>Install plugin</h3><p class="paragraph"/>Basically it's just adding dependency into `BuildConfig.groovy`:<p class="paragraph"/><div class="code"><pre>plugins &#123;
-        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;facebook:0.11"</span>
-    &#125;</pre></div><p class="paragraph"/>and calling (optionaly) configuration wizards by:
-<div class="code"><pre>grails s2&#45;quickstart //configure Spring Security Core
-grails s2&#45;init&#45;facebook //configure Spring Security Facebook</pre></div><p class="paragraph"/>Instead of last step you can edit `Config.groovy` manually, you need to add Facebook App key/secret there,
-and other configuration options if you need (see <a href="../guide/single.html#4%20Configuration" class="guide">Configuration</a> section)<p class="paragraph"/>Follow <a href="../guide/single.html#3.1%20Basic%20Usage" class="guide">Basic Usage</a> guide for next steps.
+<h2 id="4.2 Domains">4.2 Domains</h2>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th><th><strong class="bold">Values</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.domain.classname</td><td>'FacebookUser'</td><td>&#160;</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.domain.relation</td><td>null</td><td>'SameObject', 'JoinedUser'</td></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.domain.appUserConnectionPropertyName</td><td>'user'</td><td>&#160;</td></tr></table>
+<ul class="star">
+<li><code>domain.classname</code> - name of your domain class, used to store Facebook User details (uid, access_token, etc)</li>
+<li><code>domain.relation</code> - configure how your domains are connected, required only if you didn't specify your domains names (useful when you have your own FacebookAuthService, but still using some methods from default Dao)</li>
+</ul><p class="paragraph"/>Relation Types:
+<ul class="star">
+<li>'SameObject' is used when you are using same domain for Spring Security Core and for Facebook.</li>
+<li>'JoinedUser' is used when you want to store Facebook Authentication details in its own domain.</li>
+</ul><p class="paragraph"/>If you're using 'JoinedUser' you should specify <code>domain.appUserConnectionPropertyName</code>: it's how your domain class is related
+to main (used by Spring Security Core) user domain. It's the name
+of the property, usually defined as <code>static belongsTo = user: User</code> in your Facebook User domain class (where
+<code>User</code> is a Spring Security core user domain, and <code>user</code> is property name, that you should specify here<p class="paragraph"/><h4>User creation/initialization</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.autoCreate.roleNames</td><td>'ROLE_USER', 'ROLE_FACEBOOK'</td></tr></table><p class="paragraph"/>List of roles for user created by the plugin.
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
-                    <div class="toc-item prev-left"><a href="../../guide/1%20Introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/3%20Usage.html">&lt;&lt; <strong>3</strong><span>Usage</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../../guide/3%20Usage.html"><strong>3</strong><span>Usage</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/5%20Customization.html"><strong>5</strong><span>Customization</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>

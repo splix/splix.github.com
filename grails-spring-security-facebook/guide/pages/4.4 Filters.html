@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4 Configuration 0.11</title>
+    <title>4.4 Filters 0.11</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -20,29 +20,29 @@ function addJsClass() {
     <ul>
         <li>
             <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
-                <a href="../guide/index.html" class="button">Table of contents</a>
+                <a href="../../guide/index.html" class="button">Table of contents</a>
 
                 <div id="nav-summary-childs" style="display:none;">
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/1%20Introduction.html"><strong>1</strong><span>Introduction</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/1%20Introduction.html"><strong>1</strong><span>Introduction</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/2%20Intallation.html"><strong>2</strong><span>Intallation</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/2%20Intallation.html"><strong>2</strong><span>Intallation</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/3%20Usage.html"><strong>3</strong><span>Usage</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/3%20Usage.html"><strong>3</strong><span>Usage</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/4%20Configuration.html"><strong>4</strong><span>Configuration</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/4%20Configuration.html"><strong>4</strong><span>Configuration</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/5%20Customization.html"><strong>5</strong><span>Customization</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/5%20Customization.html"><strong>5</strong><span>Customization</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/6%20Taglib.html"><strong>6</strong><span>Taglib</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/6%20Taglib.html"><strong>6</strong><span>Taglib</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/8%20Common%20Issues.html"><strong>7</strong><span>Common Issues</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/8%20Common%20Issues.html"><strong>7</strong><span>Common Issues</span></a>
                     </div>
                     
                 </div>
@@ -68,18 +68,18 @@ function addJsClass() {
             <div id="main" class="corner-all">
 
                 
-                    <div class="toc-item prev-left"><a href="../guide/3%20Usage.html">&lt;&lt; <strong>3</strong><span>Usage</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/3%20Usage.html">&lt;&lt; <strong>3</strong><span>Usage</span></a></div>
                 
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../guide/5%20Customization.html"><strong>5</strong><span>Customization</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/5%20Customization.html"><strong>5</strong><span>Customization</span> >></a></div>
                 
 
 
                 <div class="project">
-                    <h1>4 Configuration - Reference Documentation</h1>
+                    <h1>4.4 Filters - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
@@ -89,63 +89,8 @@ function addJsClass() {
                 </div>
 
                 
-                <div id="table-of-content">
-                    <h2>Table of Contents</h2>
-                    
-                    <div class="toc-item" style="margin-left:0px"><a href="#4.1%20Facebook%20App%20Config"><strong>4.1</strong><span>Facebook App Config</span></a>
-                    </div>
-                    
-                    <div class="toc-item" style="margin-left:0px"><a href="#4.2%20Domains"><strong>4.2</strong><span>Domains</span></a>
-                    </div>
-                    
-                    <div class="toc-item" style="margin-left:0px"><a href="#4.3%20Login%20Button"><strong>4.3</strong><span>Login Button</span></a>
-                    </div>
-                    
-                    <div class="toc-item" style="margin-left:0px"><a href="#4.4%20Filters"><strong>4.4</strong><span>Filters</span></a>
-                    </div>
-                    
-                </div>
-                
 
                 
-
-<h1 id="4 Configuration">4 Configuration</h1>
-<h1>Basic Configuration</h1><p class="paragraph"/><blockquote class="note">
-Make sure that you have installed and configured spring-security-core plugin before this step.
-</blockquote><p class="paragraph"/>Calling `grails s2-init-facebook` will make default configuration of plugin for you, make sure
-that you have configuration in your `Config.groovy` like:<p class="paragraph"/><div class="code"><pre>grails.plugins.springsecurity.facebook.domain.classname='&#60;your FacebookUser domain&#62;'
-grails.plugins.springsecurity.facebook.secret = '&#60;Facebook secret <span class="java&#45;keyword">for</span> your app&#62;'
-grails.plugins.springsecurity.facebook.appId = '&#60;Facebooks's app ID&#62;'</pre></div><p class="paragraph"/>Or you can skip `grails s2-init-facebook` step, and make such configuration by yourself.<p class="paragraph"/>When you have valid configuration you can put Facebook Connect button in you GSP:
-<div class="code"><pre>&#60;facebookAuth:connect permissions=<span class="java&#45;quote">"email,user_about_me"</span>/&#62;</pre></div><p class="paragraph"/>You don't need to add anything else.<p class="paragraph"/><h1>All configuration options</h1>
-
-
-<h2 id="4.1 Facebook App Config">4.1 Facebook App Config</h2>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.secret</td><td>must be specified</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.appId</td><td>must be specified</td></tr></table><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.permissions</td><td>'email'</td></tr></table><p class="paragraph"/>List of required permissions, see <a href="https://developers.facebook.com/docs/reference/login/#permissions" target="blank">https://developers.facebook.com/docs/reference/login/#permissions</a>
-
-
-
-<h2 id="4.2 Domains">4.2 Domains</h2>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th><th><strong class="bold">Values</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.domain.classname</td><td>'FacebookUser'</td><td>&#160;</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.domain.relation</td><td>null</td><td>'SameObject', 'JoinedUser'</td></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.domain.appUserConnectionPropertyName</td><td>'user'</td><td>&#160;</td></tr></table>
-<ul class="star">
-<li><code>domain.classname</code> - name of your domain class, used to store Facebook User details (uid, access_token, etc)</li>
-<li><code>domain.relation</code> - configure how your domains are connected, required only if you didn't specify your domains names (useful when you have your own FacebookAuthService, but still using some methods from default Dao)</li>
-</ul><p class="paragraph"/>Relation Types:
-<ul class="star">
-<li>'SameObject' is used when you are using same domain for Spring Security Core and for Facebook.</li>
-<li>'JoinedUser' is used when you want to store Facebook Authentication details in its own domain.</li>
-</ul><p class="paragraph"/>If you're using 'JoinedUser' you should specify <code>domain.appUserConnectionPropertyName</code>: it's how your domain class is related
-to main (used by Spring Security Core) user domain. It's the name
-of the property, usually defined as <code>static belongsTo = user: User</code> in your Facebook User domain class (where
-<code>User</code> is a Spring Security core user domain, and <code>user</code> is property name, that you should specify here<p class="paragraph"/><h4>User creation/initialization</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.autoCreate.roleNames</td><td>'ROLE_USER', 'ROLE_FACEBOOK'</td></tr></table><p class="paragraph"/>List of roles for user created by the plugin.
-
-
-
-<h2 id="4.3 Login Button">4.3 Login Button</h2>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.taglib.button.text</td><td>'Login with Facebook'</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.taglib.button.defaultImg</td><td>'/images/connect.png'</td></tr></table>
-<ul class="star">
-<li><code>button.text</code> is used for client-side authentication only (using Facebook JS SDK).</li>
-</ul><p class="paragraph"/>
-
 
 <h2 id="4.4 Filters">4.4 Filters</h2>
 <table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.processUrl</td><td>'/j_spring_security_facebook_check'</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.filter.type</td><td>'redirect'</td></tr></table>
@@ -174,9 +119,9 @@ of the property, usually defined as <code>static belongsTo = user: User</code> i
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
-                    <div class="toc-item prev-left"><a href="../guide/3%20Usage.html">&lt;&lt; <strong>3</strong><span>Usage</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/3%20Usage.html">&lt;&lt; <strong>3</strong><span>Usage</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../guide/5%20Customization.html"><strong>5</strong><span>Customization</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/5%20Customization.html"><strong>5</strong><span>Customization</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
@@ -184,7 +129,7 @@ of the property, usually defined as <code>static belongsTo = user: User</code> i
         <td id="col2">
             <div class="local clearfix">
                 <div class="local-title">
-                    <a href="../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <a href="../../guide/index.html" target="mainFrame">Quick Reference</a>
                     <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
                 </div>
                 <div class="menu">

@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>2.1 Installation 0.11</title>
+    <title>3.4 Client Side Authentication 0.11</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -68,18 +68,18 @@ function addJsClass() {
             <div id="main" class="corner-all">
 
                 
-                    <div class="toc-item prev-left"><a href="../../guide/1%20Introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/2%20Intallation.html">&lt;&lt; <strong>2</strong><span>Intallation</span></a></div>
                 
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../../guide/3%20Usage.html"><strong>3</strong><span>Usage</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/4%20Configuration.html"><strong>4</strong><span>Configuration</span> >></a></div>
                 
 
 
                 <div class="project">
-                    <h1>2.1 Installation - Reference Documentation</h1>
+                    <h1>3.4 Client Side Authentication - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
@@ -92,20 +92,34 @@ function addJsClass() {
 
                 
 
-<h2 id="2.1 Installation">2.1 Installation</h2>
-<h3>Install plugin</h3><p class="paragraph"/>Basically it's just adding dependency into `BuildConfig.groovy`:<p class="paragraph"/><div class="code"><pre>plugins &#123;
-        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;facebook:0.11"</span>
-    &#125;</pre></div><p class="paragraph"/>and calling (optionaly) configuration wizards by:
-<div class="code"><pre>grails s2&#45;quickstart //configure Spring Security Core
-grails s2&#45;init&#45;facebook //configure Spring Security Facebook</pre></div><p class="paragraph"/>Instead of last step you can edit `Config.groovy` manually, you need to add Facebook App key/secret there,
-and other configuration options if you need (see <a href="../guide/single.html#4%20Configuration" class="guide">Configuration</a> section)<p class="paragraph"/>Follow <a href="../guide/single.html#3.1%20Basic%20Usage" class="guide">Basic Usage</a> guide for next steps.
+<h2 id="3.4 Client Side Authentication">3.4 Client Side Authentication</h2>
+Based on <a href="https://developers.facebook.com/docs/reference/javascript/" target="blank">Facebook Javascript SDK</a> authorization. Useful
+when you need to use FB Javascript SDK on client side.<p class="paragraph"/>And there are two ways:
+<ul class="star">
+<li>try authenticate user on each request, to any page - it's <code>transparent</code> filter</li>
+<li>authenticate only when user redirected to specified page, like a standard username/password authentication - it's <code>cookieDirect</code> filter</li>
+</ul><p class="paragraph"/>If you're using first way (<code>transparent</code> filter), your user will automatically authenticated whenever he has
+Facebook cookie. Btw, don't forget that you should <strong class="bold">reload</strong> current page after you have successfully authenticated user
+on client side. Like:<p class="paragraph"/><div class="code"><pre>&#60;facebookAuth:init&#62;
+   FB.Event.subscribe('auth.login', function() &#123;
+      window.location.reload();
+   &#125;);
+&#60;/facebookAuth:init&#62;</pre></div><p class="paragraph"/>If you're using second way (<code>cookieDirect</code> filter), you could configure URL that will be used for authentication at <code>Config.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.plugins.springsecurity.facebook.filter.processUrl = '/j_spring_security_facebook_check' //it's <span class="java&#45;keyword">default</span> value</pre></div><p class="paragraph"/>And after authorization redirect user to /j_spring_security_facebook_check, like:<p class="paragraph"/><div class="code"><pre>&#60;facebookAuth:init&#62;
+   FB.Event.subscribe('auth.login', function() &#123;
+      window.location.href = '/j_spring_security_facebook_check'
+   &#125;);
+&#60;/facebookAuth:init&#62;<p class="paragraph"/>&#60;g:javascript&#62;
+   $('&#35;fbloginbutton').click(function() &#123;
+       FB.login();
+   &#125;);
+&#60;/g:javascript&#62;</pre></div>
 
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
-                    <div class="toc-item prev-left"><a href="../../guide/1%20Introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/2%20Intallation.html">&lt;&lt; <strong>2</strong><span>Intallation</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../../guide/3%20Usage.html"><strong>3</strong><span>Usage</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/4%20Configuration.html"><strong>4</strong><span>Configuration</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>

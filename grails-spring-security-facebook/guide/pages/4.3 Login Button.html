@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>3.3 Server Side Authorization 0.10.3</title>
+    <title>4.3 Login Button 0.11</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -68,22 +68,22 @@ function addJsClass() {
             <div id="main" class="corner-all">
 
                 
-                    <div class="toc-item prev-left"><a href="../../guide/2%20Intallation.html">&lt;&lt; <strong>2</strong><span>Intallation</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/3%20Usage.html">&lt;&lt; <strong>3</strong><span>Usage</span></a></div>
                 
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../../guide/4%20Configuration.html"><strong>4</strong><span>Configuration</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/5%20Customization.html"><strong>5</strong><span>Customization</span> >></a></div>
                 
 
 
                 <div class="project">
-                    <h1>3.3 Server Side Authorization - Reference Documentation</h1>
+                    <h1>4.3 Login Button - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
-                    <p><strong>Version:</strong> 0.10.3</p>
+                    <p><strong>Version:</strong> 0.11</p>
 
                     
                 </div>
@@ -92,18 +92,18 @@ function addJsClass() {
 
                 
 
-<h2 id="3.3 Server Side Authorization">3.3 Server Side Authorization</h2>
-It's the `FacebookAuthRedirectFilter`, enabled by default.<p class="paragraph"/>It's preferred and a standard <a href="https://developers.facebook.com/docs/howtos/login/server-side-login/" target="blank">Login for Server-side Apps</a>.
-After clicking on 'connect button' user gets redirected to special Facebook page, for authentication, and then
-redirected back to your app.<p class="paragraph"/>Note, that user going to see Facebook Authentication screen only in first time (if not security modification was made).
-Next time user should be redirected back from Facebook to your application, without showing any Facebook screen.
+<h2 id="4.3 Login Button">4.3 Login Button</h2>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.taglib.button.text</td><td>'Login with Facebook'</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.taglib.button.defaultImg</td><td>'/images/connect.png'</td></tr></table>
+<ul class="star">
+<li><code>button.text</code> is used for client-side authentication only (using Facebook JS SDK).</li>
+</ul><p class="paragraph"/>
 
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
-                    <div class="toc-item prev-left"><a href="../../guide/2%20Intallation.html">&lt;&lt; <strong>2</strong><span>Intallation</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/3%20Usage.html">&lt;&lt; <strong>3</strong><span>Usage</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../../guide/4%20Configuration.html"><strong>4</strong><span>Configuration</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/5%20Customization.html"><strong>5</strong><span>Customization</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>

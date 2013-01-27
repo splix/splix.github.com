@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>3.4 Client Side Authorization 0.10.3</title>
+    <title>3.3 Server Side Authentication 0.11</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -79,11 +79,11 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>3.4 Client Side Authorization - Reference Documentation</h1>
+                    <h1>3.3 Server Side Authentication - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
-                    <p><strong>Version:</strong> 0.10.3</p>
+                    <p><strong>Version:</strong> 0.11</p>
 
                     
                 </div>
@@ -92,9 +92,19 @@ function addJsClass() {
 
                 
 
-<h2 id="3.4 Client Side Authorization">3.4 Client Side Authorization</h2>
-Based on <a href="https://developers.facebook.com/docs/reference/javascript/" target="blank">Facebook Javascript SDK</a> authorization. Useful
-when you need to use FB Javascript SDK on client side.
+<h2 id="3.3 Server Side Authentication">3.3 Server Side Authentication</h2>
+It's the `FacebookAuthRedirectFilter`, enabled by default.<p class="paragraph"/>It's preferred and a standard <a href="https://developers.facebook.com/docs/howtos/login/server-side-login/" target="blank">Login for Server-side Apps</a>.
+After clicking on 'connect button' user gets redirected to special Facebook page, for authentication, and then
+redirected back to your app.<p class="paragraph"/>Note, that user going to see Facebook Authentication screen only in first time (if not security modification was made).
+Next time user should be redirected back from Facebook to your application, without showing any Facebook screen.<p class="paragraph"/><h4>How to process failed login</h4><p class="paragraph"/>When user declines Facebook Authentication (click Cancel, for example), you'll '401 Authentication Failed' by default.
+It's default configuration of Spring Security failure handler, but for most cases it's not what you really want.<p class="paragraph"/>To handle this situation you should create your own Failure Handler, a bean implementing
+<code>org.springframework.security.web.authentication.AuthenticationFailureHandler</code>. If you just need to
+show a page (a GSP view), you can use standard <code>SimpleUrlAuthenticationFailureHandler</code>, that could redirect
+failed authentication to specified URL.<p class="paragraph"/>For example you can create bean at <code>resources.groovy</code>:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler<p class="paragraph"/>// Place your Spring DSL code here
+beans = &#123;<p class="paragraph"/>    redirectFailureHandlerExample(SimpleUrlAuthenticationFailureHandler) &#123;
+        defaultFailureUrl = '/failed' //redirect to <span class="java&#45;keyword">this</span> URL when authentication fails
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>and setup this bean for 'redirect' filter at <code>Config.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.plugins.springsecurity.facebook.filter.redirect.failureHandler='redirectFailureHandlerExample'</pre></div><p class="paragraph"/>Same way for configuring Success Handler.
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>

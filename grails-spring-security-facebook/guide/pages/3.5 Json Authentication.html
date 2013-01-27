@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>2.1 Installation 0.11</title>
+    <title>3.5 Json Authentication 0.11</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -68,18 +68,18 @@ function addJsClass() {
             <div id="main" class="corner-all">
 
                 
-                    <div class="toc-item prev-left"><a href="../../guide/1%20Introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/2%20Intallation.html">&lt;&lt; <strong>2</strong><span>Intallation</span></a></div>
                 
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../../guide/3%20Usage.html"><strong>3</strong><span>Usage</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/4%20Configuration.html"><strong>4</strong><span>Configuration</span> >></a></div>
                 
 
 
                 <div class="project">
-                    <h1>2.1 Installation - Reference Documentation</h1>
+                    <h1>3.5 Json Authentication - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
@@ -92,20 +92,37 @@ function addJsClass() {
 
                 
 
-<h2 id="2.1 Installation">2.1 Installation</h2>
-<h3>Install plugin</h3><p class="paragraph"/>Basically it's just adding dependency into `BuildConfig.groovy`:<p class="paragraph"/><div class="code"><pre>plugins &#123;
-        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;facebook:0.11"</span>
-    &#125;</pre></div><p class="paragraph"/>and calling (optionaly) configuration wizards by:
-<div class="code"><pre>grails s2&#45;quickstart //configure Spring Security Core
-grails s2&#45;init&#45;facebook //configure Spring Security Facebook</pre></div><p class="paragraph"/>Instead of last step you can edit `Config.groovy` manually, you need to add Facebook App key/secret there,
-and other configuration options if you need (see <a href="../guide/single.html#4%20Configuration" class="guide">Configuration</a> section)<p class="paragraph"/>Follow <a href="../guide/single.html#3.1%20Basic%20Usage" class="guide">Basic Usage</a> guide for next steps.
+<h2 id="3.5 Json Authentication">3.5 Json Authentication</h2>
+Filter 'FacebookAuthJsonFilter' accepts Facebook Access Token or Signed Request as parameter, and responds
+ with JSON to authorization requests. It's useful if you an external client for your Grails application, it
+ could be Android or iOS application, or Desktop application, or just AJAX client.<p class="paragraph"/>How it works:<p class="paragraph"/><div class="code"><pre>&#62; GET /j_spring_security_facebook_json?access_token=&#60;ACCESS_TOKEN&#62;</pre></div><p class="paragraph"/>For successful authorization you'll get:
+<div class="code"><pre>&#60; HTTP/1.1 200 OK
+&#60; Content&#45;Type: application/json;charset=UTF&#45;8
+&#60;
+&#123;
+  <span class="java&#45;quote">"authenticated"</span>: <span class="java&#45;keyword">true</span>,
+  <span class="java&#45;quote">"uid"</span>: 12345612345,   &#35; Facebook User Id
+  <span class="java&#45;quote">"roles"</span>:&#91;
+     <span class="java&#45;quote">"ROLE_FACEBOOK"</span>,
+     <span class="java&#45;quote">"ROLE_USER"</span>
+  &#93;,
+  <span class="java&#45;quote">"username"</span>: <span class="java&#45;quote">"facebook_12345612345"</span>, &#35; Grails Application User Id/Username
+  <span class="java&#45;quote">"enabled"</span>: <span class="java&#45;keyword">true</span> &#35; Grails Application User status
+&#125;</pre></div><p class="paragraph"/>For unsuccessful:
+<div class="code"><pre>&#60; HTTP/1.1 401 Unauthorized
+&#60; Content&#45;Type: application/json;charset=UTF&#45;8
+&#60;
+&#123;
+  <span class="java&#45;quote">"authenticated"</span>: <span class="java&#45;keyword">false</span>,
+  <span class="java&#45;quote">"message"</span>: <span class="java&#45;quote">"Expired token"</span> &#35; Authentication Failure reason
+&#125;</pre></div><p class="paragraph"/>
 
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
-                    <div class="toc-item prev-left"><a href="../../guide/1%20Introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/2%20Intallation.html">&lt;&lt; <strong>2</strong><span>Intallation</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../../guide/3%20Usage.html"><strong>3</strong><span>Usage</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/4%20Configuration.html"><strong>4</strong><span>Configuration</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
