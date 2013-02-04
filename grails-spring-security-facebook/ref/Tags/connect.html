@@ -2,12 +2,12 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4.1 Facebook App Config 0.12</title>
+    <title>Facebook Authentication 0.12</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
-    <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
     <script type="text/javascript">
-function addJsClass() {
+function addJsClass(el) {
     var classes = document.body.className.split(" ");
     classes.push("js");
     document.body.className = classes.join(" ");
@@ -16,13 +16,14 @@ function addJsClass() {
 </head>
 
 <body class="body" onload="addJsClass();">
+
 <div id="navigation">
     <ul>
         <li>
             <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
                 <a href="../../guide/index.html" class="button">Table of contents</a>
 
-                <div id="nav-summary-childs" style="display:none;">
+                <div id="nav-summary-childs">
                     
                     <div class="toc-item" style="margin-left:0"><a href="../../guide/1%20Introduction.html"><strong>1</strong><span>Introduction</span></a>
                     </div>
@@ -62,45 +63,19 @@ function addJsClass() {
 <table id="colset" border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td id="col1">
-            <div id="main" class="corner-all">
-
-                
-                    <div class="toc-item prev-left"><a href="../../guide/3%20Usage.html">&lt;&lt; <strong>3</strong><span>Usage</span></a></div>
-                
+            <div id="main" class="reference corner-all">
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
-                
-                    <div class="toc-item next-right"><a href="../../guide/5%20Customization.html"><strong>5</strong><span>Customization</span> >></a></div>
-                
+                <h1>connect</h1><p class="paragraph"/>Puts Facebook Connect button. If Facebook Javascript SDK initialization code wasn't added into current page,
+ then calling of this tag will call <code>:init</code> automatically.<p class="paragraph"/>Optional attributes:
+<ul class="star">
+<li><code>type</code> - <code>'server'</code> or <code>'client'</code>, type of authentication to use. By default it uses server-side authentication (if such authentication type is enabled)</li>
+<li><code>img</code> - url to image for connect button (for server-side authentication only)</li>
+</ul><p class="paragraph"/><h2>Examples:</h2><p class="paragraph"/>Default:
+<div class="code"><pre>&#60;facebookAuth:connect /&#62;</pre></div><p class="paragraph"/>Use your image for connect button:
+<div class="code"><pre>&#60;facebookAuth:connect img=<span class="java&#45;quote">"$&#123;resource(dir: 'images', file: 'facebook&#45;connect.png')&#125;"</span>/&#62;</pre></div>
 
-
-                <div class="project">
-                    <h1>4.1 Facebook App Config - Reference Documentation</h1>
-
-                    <p><strong>Authors:</strong> Igor Artamonov</p>
-
-                    <p><strong>Version:</strong> 0.12</p>
-
-                    
-                </div>
-
-                
-
-                
-
-<h2 id="4.1 Facebook App Config">4.1 Facebook App Config</h2>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.secret</td><td>must be specified</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.appId</td><td>must be specified</td></tr></table><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.permissions</td><td>'email'</td></tr></table><p class="paragraph"/>List of required permissions, see <a href="../ref/Httpsdevelopersfacebookcomdocsreferencelogin/https://developers.facebook.com/docs/reference/login/#permissions.html" class="https://developers.facebook.com/docs/reference/login/">https://developers.facebook.com/docs/reference/login/#permissions</a>
-
-
-
-                <div style="clear:both;margin-top:15px;"></div>
-                
-                    <div class="toc-item prev-left"><a href="../../guide/3%20Usage.html">&lt;&lt; <strong>3</strong><span>Usage</span></a></div>
-                
-                    <div class="toc-item next-right"><a href="../../guide/5%20Customization.html"><strong>5</strong><span>Customization</span> >></a></div>
-                
-                <div style="clear:both"></div>
             </div>
         </td>
         <td id="col2">
@@ -111,8 +86,10 @@ function addJsClass() {
                 </div>
                 <div class="menu">
                     
-                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Tags</h1><div class="menu-sub">
-                        
+                    <div class="menu-block">
+                        <h1 class="menu-title" onclick="toggleRef(nextElement(this))">Tags</h1>
+                        <div class="menu-sub selected">
+                            
                             
                             <div class="menu-item"><a href="../../ref/Tags/connect.html">connect</a>
                             </div>
@@ -120,7 +97,7 @@ function addJsClass() {
                             <div class="menu-item"><a href="../../ref/Tags/init.html">init</a>
                             </div>
                             
-                            </div>
+                        </div>
                     </div>
                     
                 </div>
@@ -134,7 +111,8 @@ function addJsClass() {
     
 </div>
 
-<script type="text/javascript" src="../js/docs.js"></script>
+
+<script type="text/javascript" src="../../js/docs.js"></script>
 
 </body>
 </html>

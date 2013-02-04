@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4 Configuration 0.11</title>
+    <title>4 Configuration 0.12</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -39,10 +39,7 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../guide/5%20Customization.html"><strong>5</strong><span>Customization</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/6%20Taglib.html"><strong>6</strong><span>Taglib</span></a>
-                    </div>
-                    
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/8%20Common%20Issues.html"><strong>7</strong><span>Common Issues</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/7%20Common%20Issues.html"><strong>6</strong><span>Common Issues</span></a>
                     </div>
                     
                 </div>
@@ -83,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
-                    <p><strong>Version:</strong> 0.11</p>
+                    <p><strong>Version:</strong> 0.12</p>
 
                     
                 </div>
@@ -101,7 +98,10 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0px"><a href="#4.3%20Login%20Button"><strong>4.3</strong><span>Login Button</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#4.4%20Filters"><strong>4.4</strong><span>Filters</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#4.4%20Plugin%20Internals"><strong>4.4</strong><span>Plugin Internals</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#4.5%20Authentication%20Types"><strong>4.5</strong><span>Authentication Types</span></a>
                     </div>
                     
                 </div>
@@ -120,7 +120,7 @@ grails.plugins.springsecurity.facebook.appId = '&#60;Facebooks's app ID&#62;'</p
 
 
 <h2 id="4.1 Facebook App Config">4.1 Facebook App Config</h2>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.secret</td><td>must be specified</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.appId</td><td>must be specified</td></tr></table><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.permissions</td><td>'email'</td></tr></table><p class="paragraph"/>List of required permissions, see <a href="https://developers.facebook.com/docs/reference/login/#permissions" target="blank">https://developers.facebook.com/docs/reference/login/#permissions</a>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.secret</td><td>must be specified</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.appId</td><td>must be specified</td></tr></table><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.permissions</td><td>'email'</td></tr></table><p class="paragraph"/>List of required permissions, see <a href="../ref/Httpsdevelopersfacebookcomdocsreferencelogin/https://developers.facebook.com/docs/reference/login/#permissions.html" class="https://developers.facebook.com/docs/reference/login/">https://developers.facebook.com/docs/reference/login/#permissions</a>
 
 
 
@@ -147,7 +147,15 @@ of the property, usually defined as <code>static belongsTo = user: User</code> i
 </ul><p class="paragraph"/>
 
 
-<h2 id="4.4 Filters">4.4 Filters</h2>
+<h2 id="4.4 Plugin Internals">4.4 Plugin Internals</h2>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.autoCreate.enabled</td><td>true</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.autoCreate.roles</td><td>'ROLE_USER', 'ROLE_FACEBOOK'</td></tr></table>
+<ul class="star">
+<li>autoCreate.enabled - enable/disabled automatic creation of Application User for a new Facebook user (when FB user first time authenticates)</li>
+<li>autoCreate.roles - list of roles to set to a newly created user (if enabled)</li>
+</ul><p class="paragraph"/>
+
+
+<h2 id="4.5 Authentication Types">4.5 Authentication Types</h2>
 <table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.processUrl</td><td>'/j_spring_security_facebook_check'</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.filter.type</td><td>'redirect'</td></tr></table>
 <ul class="star">
 <li><code>type</code> - type of authentication, can be <code>transparent</code>, <code>cookieDirect</code>, <code>redirect</code> or <code>json</code>.</li>
@@ -188,6 +196,18 @@ of the property, usually defined as <code>static belongsTo = user: User</code> i
                     <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
                 </div>
                 <div class="menu">
+                    
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Tags</h1><div class="menu-sub">
+                        
+                            
+                            <div class="menu-item"><a href="../ref/Tags/connect.html">connect</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Tags/init.html">init</a>
+                            </div>
+                            
+                            </div>
+                    </div>
                     
                 </div>
             </div>

@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>5.1 Using FacebookAuthService 0.11</title>
+    <title>5.1 Using FacebookAuthService 0.12</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -39,10 +39,7 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../../guide/5%20Customization.html"><strong>5</strong><span>Customization</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/6%20Taglib.html"><strong>6</strong><span>Taglib</span></a>
-                    </div>
-                    
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/8%20Common%20Issues.html"><strong>7</strong><span>Common Issues</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/7%20Common%20Issues.html"><strong>6</strong><span>Common Issues</span></a>
                     </div>
                     
                 </div>
@@ -74,7 +71,7 @@ function addJsClass() {
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../../guide/6%20Taglib.html"><strong>6</strong><span>Taglib</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/7%20Common%20Issues.html"><strong>6</strong><span>Common Issues</span> >></a></div>
                 
 
 
@@ -83,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
-                    <p><strong>Version:</strong> 0.11</p>
+                    <p><strong>Version:</strong> 0.12</p>
 
                     
                 </div>
@@ -101,7 +98,7 @@ they're exist - use them instead of own.<p class="paragraph"/>It's some kind of 
 <li>&#60;Person&#62; - general user, used by Spring Security. It's your own class, can have other name, it's just a example</li>
 <li>FacebookAuthToken - token provided by plugin</li>
 </ul><p class="paragraph"/>&#60;FacebookUser&#62; and &#60;Person&#62; can be same object, or can be two different object (with a relation), depends
-on your architecture.<p class="paragraph"/><h2>Take a look at sources</h2><p class="paragraph"/>Please, take a look at sources of <a href="https://github.com/splix/grails-spring-security-facebook/blob/master/src/groovy/com/the6hours/grails/springsecurity/facebook/DefaultFacebookAuthDao.groovy" target="blank">DefaultFacebookAuthDao</a>
+on your architecture.<p class="paragraph"/><h2>Take a look at sources</h2><p class="paragraph"/>Please, take a look at sources of <a href="../ref/Httpsgithubcomsplixgrailsspringsecurityfacebookblobmastersrcgroovycomthe6hoursgrailsspringsecurityfacebook Default Facebook Auth Daogroovy/DefaultFacebookAuthDao.html" class="https://github.com/splix/grails-spring-security-facebook/blob/master/src/groovy/com/the6hours/grails/springsecurity/facebook/DefaultFacebookAuthDao.groovy">DefaultFacebookAuthDao</a>
 to understand how it works, and which methods you can use for customization<p class="paragraph"/><h2>List of possible methods:</h2><p class="paragraph"/><h3>void onCreate(&#60;FacebookUser&#62; user, FacebookAuthToken token)</h3><p class="paragraph"/>Called after user was created by plugin, just before saving into database. You can fill user object
 with some extra values.<p class="paragraph"/>Not called if you have implemented method <code>create(..)</code><p class="paragraph"/>Where:
 <ul class="star">
@@ -154,7 +151,7 @@ we store Facebook User details in different domain).<p class="paragraph"/>Not ca
                 
                     <div class="toc-item prev-left"><a href="../../guide/4%20Configuration.html">&lt;&lt; <strong>4</strong><span>Configuration</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../../guide/6%20Taglib.html"><strong>6</strong><span>Taglib</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/7%20Common%20Issues.html"><strong>6</strong><span>Common Issues</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
@@ -166,6 +163,18 @@ we store Facebook User details in different domain).<p class="paragraph"/>Not ca
                     <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
                 </div>
                 <div class="menu">
+                    
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Tags</h1><div class="menu-sub">
+                        
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/connect.html">connect</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/init.html">init</a>
+                            </div>
+                            
+                            </div>
+                    </div>
                     
                 </div>
             </div>
