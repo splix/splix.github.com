@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>Facebook Authentication 0.12</title>
+        <title>Facebook Authentication 0.12.2</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -62,7 +62,7 @@ function addJsClass(el) {
                         <div class="project">
                             <h1>Facebook Authentication - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Igor Artamonov</p>
-                            <p><strong>Version:</strong> 0.12</p>
+                            <p><strong>Version:</strong> 0.12.2</p>
                             
                         </div>
 
@@ -302,9 +302,12 @@ of the property, usually defined as <code>static belongsTo = user: User</code> i
 
 
 <h2 id="4.3 Login Button">4.3 Login Button</h2>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.taglib.button.text</td><td>'Login with Facebook'</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.taglib.button.defaultImg</td><td>'/images/connect.png'</td></tr></table>
+<h4>Button configuration</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.taglib.button.text</td><td>'Login with Facebook'</td></tr></table><p class="paragraph"/><h4>Button for Server Side authentication (default)</h4><p class="paragraph"/>Standard <code>&#60;img &#8230; /&#62;</code> will be used for button, with following extra configuration options:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.taglib.button.img</td><td>an url for image distributed with plugin</td></tr></table>
 <ul class="star">
-<li><code>button.text</code> is used for client-side authentication only (using Facebook JS SDK).</li>
+<li><code>img</code> - url of a default image to use for button</li>
+</ul><p class="paragraph"/><h4>Button for Client Side authentication</h4><p class="paragraph"/>At this case a HTML button, provided by Facebook JS SDK, will be user.<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.taglib.language</td><td>'en_US'</td></tr></table>
+<ul class="star">
+<li><code>language</code> - language for Facebook Javascript SDK (actually it's not only for connect button)</li>
 </ul><p class="paragraph"/>
 
 

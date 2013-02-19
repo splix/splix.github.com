@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>Facebook Authentication 0.12</title>
+    <title>Facebook Authentication 0.12.2</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -71,11 +71,19 @@ function addJsClass(el) {
  then calling of this tag will call <code>:init</code> automatically.<p class="paragraph"/>Optional attributes:
 <ul class="star">
 <li><code>type</code> - <code>'server'</code> or <code>'client'</code>, type of authentication to use. By default it uses server-side authentication (if such authentication type is enabled)</li>
+</ul><p class="paragraph"/>Optional attributes for <code>server</code> button (server-side authentication):
+<ul class="star">
 <li><code>img</code> - url to image for connect button (for server-side authentication only)</li>
+<li><code>img-*</code> - a attribute for &#60;img&#62; tag, like <code>img-id</code> or <code>img-style</code></li>
+</ul><p class="paragraph"/>Optional attributes for <code>client</code> button (client-side authentication):
+<ul class="star">
+<li><code>permission</code> - list of <a href="../../ref/Httpsdevelopersfacebookcomdocsreferencelogin/Facebook Permission.html" class="https://developers.facebook.com/docs/reference/login/">Facebook Permission</a> as a String or List</li>
+<li><code>text</code> - text to display on button, <strong class="bold">Login with Facebook</strong> by default</li>
+<li><code>skipInit</code> - force to skip Facebook Javascript SDK initialization. By default this tag calls <code>&#60;facebook:init /&#62;</code>, if it's not executed yet.</li>
 </ul><p class="paragraph"/><h2>Examples:</h2><p class="paragraph"/>Default:
 <div class="code"><pre>&#60;facebookAuth:connect /&#62;</pre></div><p class="paragraph"/>Use your image for connect button:
-<div class="code"><pre>&#60;facebookAuth:connect img=<span class="java&#45;quote">"$&#123;resource(dir: 'images', file: 'facebook&#45;connect.png')&#125;"</span>/&#62;</pre></div>
-
+<div class="code"><pre>&#60;facebookAuth:connect img=<span class="java&#45;quote">"$&#123;resource(dir: 'images', file: 'facebook&#45;connect.png')&#125;"</span> img&#45;alt=<span class="java&#45;quote">"Login to my site!"</span>/&#62;</pre></div><p class="paragraph"/>Ask for email:
+<div class="code"><pre>&#60;facebookAuth:connect permission=<span class="java&#45;quote">"email"</span>/&#62;</pre></div><p class="paragraph"/>
             </div>
         </td>
         <td id="col2">
