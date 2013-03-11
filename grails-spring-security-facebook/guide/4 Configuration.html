@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4 Configuration 0.12.2</title>
+    <title>4 Configuration 0.13</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -55,7 +55,7 @@ function addJsClass() {
         
         
     </div>
-    <p>Facebook Connect authentication support for the Spring Security plugin.</p>
+    <p>Facebook Authentication plugin, extension to the Spring Security Core plugin.</p>
 </div>
 
 
@@ -80,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
-                    <p><strong>Version:</strong> 0.12.2</p>
+                    <p><strong>Version:</strong> 0.13</p>
 
                     
                 </div>
@@ -120,7 +120,7 @@ grails.plugins.springsecurity.facebook.appId = '&#60;Facebooks's app ID&#62;'</p
 
 
 <h2 id="4.1 Facebook App Config">4.1 Facebook App Config</h2>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.secret</td><td>must be specified</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.appId</td><td>must be specified</td></tr></table><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.permissions</td><td>'email'</td></tr></table><p class="paragraph"/>List of required permissions, see <a href="../ref/Httpsdevelopersfacebookcomdocsreferencelogin/https://developers.facebook.com/docs/reference/login/#permissions.html" class="https://developers.facebook.com/docs/reference/login/">https://developers.facebook.com/docs/reference/login/#permissions</a>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.secret</td><td>must be specified</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.appId</td><td>must be specified</td></tr></table><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.permissions</td><td>'email'</td></tr></table><p class="paragraph"/>List of required permissions, see <a href="https://developers.facebook.com/docs/reference/login/#permissions" target="blank">https://developers.facebook.com/docs/reference/login/#permissions</a>
 
 
 
@@ -136,7 +136,7 @@ grails.plugins.springsecurity.facebook.appId = '&#60;Facebooks's app ID&#62;'</p
 </ul><p class="paragraph"/>If you're using 'JoinedUser' you should specify <code>domain.appUserConnectionPropertyName</code>: it's how your domain class is related
 to main (used by Spring Security Core) user domain. It's the name
 of the property, usually defined as <code>static belongsTo = user: User</code> in your Facebook User domain class (where
-<code>User</code> is a Spring Security core user domain, and <code>user</code> is property name, that you should specify here<p class="paragraph"/><h4>User creation/initialization</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.autoCreate.roleNames</td><td>'ROLE_USER', 'ROLE_FACEBOOK'</td></tr></table><p class="paragraph"/>List of roles for user created by the plugin.
+<code>User</code> is a Spring Security core user domain, and <code>user</code> is property name, that you should specify here<p class="paragraph"/><h4>User creation/initialization</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.autoCreate.roles</td><td>'ROLE_USER', 'ROLE_FACEBOOK'</td></tr></table><p class="paragraph"/>List of roles for user created by the plugin.
 
 
 
@@ -179,8 +179,11 @@ of the property, usually defined as <code>static belongsTo = user: User</code> i
 <li>if <code>filter.cookieDirect.processUrl</code> is not then, then default <code>filter.processUrl</code> will be used</li>
 <li><code>failureHandler</code> - a name of the bean that implements <a href="http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/web/authentication/AuthenticationFailureHandler.html" target="blank">AuthenticationFailureHandler</a></li>
 <li><code>successHandler</code> - a name of the bean that implements <a href="http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/web/authentication/AuthenticationSuccessHandler.html" target="blank">AuthenticationSuccessHandler</a></li>
-</ul><p class="paragraph"/><h4>Configuration for JSON filter</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.json.processUrl</td><td>'/j_spring_security_facebook_json'</td></tr></table>
-
+</ul><p class="paragraph"/><h4>Configuration for JSON filter</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.json.processUrl</td><td>'/j_spring_security_facebook_json'</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.filter.json.type</td><td>'json'</td></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.json.methods</td><td>'POST'</td></tr></table>
+<ul class="star">
+<li><code>type</code> could be <code>json</code> (default) or <code>jsonp</code></li>
+<li><code>methods</code> - allowed HTTP methods. Notice that it's used only for JSON, for JSONP it will be forced to 'GET'</li>
+</ul><p class="paragraph"/>
 
 
                 <div style="clear:both;margin-top:15px;"></div>

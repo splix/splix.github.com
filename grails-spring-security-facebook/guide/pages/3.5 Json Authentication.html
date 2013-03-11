@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>3.5 Json Authentication 0.12.2</title>
+    <title>3.5 Json Authentication 0.13</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -55,7 +55,7 @@ function addJsClass() {
         
         
     </div>
-    <p>Facebook Connect authentication support for the Spring Security plugin.</p>
+    <p>Facebook Authentication plugin, extension to the Spring Security Core plugin.</p>
 </div>
 
 
@@ -80,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
-                    <p><strong>Version:</strong> 0.12.2</p>
+                    <p><strong>Version:</strong> 0.13</p>
 
                     
                 </div>
@@ -112,7 +112,10 @@ Filter 'FacebookAuthJsonFilter' accepts Facebook Access Token or Signed Request 
 &#123;
   <span class="java&#45;quote">"authenticated"</span>: <span class="java&#45;keyword">false</span>,
   <span class="java&#45;quote">"message"</span>: <span class="java&#45;quote">"Expired token"</span> &#35; Authentication Failure reason
-&#125;</pre></div><p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/><h4>How to extend JSON response</h4><p class="paragraph"/>The plugin going to call <code>Map onJsonSuccess(Map input, FacebookAuthToken token)</code>
+or <code>Map onJsonFailure(Map input, AuthenticationException exception)</code> methods
+of <a href="../guide/single.html#5.1%20Using%20FacebookAuthService" class="guide">FacebookAuthService</a> (if exists).<p class="paragraph"/>There you can update <code>input</code> data with any other values, introduce new fields/keys, or even return your
+own structure. This structure will be transformed to JSON and sent to client.<p class="paragraph"/><h4>Configuration</h4><p class="paragraph"/>See <a href="../guide/single.html#4.5%20Authentication%20Types" class="guide">authentication configuration page</a><p class="paragraph"/>
 
 
                 <div style="clear:both;margin-top:15px;"></div>

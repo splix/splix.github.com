@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4.2 Domains 0.12.2</title>
+    <title>4.2 Domains 0.13</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -55,7 +55,7 @@ function addJsClass() {
         
         
     </div>
-    <p>Facebook Connect authentication support for the Spring Security plugin.</p>
+    <p>Facebook Authentication plugin, extension to the Spring Security Core plugin.</p>
 </div>
 
 
@@ -80,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
-                    <p><strong>Version:</strong> 0.12.2</p>
+                    <p><strong>Version:</strong> 0.13</p>
 
                     
                 </div>
@@ -101,7 +101,7 @@ function addJsClass() {
 </ul><p class="paragraph"/>If you're using 'JoinedUser' you should specify <code>domain.appUserConnectionPropertyName</code>: it's how your domain class is related
 to main (used by Spring Security Core) user domain. It's the name
 of the property, usually defined as <code>static belongsTo = user: User</code> in your Facebook User domain class (where
-<code>User</code> is a Spring Security core user domain, and <code>user</code> is property name, that you should specify here<p class="paragraph"/><h4>User creation/initialization</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.autoCreate.roleNames</td><td>'ROLE_USER', 'ROLE_FACEBOOK'</td></tr></table><p class="paragraph"/>List of roles for user created by the plugin.
+<code>User</code> is a Spring Security core user domain, and <code>user</code> is property name, that you should specify here<p class="paragraph"/><h4>User creation/initialization</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.autoCreate.roles</td><td>'ROLE_USER', 'ROLE_FACEBOOK'</td></tr></table><p class="paragraph"/>List of roles for user created by the plugin.
 
 
 
