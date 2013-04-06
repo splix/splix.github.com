@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>3 Usage 0.5</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <script type="text/javascript">
+function addJsClass() {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+<div id="navigation">
+    <ul>
+        <li>
+            <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                <a href="../guide/index.html" class="button">Table of contents</a>
+
+                <div id="nav-summary-childs" style="display:none;">
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/1%20Introduction.html"><strong>1</strong><span>Introduction</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/2%20Installation.html"><strong>2</strong><span>Installation</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/3%20Usage.html"><strong>3</strong><span>Usage</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/4%20Configuration.html"><strong>4</strong><span>Configuration</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/5%20Using%20TwitterAuthService.html"><strong>5</strong><span>Using TwitterAuthService</span></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </li>
+        <li class="separator selected">
+            <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+        </li>
+    </ul>
+</div>
+<div id="header">
+    <div class="images clearfix">
+        
+        
+    </div>
+    <p>Twitter authentication support for the Spring Security plugin.</p>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="corner-all">
+
+                
+                    <div class="toc-item prev-left"><a href="../guide/2%20Installation.html">&lt;&lt; <strong>2</strong><span>Installation</span></a></div>
+                
+
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                
+                    <div class="toc-item next-right"><a href="../guide/4%20Configuration.html"><strong>4</strong><span>Configuration</span> >></a></div>
+                
+
+
+                <div class="project">
+                    <h1>3 Usage - Reference Documentation</h1>
+
+                    <p><strong>Authors:</strong> Igor Artamonov</p>
+
+                    <p><strong>Version:</strong> 0.5</p>
+
+                    
+                </div>
+
+                
+
+                
+
+<h1 id="3 Usage">3 Usage</h1>
+<h2>Example app</h2><p class="paragraph"/>You can take a look at <a href="../ref/Httpsgithubcomsplixgrailstwitterauthenticationexample/Example Application.html" class="https://github.com/splix/grails-twitter-authentication-example">Example Application</a>, it's very
+basic app, that shows how to use the plugin. Just clone it, put your Twitter App credentials, and play with the code.<p class="paragraph"/><h2>Usage</h2>
+<h3>Install plugin</h3><p class="paragraph"/>Add dependencies into <code>BuildConfig.groovy</code>:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+        runtime <span class="java&#45;quote">"org.grails.plugins:resources:1.1.6"</span>
+        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;core:1.2.7.2"</span><p class="paragraph"/>        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;twitter:0.5"</span>
+    &#125;</pre></div><p class="paragraph"/><h3>Setup Twitter credentials</h3><p class="paragraph"/>Put your Twitter API Consumer Key/Secret into <code>Config.groovy</code>:
+<div class="code"><pre>grails.plugins.springsecurity.twitter.consumerKey=&#8230;
+grails.plugins.springsecurity.twitter.consumerSecret=...</pre></div><p class="paragraph"/><h3>Create domain class for your user</h3><p class="paragraph"/>Like <code>domain/TwitterUser.groovy</code>:<p class="paragraph"/><div class="code"><pre>class TwitterUser  &#123;<p class="paragraph"/>    /&#42;&#42;
+     &#42; Twitter Username (notice that it could be modified by user, Twitter allows that)
+     &#42;/
+    <span class="java&#45;object">String</span> username<p class="paragraph"/>    /&#42;&#42;
+     &#42; Twitter User Id
+     &#42;/
+    <span class="java&#45;object">Long</span> twitterId<p class="paragraph"/>    /&#42;&#42;
+     &#42; Twitter API token
+     &#42;/
+    <span class="java&#45;object">String</span> token<p class="paragraph"/>    /&#42;&#42;
+     &#42; Twitter API secret
+     &#42;/
+    <span class="java&#45;object">String</span> tokenSecret<p class="paragraph"/>    /&#42;&#42;
+     &#42; Related to main App User
+     &#42;/
+    <span class="java&#45;keyword">static</span> belongsTo = &#91;user: User&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
+        twitterId(unique: <span class="java&#45;keyword">true</span>, nullable: <span class="java&#45;keyword">false</span>)
+        username(nullable: <span class="java&#45;keyword">false</span>, blank: <span class="java&#45;keyword">false</span>)
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>The plugin is configured for <code>TwitterUser</code> class name by default. But you could use different name (or use package) for domain class,
+for example <code>com.company.UserWithTwitter</code>, that you should configure at <code>Config.groovy</code> at this case:
+<div class="code"><pre>grails.plugins.springsecurity.twitter.domain.classname='com.company.UserWithTwitter'</pre></div><p class="paragraph"/>
+<h3>Put SignIn with Twitter button:</h3><p class="paragraph"/>Add into your GSP:
+<div class="code"><pre>&#60;twitterAuth:button /&#62;</pre></div><p class="paragraph"/><h3>Use Spring Security</h3><p class="paragraph"/>Now you could use all security tools provided by <a href="http://grails-plugins.github.io/grails-spring-security-core/docs/manual/" target="blank">Spring Security Core</a>.<p class="paragraph"/>For example, you could use taglib for checking user state:
+<div class="code"><pre>&#60;sec:ifLoggedIn&#62;
+    &#60;div class=<span class="java&#45;quote">"message"</span>&#62;Authenticated&#60;/div&#62;
+    Hello &#60;sec:username/&#62;!
+&#60;/sec:ifLoggedIn&#62;<p class="paragraph"/>&#60;sec:ifNotLoggedIn&#62;
+    &#60;div class=<span class="java&#45;quote">"message"</span>&#62;Not authenticated&#60;/div&#62;
+    &#60;twitterAuth:button /&#62;
+&#60;/sec:ifNotLoggedIn&#62;</pre></div><p class="paragraph"/>
+
+
+                <div style="clear:both;margin-top:15px;"></div>
+                
+                    <div class="toc-item prev-left"><a href="../guide/2%20Installation.html">&lt;&lt; <strong>2</strong><span>Installation</span></a></div>
+                
+                    <div class="toc-item next-right"><a href="../guide/4%20Configuration.html"><strong>4</strong><span>Configuration</span> >></a></div>
+                
+                <div style="clear:both"></div>
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    
+    
+</div>
+
+<script type="text/javascript" src="../js/docs.js"></script>
+
+</body>
+</html>

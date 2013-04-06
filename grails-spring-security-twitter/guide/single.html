@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <title>Twitter Authentication  for Spring Security 0.5</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
+        <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
+    <script type="text/javascript">
+function addJsClass(el) {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+    </head>
+
+    <body class="body" onload="addJsClass();">
+        <div id="navigation">
+            <ul>
+                <li>
+                    <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                        <a href="../guide/index.html" class="button">Table of contents</a>
+                        <div id="nav-summary-childs" style="display:none;">
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#1%20Introduction"><strong>1</strong><span>Introduction</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#2%20Installation"><strong>2</strong><span>Installation</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#3%20Usage"><strong>3</strong><span>Usage</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#4%20Configuration"><strong>4</strong><span>Configuration</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#5%20Using%20TwitterAuthService"><strong>5</strong><span>Using TwitterAuthService</span></a></div>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li class="separator selected">
+                    <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+                </li>
+            </ul>
+        </div>
+        <div id="header">
+            <div class="images clearfix">
+                
+                
+            </div>
+            <p>Twitter authentication support for the Spring Security plugin.</p>
+        </div>
+
+
+        <table id="colset" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td id="col1">
+                    <div id="main" class="corner-all">
+
+                        <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                        <div class="project">
+                            <h1>Twitter Authentication  for Spring Security - Reference Documentation</h1>
+                            <p><strong>Authors:</strong> Igor Artamonov</p>
+                            <p><strong>Version:</strong> 0.5</p>
+                            
+                        </div>
+
+                        
+                        <div id="table-of-content">
+                            <h2>Table of Contents</h2>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#1%20Introduction"><strong>1</strong><span>Introduction</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#2%20Installation"><strong>2</strong><span>Installation</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#3%20Usage"><strong>3</strong><span>Usage</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#4%20Configuration"><strong>4</strong><span>Configuration</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#5%20Using%20TwitterAuthService"><strong>5</strong><span>Using TwitterAuthService</span></a></div>
+                            
+                            <div style="clear:both" ></div>
+                        </div>
+                        
+                        
+
+<h1 id="1 Introduction">1 Introduction</h1>
+Grails plugin for Twitter Authentication, as extension to Grails Spring Security Core plugin.<p class="paragraph"/><h2>Requirements:</h2>
+<ul class="star">
+<li>grails 2.0+</li>
+<li>spring-security-core plugin 1.2.7.2</li>
+</ul><p class="paragraph"/><h2>Links:</h2>
+<ul class="star">
+<li>Sources - <a href="../ref/Httpsgithubcomsplixgrailsspringsecuritytwitter/https://github.com/splix/grails-spring-security-twitter.html" class="https://github.com/splix/grails-spring-security-twitter">https://github.com/splix/grails-spring-security-twitter</a></li>
+<li>Example app - <a href="../ref/Httpsgithubcomsplixgrailstwitterauthenticationexample/https://github.com/splix/grails-twitter-authentication-example.html" class="https://github.com/splix/grails-twitter-authentication-example">https://github.com/splix/grails-twitter-authentication-example</a></li>
+<li>Submit a bug - <a href="../ref/Httpsgithubcomsplixgrailsspringsecuritytwitterissues/GitHub Issues.html" class="https://github.com/splix/grails-spring-security-twitter/issues">GitHub Issues</a></li>
+</ul><p class="paragraph"/>
+
+
+<h1 id="2 Installation">2 Installation</h1>
+<h2>Install plugin</h2><p class="paragraph"/>Add dependency into `BuildConfig.groovy`:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;twitter:0.5"</span>
+        // &#8230;
+        // you need to have spring&#45;security&#45;core plugin installed
+        // &#8230;
+    &#125;</pre></div><p class="paragraph"/>and put your Twitter API Consumer Key/Secret into `Config.groovy`:
+<div class="code"><pre>grails.plugins.springsecurity.twitter.consumerKey=&#8230;
+grails.plugins.springsecurity.twitter.consumerSecret=...</pre></div><p class="paragraph"/>It's very basic configuration, for other options (see <a href="../guide/single.html#4%20Configuration" class="guide">Configuration</a> section)<p class="paragraph"/>Follow <a href="../guide/single.html#3%20Usage" class="guide">Basic Usage</a> guide for full example.<p class="paragraph"/><h2>Upgrading from versions prior to 0.5</h2><p class="paragraph"/>Version 0.5 was completely rewritten, so you could expect some inconsistency after upgrade. Just follow this guide
+and <a href="../guide/single.html#4%20Configuration" class="guide">Configuration</a> section if you have any troubles.
+
+
+<h1 id="3 Usage">3 Usage</h1>
+<h2>Example app</h2><p class="paragraph"/>You can take a look at <a href="../ref/Httpsgithubcomsplixgrailstwitterauthenticationexample/Example Application.html" class="https://github.com/splix/grails-twitter-authentication-example">Example Application</a>, it's very
+basic app, that shows how to use the plugin. Just clone it, put your Twitter App credentials, and play with the code.<p class="paragraph"/><h2>Usage</h2>
+<h3>Install plugin</h3><p class="paragraph"/>Add dependencies into <code>BuildConfig.groovy</code>:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+        runtime <span class="java&#45;quote">"org.grails.plugins:resources:1.1.6"</span>
+        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;core:1.2.7.2"</span><p class="paragraph"/>        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;twitter:0.5"</span>
+    &#125;</pre></div><p class="paragraph"/><h3>Setup Twitter credentials</h3><p class="paragraph"/>Put your Twitter API Consumer Key/Secret into <code>Config.groovy</code>:
+<div class="code"><pre>grails.plugins.springsecurity.twitter.consumerKey=&#8230;
+grails.plugins.springsecurity.twitter.consumerSecret=...</pre></div><p class="paragraph"/><h3>Create domain class for your user</h3><p class="paragraph"/>Like <code>domain/TwitterUser.groovy</code>:<p class="paragraph"/><div class="code"><pre>class TwitterUser  &#123;<p class="paragraph"/>    /&#42;&#42;
+     &#42; Twitter Username (notice that it could be modified by user, Twitter allows that)
+     &#42;/
+    <span class="java&#45;object">String</span> username<p class="paragraph"/>    /&#42;&#42;
+     &#42; Twitter User Id
+     &#42;/
+    <span class="java&#45;object">Long</span> twitterId<p class="paragraph"/>    /&#42;&#42;
+     &#42; Twitter API token
+     &#42;/
+    <span class="java&#45;object">String</span> token<p class="paragraph"/>    /&#42;&#42;
+     &#42; Twitter API secret
+     &#42;/
+    <span class="java&#45;object">String</span> tokenSecret<p class="paragraph"/>    /&#42;&#42;
+     &#42; Related to main App User
+     &#42;/
+    <span class="java&#45;keyword">static</span> belongsTo = &#91;user: User&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
+        twitterId(unique: <span class="java&#45;keyword">true</span>, nullable: <span class="java&#45;keyword">false</span>)
+        username(nullable: <span class="java&#45;keyword">false</span>, blank: <span class="java&#45;keyword">false</span>)
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>The plugin is configured for <code>TwitterUser</code> class name by default. But you could use different name (or use package) for domain class,
+for example <code>com.company.UserWithTwitter</code>, that you should configure at <code>Config.groovy</code> at this case:
+<div class="code"><pre>grails.plugins.springsecurity.twitter.domain.classname='com.company.UserWithTwitter'</pre></div><p class="paragraph"/>
+<h3>Put SignIn with Twitter button:</h3><p class="paragraph"/>Add into your GSP:
+<div class="code"><pre>&#60;twitterAuth:button /&#62;</pre></div><p class="paragraph"/><h3>Use Spring Security</h3><p class="paragraph"/>Now you could use all security tools provided by <a href="http://grails-plugins.github.io/grails-spring-security-core/docs/manual/" target="blank">Spring Security Core</a>.<p class="paragraph"/>For example, you could use taglib for checking user state:
+<div class="code"><pre>&#60;sec:ifLoggedIn&#62;
+    &#60;div class=<span class="java&#45;quote">"message"</span>&#62;Authenticated&#60;/div&#62;
+    Hello &#60;sec:username/&#62;!
+&#60;/sec:ifLoggedIn&#62;<p class="paragraph"/>&#60;sec:ifNotLoggedIn&#62;
+    &#60;div class=<span class="java&#45;quote">"message"</span>&#62;Not authenticated&#60;/div&#62;
+    &#60;twitterAuth:button /&#62;
+&#60;/sec:ifNotLoggedIn&#62;</pre></div><p class="paragraph"/>
+
+
+<h1 id="4 Configuration">4 Configuration</h1>
+<h2>Twitter configuration</h2>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.twitter.consumerKey</td><td>must be specified</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.twitter.consumerSecret</td><td>must be specified</td></tr></table><p class="paragraph"/><h2>Domain configuration</h2>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.twitter.domain.classname</td><td>TwitterUser</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.twitter.domain.connectionPropertyName</td><td>user</td></tr></table>
+<ul class="star">
+<li>`.classname` - domain class name that will be used for authentication</li>
+<li>`.connectionPropertyName` - name of property that connects (`belongsTo`) to main app user (if you have two different domains, one for app user, one for twitter user)</li>
+</ul><p class="paragraph"/><h2>Authentication configuration</h2><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.twitter.autoCreate.active</td><td>true</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.twitter.autoCreate.roles</td><td>'ROLE_USER', 'ROLE_TWITTER'</td></tr><tr class="table-odd"><td>grails.plugins.springsecurity.twitter.filter.processUrl</td><td>'/j_spring_twitter_security_check'</td></tr></table>
+<ul class="star">
+<li>`.autoCreate.active` - plugin will automatically create corresponding user for each new visitor authentication using Twitter</li>
+<li>`.autoCreate.roles` - default list of roles that will be assigned to create user</li>
+<li>`.filter.processUrl` - url that will be used for authentication</li>
+</ul><p class="paragraph"/>
+
+
+<h1 id="5 Using TwitterAuthService">5 Using TwitterAuthService</h1>
+<h2>How it works</h2><p class="paragraph"/>If you want to add some specific logic to default plugin behaviour, you have to create your own
+service called `TwitterAuthService`. Then the plugin will check for known methods of this service, and if
+they're exist - use them instead of or in additional to own method.<p class="paragraph"/>It's some kind of extending an abstract class, but you don't need to create all methods, just what you need.<p class="paragraph"/>Used objects:
+<ul class="star">
+<li><code>&#60;TwitterUser&#62;</code> - domain class for your twitter user. It's your own class, can have other name, it's just a example</li>
+<li><code>&#60;Person&#62;</code> - general user, used by Spring Security. It's your own class, can have other name, it's just a example</li>
+<li><code>TwitterAuthToken</code> - token provided by plugin (instance of <code>com.the6hours.grails.springsecurity.facebook.TwitterAuthToken</code>)</li>
+</ul><p class="paragraph"/>TwitterAuthToken contains:
+<ul class="star">
+<li>String token</li>
+<li>String tokenSecret</li>
+<li>long userId</li>
+<li>String screenName</li>
+</ul><p class="paragraph"/>Notice that <code>&#60;TwitterUser&#62;</code> and <code>&#60;Person&#62;</code> can be same object, or can be two different object (with a relation), depends
+on your architecture.<p class="paragraph"/><h2>Take a look at sources</h2><p class="paragraph"/>Please, take a look at sources of <a href="../ref/Httpsgithubcomsplixgrailsspringsecuritytwitterblobmastersrcgroovycomthe6hoursgrailsspringsecuritytwitter Default Twitter Auth Daogroovy/DefaultTwitterAuthDao.html" class="https://github.com/splix/grails-spring-security-twitter/blob/master/src/groovy/com/the6hours/grails/springsecurity/twitter/DefaultTwitterAuthDao.groovy">DefaultTwitterAuthDao</a>
+to understand how it works, and which methods you can use for customization. It's much easier to read from the sources, that from the docs :)<p class="paragraph"/><h2>List of possible methods:</h2><p class="paragraph"/><h3><code>&#60;TwitterUser&#62;</code> findUser(TwitterAuthToken token)</h3><p class="paragraph"/>Called when twitter user is authenticated (on every request), must return existing instance
+for specified token, if exits. If doesn't - return <code>null</code>.<p class="paragraph"/><h3><code>&#60;TwitterUser&#62;</code> create(TwitterAuthToken token)</h3><p class="paragraph"/>Called when we have a new twitter user, called on first login to create all required
+data structures.<p class="paragraph"/>Notice, that if you have such method, it replaces all other methods for user creation, like:
+<ul class="star">
+<li>generateUsername</li>
+<li>createUser, createAppUser and createTwitterUser</li>
+<li>afterCreate</li>
+<li>createRoles</li>
+</ul><p class="paragraph"/><h3><code>&#60;Person&#62;</code> createUser(<code>&#60;TwitterUser&#62;</code> user, TwitterAuthToken token)</h3><p class="paragraph"/>Called if you have configured same domain for Twitter User and App User. Should create <code>&#60;Person&#62;</code> object and fill with
+all required details.<p class="paragraph"/><h3><code>&#60;TwitterUser&#62;</code> createTwitterUser(TwitterAuthToken token)</h3><p class="paragraph"/>Called if you have configured two domains, one for main user, one for twitter user.<p class="paragraph"/><h3><code>&#60;Person&#62;</code> createAppUser(<code>&#60;TwitterUser&#62;</code> user, TwitterAuthToken token)</h3><p class="paragraph"/>Called if you have configured two domains, one for main user, one for twitter user.<p class="paragraph"/><h3>String generateUsername(<code>&#60;Person&#62;</code> user, TwitterAuthToken token)</h3><p class="paragraph"/>Should generate a new unique username on a new user creation. If method doesn't exist, Twitter User Screen Name will be used.<p class="paragraph"/>Not called if you have implemented <code>createAppUser()</code> method<p class="paragraph"/><h3>void afterCreate(<code>&#60;TwitterUser&#62;</code> user, TwitterAuthToken token)</h3><p class="paragraph"/>Called after user was created by plugin, just after saving into database, but before roles are assigned to user.
+You can setup user object with some extra values. If you need to access Twitter API, you could use token, it
+contains `token` and `tokenSecret` for current user.<p class="paragraph"/><h3>void createRoles(<code>&#60;TwitterUser&#62;</code> user)</h3><p class="paragraph"/>Called when we have a new Twitter user, called on first login to create roles list for new user. If method doesn't exist,
+user will be created with default roles (configured at 'grails.plugins.springsecurity.twitter.autoCreate.roles')<p class="paragraph"/><h3>void updateIfNeeded(<code>&#60;TwitterUser&#62;</code> user, TwitterAuthToken token)</h3><p class="paragraph"/>Called on each login, you could update user details if needed.<p class="paragraph"/><h3><code>&#60;Person&#62;</code> getAppUser(<code>&#60;TwitterUser&#62;</code> user)</h3><p class="paragraph"/>Must return object to store in security context for specified facebook user (can return itself)<p class="paragraph"/><h3>Object getPrincipal(<code>&#60;Person&#62;</code> person)</h3><p class="paragraph"/>Principal to use with Spring Security. It's very useful if it will be instance of <code>UserDetails</code> class.<p class="paragraph"/><h3>Collection&#60;GrantedAuthority&#62; getRoles(<code>&#60;Person&#62;</code> user)</h3><p class="paragraph"/>Must return roles list for specified facebook user
+
+                    </div>
+                </td>
+                <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                </div>
+            </div>
+        </td>
+            </tr>
+        </table>
+
+        <div id="footer">
+            
+            
+        </div>
+
+
+
+<script type="text/javascript" src="../js/docs.js"></script>
+
+    </body>
+</html>
