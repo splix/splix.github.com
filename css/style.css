@@ -6467,3 +6467,19 @@ body {
 h1, h2, h3 {
   font-family: Cuprum, sans-serif;
 }
+
+/* line 11, ../sass/style.scss */
+h1 {
+  margin-top: 35px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* line 16, ../sass/style.scss */
+.navigation {
+  padding-top: 20px;
+}
+
+/* line 20, ../sass/style.scss */
+.main {
+  padding-bottom: 50px;
+}
