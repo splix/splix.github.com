@@ -1,8 +1,8 @@
 #!/bin/sh
 
-TARGET=appengine-groovify.md
+TARGET=garfa.md
 rm $TARGET
-cp appengine-groovify.base $TARGET
+cp garfa.base $TARGET
 echo '\n' >> $TARGET
 
 BASE=~/Projects/groovify-appengine/docs
