@@ -22,3 +22,7 @@ Splix.addDocMenu = ->
     li = "<li><a href='##{id}'>#{title}</a></li>"
     $('.navigation ul').append(li)
   )
+
+Splix.addRibbon = (repo) ->
+  r = "<a href=\"https://github.com/splix/#{repo}\"><img style=\"position: absolute; top: 0; right: 0; border: 0;\" src=\"https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png\" alt=\"Fork me on GitHub\"></a>"
+  $('body').append(r)
