@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en">
+<head>
+
+	<title> Hsoy Templates |  Igor Artamonov GitHub</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+	<script src="/js/jquery-1.5.1.min.js" type="text/javascript"></script>
+	<script src="/js/underscore-min.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cuprum">
+	<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/pygments.css"/>
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-55990-12']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+	<script src="/js/script.js" type="text/javascript"></script>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2 navigation">
+            <ul class="nav nav-list affix"></ul>
+        </div>
+        <div class="span9 main">
+            <h1 id="toc_44">Introduction</h1>
+
+<p>Hsoy Templates is a client- and server- side templating system for web and Java.</p>
+
+<p>Based on Google Closure Templates with adding HAML syntax.</p>
+
+<h2 id="toc_45">Features</h2>
+
+<ul>
+<li>One template for both client and server</li>
+<li>HAML syntax</li>
+<li>Fast
+
+<ul>
+<li>compiled into Java, to run on Server Side</li>
+<li>compiled into JavaScript, to run in Browser (or NodeJs)</li>
+</ul></li>
+<li>Rich command system (based on Google Closure Templates)</li>
+</ul>
+
+<h2 id="toc_46">License</h2>
+
+<p>Licensed under Apache 2 license.</p>
+
+<h1 id="toc_47">Template Structure</h1>
+
+<h2 id="toc_48">Hsoy Template Example</h2>
+
+<p>This template:</p>
+<div class="highlight"><pre><span class="nn">!!! namespace tests</span>
+
+<span class="c">/</span>
+  <span class="c">Greets a person using &quot;Hello&quot; by default.</span>
+
+  <span class="c">@param name The name of the person.</span>
+  <span class="c">@param? greetingWord Optional greeting word to use instead of &quot;Hello&quot;.</span>
+<span class="nf">#greeting</span>
+  <span class="nt">%h1</span>
+    A Greeting
+  {if not $greetingWord}
+    <span class="nc">.default</span>
+      Hello {$name}!
+  {else}
+    <span class="nc">.special</span>
+      {$greetingWord} {$name}!
+  {/if}
+</pre></div>
+<p>will generate for <code>{name: &#39;John&#39;}</code>:</p>
+<div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>A Greeting<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;default&quot;</span><span class="nt">&gt;</span>
+ Hello John!
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>and for <code>{name: &#39;Ivan&#39;, greetingWord: &#39;Privet&#39;}</code>:</p>
+<div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>A Greeting<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;special&quot;</span><span class="nt">&gt;</span>
+ Privet Ivan!
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<h1 id="toc_49">Commands</h1>
+
+<h2 id="toc_50">General syntax</h2>
+
+<ul>
+<li>Hsoy Templates uses braces <code>{}</code> for commands.</li>
+<li>use commands <code>{lb}</code> and <code>{rb}</code> for left- and right brackets if you need to put them into result html</li>
+<li>open-close block commands: <code>{if ...} ... {/if}</code></li>
+<li>use indentation for multi line block commands</li>
+<li>based on Google Closure Templates, so you can also use docs from here: <a href="https://developers.google.com/closure/templates/docs/commands">https://developers.google.com/closure/templates/docs/commands</a></li>
+</ul>
+
+<p>If you need help for HAML syntax - see <a href="http://haml.info/">http://haml.info/</a></p>
+
+<h2 id="toc_51">Print value</h2>
+
+<p>For variable use just a <code>{$variable}</code> (notice that <code>$</code> is placed inside <code>{}</code>)</p>
+
+<h3 id="toc_52">General syntax:</h3>
+<div class="highlight"><pre>{&lt;expression&gt;}
+{print &lt;expression&gt;}
+</pre></div>
+<h3 id="toc_53">Print Options</h3>
+
+<p>You can post process print</p>
+
+<table>
+ <tr>
+  <th>Option</th>
+  <th>Description</th>
+ </tr>
+ <tr>
+   <td>noAutoescape</td>
+   <td>turns off autoescaping</td>
+ </tr>
+ <tr>
+   <td>escapeHtml</td>
+   <td>manually HTML-escape the output</td>
+ </tr>
+ <tr>
+   <td>escapeUri</td>
+   <td>escape the output so that it can be inserted into a URI parameter</td>
+ </tr>
+ <tr>
+   <td>escapeJsString</td>
+   <td>escape the output so that it can be inserted into a JavaScript string</td>
+ </tr>
+ <tr>
+   <td>truncate:<n>[,false]</td>
+   <td>truncate a string to a maximum length n with trailing ellipsis, optional ',false' to truncate without an ellipsis.</td>
+ </tr>
+ <tr>
+   <td>changeNewlineToBr</td>
+   <td>change newlines (\n, \r, or \r\n) to &lt;br&gt;s.</td>
+ </tr>
+</table>
+
+<h3 id="toc_54">Example</h3>
+<div class="highlight"><pre>{&lt;expression&gt; |noAutoescape}
+{print &lt;expression&gt; |noAutoescape}
+{&lt;expression&gt; |truncate:10,false}
+</pre></div>
+<h2 id="toc_55">If</h2>
+<div class="highlight"><pre>{if &lt;expression&gt;} .... {/if}
+
+{if &lt;expression&gt;}
+  .hello
+    Hello {$variable}!
+{/if}
+
+{if &lt;expression&gt;}
+  Hello
+{elseif &lt;expression&gt;}
+  Bueno
+{else}
+  %span.error hey?!
+{/if}
+</pre></div>
+<p>where <code>&lt;expression&gt;</code> could be:</p>
+
+<ul>
+<li><code>{if $variable}</code></li>
+<li><code>{if $variable &gt; 5}</code></li>
+<li><code>{if $variable == $anotherVariable}</code></li>
+<li><code>{if not $variable}</code></li>
+<li><code>{if $variable and $anotherVariable}</code></li>
+</ul>
+
+<h2 id="toc_56">Loops</h2>
+<div class="highlight"><pre>{foreach &lt;var&gt; in &lt;array&gt;}
+  ...
+{ifempty}
+  ...
+{/foreach}
+</pre></div>
+<p>The iterator <code>var</code> is a local variable that is defined only in the block. Within
+the block, you can also use three built-in functions that only take foreach variables as arguments:</p>
+
+<ul>
+<li><code>isFirst($var)</code> returns true only on the first iteration.</li>
+<li><code>isLast($var)</code> returns true only on the last iteration.</li>
+<li><code>index($var)</code> returns the current index in the list. List indices are 0-based.</li>
+</ul>
+
+<h1 id="toc_57">JavaScript Usage</h1>
+
+<p>TO DO</p>
+
+<h1 id="toc_58">Java Usage</h1>
+
+<p>TO DO</p>
+
+<h1 id="toc_59">Modules</h1>
+
+<ul>
+<li><a href="https://github.com/splix/hsoy-templates">Hsoy Templates Core</a> - low-level library</li>
+<li><a href="https://github.com/splix/maven-hsoy-templates">Maven Plugin</a></li>
+<li><a href="https://github.com/splix/grails-hsoy-templates">Grails Plugin</a></li>
+</ul>
+
+<h2 id="toc_60">Maven</h2>
+<div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.the6hours<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>hsoy-templates<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.4<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
+<ul>
+<li>you need extra repository:</li>
+</ul>
+<div class="highlight"><pre><span class="nt">&lt;repositories&gt;</span>
+    <span class="nt">&lt;repository&gt;</span>
+        <span class="nt">&lt;id&gt;</span>the6hours-release<span class="nt">&lt;/id&gt;</span>
+        <span class="nt">&lt;url&gt;</span>http://maven.the6hours.com/release<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;releases&gt;&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;&lt;/releases&gt;</span>
+        <span class="nt">&lt;snapshots&gt;&lt;enabled&gt;</span>false<span class="nt">&lt;/enabled&gt;&lt;/snapshots&gt;</span>
+    <span class="nt">&lt;/repository&gt;</span>
+<span class="nt">&lt;/repositories&gt;</span>
+</pre></div>
+<h1 id="toc_61">Links</h1>
+
+<ul>
+<li><a href="https://developers.google.com/closure/templates/docs/">https://developers.google.com/closure/templates/docs/</a> - docs for Google Closure Templates (internal engine for Hsoy Templates)</li>
+<li><a href="http://haml.info/">http://haml.info/</a> - HAML syntax</li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    Splix.addDocMenu();
+    Splix.addRibbon('hsoy-templates');
+</script>
+</body>
+</html>
+
