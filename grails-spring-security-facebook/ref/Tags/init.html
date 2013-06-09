@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>Facebook Authentication 0.13.2</title>
+    <title>Facebook Authentication for Grails 0.14.4</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -56,7 +56,7 @@ function addJsClass(el) {
         
         
     </div>
-    <p>Facebook Authentication plugin, extension to the Spring Security Core plugin.</p>
+    <p>Facebook Authentication for Spring Security Core plugin</p>
 </div>
 
 
@@ -73,6 +73,7 @@ this tag, it will be executed just after Facebook SDK initialization.<p class="p
 </blockquote><p class="paragraph"/><h2>Attributes:</h2>
 <ul class="star">
 <li><code>force</code> Force tag to put FB SDK initialization code (even if it's already added)</li>
+<li><code>lang</code> - locale, for Facebook <code>all.js</code> (like 'en_US', 'ru_RU', etc)</li>
 </ul><p class="paragraph"/><h2>Example:</h2>
 <div class="code"><pre>&#60;facebookAuth:init&#62;
     &#60;!&#45;&#45;
@@ -117,6 +118,20 @@ this tag, it will be executed just after Facebook SDK initialization.<p class="p
 <div id="footer">
     
     
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-55990-12']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
 </div>
 
 

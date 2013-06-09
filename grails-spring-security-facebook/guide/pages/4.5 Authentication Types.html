@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4.5 Authentication Types 0.13.2</title>
+    <title>4.5 Authentication Types 0.14.4</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -55,7 +55,7 @@ function addJsClass() {
         
         
     </div>
-    <p>Facebook Authentication plugin, extension to the Spring Security Core plugin.</p>
+    <p>Facebook Authentication for Spring Security Core plugin</p>
 </div>
 
 
@@ -78,9 +78,9 @@ function addJsClass() {
                 <div class="project">
                     <h1>4.5 Authentication Types - Reference Documentation</h1>
 
-                    <p><strong>Authors:</strong> Igor Artamonov</p>
+                    <p><strong>Authors:</strong> Igor Artamonov (igor@artamonov.ru)</p>
 
-                    <p><strong>Version:</strong> 0.13.2</p>
+                    <p><strong>Version:</strong> 0.14.4</p>
 
                     
                 </div>
@@ -100,12 +100,7 @@ function addJsClass() {
 <li>if <code>filter.redirect.processUrl</code> is not then, then default <code>filter.processUrl</code> will be used</li>
 <li><code>failureHandler</code> - a name of the bean that implements <a href="http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/web/authentication/AuthenticationFailureHandler.html" target="blank">AuthenticationFailureHandler</a></li>
 <li><code>successHandler</code> - a name of the bean that implements <a href="http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/web/authentication/AuthenticationSuccessHandler.html" target="blank">AuthenticationSuccessHandler</a></li>
-</ul><p class="paragraph"/><h4>Configuration for TRANSPARENT filter</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.transparent.processUrl</td><td>not set</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.filter.transparent.failureHandler</td><td>not set</td></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.transparent.successHandler</td><td>not set</td></tr></table>
-<ul class="star">
-<li>if <code>filter.transparent.processUrl</code> is not then, then default <code>filter.processUrl</code> will be used</li>
-<li><code>failureHandler</code> - a name of the bean that implements <a href="http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/web/authentication/AuthenticationFailureHandler.html" target="blank">AuthenticationFailureHandler</a></li>
-<li><code>successHandler</code> - a name of the bean that implements <a href="http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/web/authentication/AuthenticationSuccessHandler.html" target="blank">AuthenticationSuccessHandler</a></li>
-</ul><p class="paragraph"/><h4>Configuration for COOKIEDIRECT filter</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.cookieDirect.processUrl</td><td>not set</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.filter.cookieDirect.failureHandler</td><td>not set</td></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.cookieDirect.successHandler</td><td>not set</td></tr></table>
+</ul><p class="paragraph"/><h4>Configuration for TRANSPARENT filter</h4><p class="paragraph"/>NA<p class="paragraph"/><h4>Configuration for COOKIEDIRECT filter</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.cookieDirect.processUrl</td><td>not set</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.filter.cookieDirect.failureHandler</td><td>not set</td></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.cookieDirect.successHandler</td><td>not set</td></tr></table>
 <ul class="star">
 <li>if <code>filter.cookieDirect.processUrl</code> is not then, then default <code>filter.processUrl</code> will be used</li>
 <li><code>failureHandler</code> - a name of the bean that implements <a href="http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/web/authentication/AuthenticationFailureHandler.html" target="blank">AuthenticationFailureHandler</a></li>
@@ -155,6 +150,20 @@ function addJsClass() {
 <div id="footer">
     
     
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-55990-12']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
 </div>
 
 <script type="text/javascript" src="../js/docs.js"></script>
