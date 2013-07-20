@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>3.5 Json Authentication 0.14.4</title>
+    <title>3.5 Json Authentication 0.14.5</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -80,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov (igor@artamonov.ru)</p>
 
-                    <p><strong>Version:</strong> 0.14.4</p>
+                    <p><strong>Version:</strong> 0.14.5</p>
 
                     
                 </div>
@@ -92,7 +92,11 @@ function addJsClass() {
 <h2 id="3.5 Json Authentication">3.5 Json Authentication</h2>
 Filter 'FacebookAuthJsonFilter' accepts Facebook Access Token or Signed Request as parameter, and responds
  with JSON to authorization requests. It's useful if you an external client for your Grails application, it
- could be Android or iOS application, or Desktop application, or just AJAX client.<p class="paragraph"/>How it works:<p class="paragraph"/><div class="code"><pre>&#62; GET /j_spring_security_facebook_json?access_token=&#60;ACCESS_TOKEN&#62;</pre></div><p class="paragraph"/>For successful authorization you'll get:
+ could be Android or iOS application, or Desktop application, or just AJAX client.<p class="paragraph"/><blockquote class="note">
+JSON filter just returns an object with user details, nothing else. For authentication of other requests,
+you still have to use different filter. If you have a RESTful client, take a look at
+<a href="http://grails.org/plugin/spring-security-oauth2-provider" target="blank">spring-security-oauth2-provider plugin</a>
+</blockquote><p class="paragraph"/>How it works:<p class="paragraph"/><div class="code"><pre>&#62; GET /j_spring_security_facebook_json?access_token=&#60;ACCESS_TOKEN&#62;</pre></div><p class="paragraph"/>For successful authorization you'll get:
 <div class="code"><pre>&#60; HTTP/1.1 200 OK
 &#60; Content&#45;Type: application/json;charset=UTF&#45;8
 &#60;

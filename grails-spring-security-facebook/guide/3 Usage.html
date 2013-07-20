@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>3 Usage 0.14.4</title>
+    <title>3 Usage 0.14.5</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -80,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov (igor@artamonov.ru)</p>
 
-                    <p><strong>Version:</strong> 0.14.4</p>
+                    <p><strong>Version:</strong> 0.14.5</p>
 
                     
                 </div>
@@ -140,7 +140,7 @@ grails.plugins.springsecurity.facebook.secret=76c2279743c99da3715e3d00f29a1234</
 <li>FacebookAuthRedirectFilter - server-side authorization (used by default)</li>
 <li>FacebookAuthCookieTransparentFilter - automatic client-side authorization</li>
 <li>FacebookAuthCookieDirectFilter - manual client-side authorization</li>
-<li>FacebookAuthJsonFilter - for AJAX or non-browser clients (Android/iOS/etc)</li>
+<li>FacebookAuthJsonFilter - for external clients (like Android/iOS app)</li>
 </ul><p class="paragraph"/><h2>Server-Side authentication (FacebookAuthRedirectFilter)</h2><p class="paragraph"/>It's a standard <a href="../ref/Httpsdevelopersfacebookcomdocshowtosloginserversidelogin/Login for Server-side Apps.html" class="https://developers.facebook.com/docs/howtos/login/server-side-login/">Login for Server-side Apps</a>.
 After clicking on 'connect button' user gets redirected to special Facebook page, for authentication, and then
 redirected back to your app.<p class="paragraph"/><h2>Client-Side authentication</h2>
@@ -153,7 +153,7 @@ It's per-request authorization. That means that this filter will try to authoriz
 client side it makes Facebook authorization and put Facebook Cookie (it's made by Facebook Javascript,
 you don't need anything special)<p class="paragraph"/>Same as FacebookAuthCookieTransparentFilter, it parse Facebook cookie, but only for specified url. Like
 username/password filter from spring-security-core or similar. After successful authorization it
-can redirect user to specified url.<p class="paragraph"/><h2>JSON or Android/iOS/desktop authorization (FacebookAuthJsonFilter)</h2><p class="paragraph"/>Client should send Access Token or Signed Request as parameter, and will get authorization response as JSON<p class="paragraph"/>See <a href="../guide/single.html#3.5%20Json%20Authentication" class="guide">filter docs</a><p class="paragraph"/><h1>Filter configuration</h1><p class="paragraph"/>You can use config parameter <code>grails.plugins.springsecurity.facebook.filter.type</code> to configure which filters
+can redirect user to specified url.<p class="paragraph"/><h2>JSON or Android/iOS/desktop authorization (FacebookAuthJsonFilter)</h2><p class="paragraph"/>Client should send Access Token or Signed Request as parameter, and will get JSON response with user details.<p class="paragraph"/>See <a href="../guide/single.html#3.5%20Json%20Authentication" class="guide">filter docs</a><p class="paragraph"/><h1>Filter configuration</h1><p class="paragraph"/>You can use config parameter <code>grails.plugins.springsecurity.facebook.filter.type</code> to configure which filters
 you want to use in your application.<p class="paragraph"/><blockquote class="note">
 It's not a Spring Security configuration, not a configuration for Spring filters. Just a
 extra configuration, that used only by this plugin.
@@ -171,9 +171,11 @@ extra configuration, that used only by this plugin.
 <h2 id="3.3 Server Side Authentication">3.3 Server Side Authentication</h2>
 It's the `FacebookAuthRedirectFilter`, enabled by default.<p class="paragraph"/>It's preferred and a standard <a href="../ref/Httpsdevelopersfacebookcomdocshowtosloginserversidelogin/Login for Server-side Apps.html" class="https://developers.facebook.com/docs/howtos/login/server-side-login/">Login for Server-side Apps</a>.
 After clicking on 'connect button' user gets redirected to special Facebook page, for authentication, and then
-redirected back to your app.<p class="paragraph"/>Note, that user going to see Facebook Authentication screen only in first time (if not security modification was made).
-Next time user should be redirected back from Facebook to your application, without showing any Facebook screen.<p class="paragraph"/><h4>How to process failed login</h4><p class="paragraph"/>When user declines Facebook Authentication (click Cancel, for example), you'll '401 Authentication Failed' by default.
-It's default configuration of Spring Security failure handler, but for most cases it's not what you really want.<p class="paragraph"/>To handle this situation you should create your own Failure Handler, a bean implementing
+redirected back to your app.<p class="paragraph"/><blockquote class="note">
+User going to see Facebook Authentication screen only at the first time. Next time user will be redirected
+back from Facebook to your application immediately.
+</blockquote><p class="paragraph"/><h4>How to process failed login</h4><p class="paragraph"/>When user declines Facebook Authentication (click Cancel, for example), you'll '401 Authentication Failed' by default.
+It's default configuration of Spring Security failure handler, but for most cases it's not what you really want.<p class="paragraph"/>To handle this situation you have to create your own Failure Handler, a bean implementing
 <code>org.springframework.security.web.authentication.AuthenticationFailureHandler</code>. If you just need to
 show a page (a GSP view), you can use standard <code>SimpleUrlAuthenticationFailureHandler</code>, that could redirect
 failed authentication to specified URL.<p class="paragraph"/>For example you can create bean at <code>resources.groovy</code>:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler<p class="paragraph"/>// Place your Spring DSL code here
@@ -189,7 +191,7 @@ when you need to use FB Javascript SDK on client side.<p class="paragraph"/>And 
 <ul class="star">
 <li>try authenticate user on each request, to any page - it's <code>transparent</code> filter</li>
 <li>authenticate only when user redirected to specified page, like a standard username/password authentication - it's <code>cookieDirect</code> filter</li>
-</ul><p class="paragraph"/>If you're using first way (<code>transparent</code> filter), your user will automatically authenticated whenever he has
+</ul><p class="paragraph"/>If you're using first way (<code>transparent</code> filter), your user will be automatically authenticated whenever he has
 Facebook cookie. Btw, don't forget that you should <strong class="bold">reload</strong> current page after you have successfully authenticated user
 on client side. Like:<p class="paragraph"/><div class="code"><pre>&#60;facebookAuth:init&#62;
    FB.Event.subscribe('auth.login', function() &#123;
@@ -209,7 +211,11 @@ on client side. Like:<p class="paragraph"/><div class="code"><pre>&#60;facebookA
 <h2 id="3.5 Json Authentication">3.5 Json Authentication</h2>
 Filter 'FacebookAuthJsonFilter' accepts Facebook Access Token or Signed Request as parameter, and responds
  with JSON to authorization requests. It's useful if you an external client for your Grails application, it
- could be Android or iOS application, or Desktop application, or just AJAX client.<p class="paragraph"/>How it works:<p class="paragraph"/><div class="code"><pre>&#62; GET /j_spring_security_facebook_json?access_token=&#60;ACCESS_TOKEN&#62;</pre></div><p class="paragraph"/>For successful authorization you'll get:
+ could be Android or iOS application, or Desktop application, or just AJAX client.<p class="paragraph"/><blockquote class="note">
+JSON filter just returns an object with user details, nothing else. For authentication of other requests,
+you still have to use different filter. If you have a RESTful client, take a look at
+<a href="http://grails.org/plugin/spring-security-oauth2-provider" target="blank">spring-security-oauth2-provider plugin</a>
+</blockquote><p class="paragraph"/>How it works:<p class="paragraph"/><div class="code"><pre>&#62; GET /j_spring_security_facebook_json?access_token=&#60;ACCESS_TOKEN&#62;</pre></div><p class="paragraph"/>For successful authorization you'll get:
 <div class="code"><pre>&#60; HTTP/1.1 200 OK
 &#60; Content&#45;Type: application/json;charset=UTF&#45;8
 &#60;

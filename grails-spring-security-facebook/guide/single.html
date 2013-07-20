@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>Facebook Authentication for Grails 0.14.4</title>
+        <title>Facebook Authentication for Grails 0.14.5</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -62,7 +62,7 @@ function addJsClass(el) {
                         <div class="project">
                             <h1>Facebook Authentication for Grails - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Igor Artamonov (igor@artamonov.ru)</p>
-                            <p><strong>Version:</strong> 0.14.4</p>
+                            <p><strong>Version:</strong> 0.14.5</p>
                             
                         </div>
 
@@ -133,11 +133,10 @@ Grails plugin for Facebook Authentication, as extension to Grails Spring Securit
 
 <h2 id="2.1 Installation">2.1 Installation</h2>
 <h3>Install plugin</h3><p class="paragraph"/>Basically it's just adding dependency into `BuildConfig.groovy`:<p class="paragraph"/><div class="code"><pre>plugins &#123;
-        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;facebook:0.11"</span>
+        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;facebook:0.14.5"</span>
     &#125;</pre></div><p class="paragraph"/>and calling (optionaly) configuration wizards by:
 <div class="code"><pre>grails s2&#45;quickstart //configure Spring Security Core
-grails s2&#45;init&#45;facebook //configure Spring Security Facebook</pre></div><p class="paragraph"/>Instead of last step you can edit `Config.groovy` manually, you need to add Facebook App key/secret there,
-and other configuration options if you need (see <a href="../guide/single.html#4%20Configuration" class="guide">Configuration</a> section)<p class="paragraph"/>Follow <a href="../guide/single.html#3.1%20Basic%20Usage" class="guide">Basic Usage</a> guide for next steps.
+grails s2&#45;init&#45;facebook //configure Spring Security Facebook</pre></div><p class="paragraph"/>Or you can edit `Config.groovy` instead, see <a href="../guide/single.html#4%20Configuration" class="guide">Configuration</a> section.<p class="paragraph"/>Follow <a href="../guide/single.html#3.1%20Basic%20Usage" class="guide">Basic Usage</a> guide for next steps.
 
 
 <h2 id="2.2 Upgrade Notice">2.2 Upgrade Notice</h2>
@@ -178,7 +177,7 @@ grails.plugins.springsecurity.facebook.secret=76c2279743c99da3715e3d00f29a1234</
 <li>FacebookAuthRedirectFilter - server-side authorization (used by default)</li>
 <li>FacebookAuthCookieTransparentFilter - automatic client-side authorization</li>
 <li>FacebookAuthCookieDirectFilter - manual client-side authorization</li>
-<li>FacebookAuthJsonFilter - for AJAX or non-browser clients (Android/iOS/etc)</li>
+<li>FacebookAuthJsonFilter - for external clients (like Android/iOS app)</li>
 </ul><p class="paragraph"/><h2>Server-Side authentication (FacebookAuthRedirectFilter)</h2><p class="paragraph"/>It's a standard <a href="../ref/Httpsdevelopersfacebookcomdocshowtosloginserversidelogin/Login for Server-side Apps.html" class="https://developers.facebook.com/docs/howtos/login/server-side-login/">Login for Server-side Apps</a>.
 After clicking on 'connect button' user gets redirected to special Facebook page, for authentication, and then
 redirected back to your app.<p class="paragraph"/><h2>Client-Side authentication</h2>
@@ -191,7 +190,7 @@ It's per-request authorization. That means that this filter will try to authoriz
 client side it makes Facebook authorization and put Facebook Cookie (it's made by Facebook Javascript,
 you don't need anything special)<p class="paragraph"/>Same as FacebookAuthCookieTransparentFilter, it parse Facebook cookie, but only for specified url. Like
 username/password filter from spring-security-core or similar. After successful authorization it
-can redirect user to specified url.<p class="paragraph"/><h2>JSON or Android/iOS/desktop authorization (FacebookAuthJsonFilter)</h2><p class="paragraph"/>Client should send Access Token or Signed Request as parameter, and will get authorization response as JSON<p class="paragraph"/>See <a href="../guide/single.html#3.5%20Json%20Authentication" class="guide">filter docs</a><p class="paragraph"/><h1>Filter configuration</h1><p class="paragraph"/>You can use config parameter <code>grails.plugins.springsecurity.facebook.filter.type</code> to configure which filters
+can redirect user to specified url.<p class="paragraph"/><h2>JSON or Android/iOS/desktop authorization (FacebookAuthJsonFilter)</h2><p class="paragraph"/>Client should send Access Token or Signed Request as parameter, and will get JSON response with user details.<p class="paragraph"/>See <a href="../guide/single.html#3.5%20Json%20Authentication" class="guide">filter docs</a><p class="paragraph"/><h1>Filter configuration</h1><p class="paragraph"/>You can use config parameter <code>grails.plugins.springsecurity.facebook.filter.type</code> to configure which filters
 you want to use in your application.<p class="paragraph"/><blockquote class="note">
 It's not a Spring Security configuration, not a configuration for Spring filters. Just a
 extra configuration, that used only by this plugin.
@@ -209,9 +208,11 @@ extra configuration, that used only by this plugin.
 <h2 id="3.3 Server Side Authentication">3.3 Server Side Authentication</h2>
 It's the `FacebookAuthRedirectFilter`, enabled by default.<p class="paragraph"/>It's preferred and a standard <a href="../ref/Httpsdevelopersfacebookcomdocshowtosloginserversidelogin/Login for Server-side Apps.html" class="https://developers.facebook.com/docs/howtos/login/server-side-login/">Login for Server-side Apps</a>.
 After clicking on 'connect button' user gets redirected to special Facebook page, for authentication, and then
-redirected back to your app.<p class="paragraph"/>Note, that user going to see Facebook Authentication screen only in first time (if not security modification was made).
-Next time user should be redirected back from Facebook to your application, without showing any Facebook screen.<p class="paragraph"/><h4>How to process failed login</h4><p class="paragraph"/>When user declines Facebook Authentication (click Cancel, for example), you'll '401 Authentication Failed' by default.
-It's default configuration of Spring Security failure handler, but for most cases it's not what you really want.<p class="paragraph"/>To handle this situation you should create your own Failure Handler, a bean implementing
+redirected back to your app.<p class="paragraph"/><blockquote class="note">
+User going to see Facebook Authentication screen only at the first time. Next time user will be redirected
+back from Facebook to your application immediately.
+</blockquote><p class="paragraph"/><h4>How to process failed login</h4><p class="paragraph"/>When user declines Facebook Authentication (click Cancel, for example), you'll '401 Authentication Failed' by default.
+It's default configuration of Spring Security failure handler, but for most cases it's not what you really want.<p class="paragraph"/>To handle this situation you have to create your own Failure Handler, a bean implementing
 <code>org.springframework.security.web.authentication.AuthenticationFailureHandler</code>. If you just need to
 show a page (a GSP view), you can use standard <code>SimpleUrlAuthenticationFailureHandler</code>, that could redirect
 failed authentication to specified URL.<p class="paragraph"/>For example you can create bean at <code>resources.groovy</code>:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler<p class="paragraph"/>// Place your Spring DSL code here
@@ -227,7 +228,7 @@ when you need to use FB Javascript SDK on client side.<p class="paragraph"/>And 
 <ul class="star">
 <li>try authenticate user on each request, to any page - it's <code>transparent</code> filter</li>
 <li>authenticate only when user redirected to specified page, like a standard username/password authentication - it's <code>cookieDirect</code> filter</li>
-</ul><p class="paragraph"/>If you're using first way (<code>transparent</code> filter), your user will automatically authenticated whenever he has
+</ul><p class="paragraph"/>If you're using first way (<code>transparent</code> filter), your user will be automatically authenticated whenever he has
 Facebook cookie. Btw, don't forget that you should <strong class="bold">reload</strong> current page after you have successfully authenticated user
 on client side. Like:<p class="paragraph"/><div class="code"><pre>&#60;facebookAuth:init&#62;
    FB.Event.subscribe('auth.login', function() &#123;
@@ -247,7 +248,11 @@ on client side. Like:<p class="paragraph"/><div class="code"><pre>&#60;facebookA
 <h2 id="3.5 Json Authentication">3.5 Json Authentication</h2>
 Filter 'FacebookAuthJsonFilter' accepts Facebook Access Token or Signed Request as parameter, and responds
  with JSON to authorization requests. It's useful if you an external client for your Grails application, it
- could be Android or iOS application, or Desktop application, or just AJAX client.<p class="paragraph"/>How it works:<p class="paragraph"/><div class="code"><pre>&#62; GET /j_spring_security_facebook_json?access_token=&#60;ACCESS_TOKEN&#62;</pre></div><p class="paragraph"/>For successful authorization you'll get:
+ could be Android or iOS application, or Desktop application, or just AJAX client.<p class="paragraph"/><blockquote class="note">
+JSON filter just returns an object with user details, nothing else. For authentication of other requests,
+you still have to use different filter. If you have a RESTful client, take a look at
+<a href="http://grails.org/plugin/spring-security-oauth2-provider" target="blank">spring-security-oauth2-provider plugin</a>
+</blockquote><p class="paragraph"/>How it works:<p class="paragraph"/><div class="code"><pre>&#62; GET /j_spring_security_facebook_json?access_token=&#60;ACCESS_TOKEN&#62;</pre></div><p class="paragraph"/>For successful authorization you'll get:
 <div class="code"><pre>&#60; HTTP/1.1 200 OK
 &#60; Content&#45;Type: application/json;charset=UTF&#45;8
 &#60;
@@ -280,27 +285,22 @@ Make sure that you have installed and configured spring-security-core plugin bef
 that you have configuration in your `Config.groovy` like:<p class="paragraph"/><div class="code"><pre>grails.plugins.springsecurity.facebook.domain.classname='&#60;your FacebookUser domain&#62;'
 grails.plugins.springsecurity.facebook.secret = '&#60;Facebook secret <span class="java&#45;keyword">for</span> your app&#62;'
 grails.plugins.springsecurity.facebook.appId = '&#60;Facebooks's app ID&#62;'</pre></div><p class="paragraph"/>Or you can skip `grails s2-init-facebook` step, and make such configuration by yourself.<p class="paragraph"/>When you have valid configuration you can put Facebook Connect button in you GSP:
-<div class="code"><pre>&#60;facebookAuth:connect permissions=<span class="java&#45;quote">"email,user_about_me"</span>/&#62;</pre></div><p class="paragraph"/>You don't need to add anything else.<p class="paragraph"/><h1>All configuration options</h1>
+<div class="code"><pre>&#60;facebookAuth:connect permissions=<span class="java&#45;quote">"email,user_about_me"</span>/&#62;</pre></div><p class="paragraph"/>You don't need to add anything else.
 
 
 <h2 id="4.1 Facebook App Config">4.1 Facebook App Config</h2>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.secret</td><td>must be specified</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.appId</td><td>must be specified</td></tr></table><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.permissions</td><td>'email'</td></tr></table><p class="paragraph"/>List of required permissions, see <a href="../ref/Httpsdevelopersfacebookcomdocsreferencelogin/https://developers.facebook.com/docs/reference/login/#permissions.html" class="https://developers.facebook.com/docs/reference/login/">https://developers.facebook.com/docs/reference/login/#permissions</a>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.secret</td><td>must be specified</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.appId</td><td>must be specified</td></tr></table><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.permissions</td><td>'email'</td></tr></table><p class="paragraph"/>For a list of all possible permissions see <a href="../ref/Httpsdevelopersfacebookcomdocsreferencelogin/https://developers.facebook.com/docs/reference/login/#permissions.html" class="https://developers.facebook.com/docs/reference/login/">https://developers.facebook.com/docs/reference/login/#permissions</a>
 
 
 
 <h2 id="4.2 Domains">4.2 Domains</h2>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th><th><strong class="bold">Values</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.domain.classname</td><td>'FacebookUser'</td><td>&#160;</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.domain.relation</td><td>null</td><td>'SameObject', 'JoinedUser'</td></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.domain.appUserConnectionPropertyName</td><td>'user'</td><td>&#160;</td></tr></table>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th><th><strong class="bold">Values</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.domain.classname</td><td>'FacebookUser'</td><td>&#160;</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.domain.appUserConnectionPropertyName</td><td>'user'</td><td>&#160;</td></tr></table>
 <ul class="star">
-<li><code>domain.classname</code> - name of your domain class, used to store Facebook User details (uid, access_token, etc)</li>
-<li><code>domain.relation</code> - configure how your domains are connected, required only if you didn't specify your domains names (useful when you have your own FacebookAuthService, but still using some methods from default Dao)</li>
-</ul><p class="paragraph"/>Relation Types:
-<ul class="star">
-<li>'SameObject' is used when you are using same domain for Spring Security Core and for Facebook.</li>
-<li>'JoinedUser' is used when you want to store Facebook Authentication details in its own domain.</li>
-</ul><p class="paragraph"/>If you're using 'JoinedUser' you should specify <code>domain.appUserConnectionPropertyName</code>: it's how your domain class is related
+<li><code>domain.classname</code> - name of your domain class, used to store Facebook User details (uid, access_token, etc). Could be same as configured for Spring Security Core, or a own domain, just for Facebook User details.</li>
+</ul><p class="paragraph"/>If you're using own domain for Facebook user (a joined to main User) you should
+specify <code>domain.appUserConnectionPropertyName</code>: it's how your domain class is related
 to main (used by Spring Security Core) user domain. It's the name
-of the property, usually defined as <code>static belongsTo = user: User</code> in your Facebook User domain class (where
-<code>User</code> is a Spring Security core user domain, and <code>user</code> is property name, that you should specify here<p class="paragraph"/><h4>User creation/initialization</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.autoCreate.roles</td><td>'ROLE_USER', 'ROLE_FACEBOOK'</td></tr></table><p class="paragraph"/>List of roles for user created by the plugin.
+of the property, usually defined as <code>static belongsTo = user: User</code> in your Facebook User domain class.<p class="paragraph"/><h4>User creation/initialization</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.autoCreate.roles</td><td>'ROLE_USER', 'ROLE_FACEBOOK'</td></tr></table><p class="paragraph"/>List of roles for user created by the plugin.
 
 
 
@@ -326,7 +326,7 @@ of the property, usually defined as <code>static belongsTo = user: User</code> i
 <table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.processUrl</td><td>'/j_spring_security_facebook_check'</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.filter.type</td><td>'redirect'</td></tr></table>
 <ul class="star">
 <li><code>type</code> - type of authentication, can be <code>transparent</code>, <code>cookieDirect</code>, <code>redirect</code> or <code>json</code>.</li>
-</ul><p class="paragraph"/>You can specify list of filters as: <code>'redirect', 'json'</code> or comma-separated string:
+</ul><p class="paragraph"/>You can specify list of filters as a list <code>'redirect', 'json'</code> or comma-separated string:
 <div class="code"><pre>grails.plugins.springsecurity.facebook.filter.type='redirect,json'</pre></div><p class="paragraph"/><h4>Configuration for REDIRECT filter</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.redirect.processUrl</td><td>not set</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.filter.redirect.redirectFromUrl</td><td>'/j_spring_security_facebook_redirect'</td></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.redirect.failureHandler</td><td>not set</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.filter.redirect.successHandler</td><td>not set</td></tr></table>
 <ul class="star">
 <li><code>redirectFromUrl</code> - it's the url that will redirect user to special Facebook Authentication URL. You can put link to/redirect user to <code>redirectFromUrl</code> when you want to use Facebook authentication. This url is used by default <code>&#60;facebook:connect /&#62;</code> button.</li>
@@ -335,7 +335,7 @@ of the property, usually defined as <code>static belongsTo = user: User</code> i
 <li><code>successHandler</code> - a name of the bean that implements <a href="http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/web/authentication/AuthenticationSuccessHandler.html" target="blank">AuthenticationSuccessHandler</a></li>
 </ul><p class="paragraph"/><h4>Configuration for TRANSPARENT filter</h4><p class="paragraph"/>NA<p class="paragraph"/><h4>Configuration for COOKIEDIRECT filter</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.cookieDirect.processUrl</td><td>not set</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.filter.cookieDirect.failureHandler</td><td>not set</td></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.cookieDirect.successHandler</td><td>not set</td></tr></table>
 <ul class="star">
-<li>if <code>filter.cookieDirect.processUrl</code> is not then, then default <code>filter.processUrl</code> will be used</li>
+<li>if <code>filter.cookieDirect.processUrl</code> is not set, then default <code>filter.processUrl</code> will be used</li>
 <li><code>failureHandler</code> - a name of the bean that implements <a href="http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/web/authentication/AuthenticationFailureHandler.html" target="blank">AuthenticationFailureHandler</a></li>
 <li><code>successHandler</code> - a name of the bean that implements <a href="http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/web/authentication/AuthenticationSuccessHandler.html" target="blank">AuthenticationSuccessHandler</a></li>
 </ul><p class="paragraph"/><h4>Configuration for JSON filter</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.json.processUrl</td><td>'/j_spring_security_facebook_json'</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.filter.json.type</td><td>'json'</td></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.filter.json.methods</td><td>'POST'</td></tr></table>
@@ -411,11 +411,10 @@ we store Facebook User details in different domain).<p class="paragraph"/>Not ca
 <h2>Please enable logging</h2><p class="paragraph"/>If you have troubles with plugin, please enabled logging, so you can see what's happening:
 <div class="code"><pre>log4j = &#123;
   debug 'com.the6hours', 'grails.app.taglib.com.the6hours'
-&#125;</pre></div><p class="paragraph"/><h2>Can't find a cookie / user not authenticated by plugin (client side authentication)</h2><p class="paragraph"/>Make sure that you're using any domain name for you application. Not a <code>localhost</code>, because Facebook can't setup
-cookie for localhost. Avoid <code>.local</code> domains as well.<p class="paragraph"/>You can use domain like <code>myapp.dev</code>, that you should setup at file <code>/etc/hosts</code> (or
-<code>C:/Windows/system32/etc/hosts</code> on Windows), by adding following line:
-<div class="code"><pre>127.0.0.1  myapp.dev</pre></div><p class="paragraph"/>Notice: if you already have line starting with <code>127.0.0.1</code>, then put your <code>myapp.dev</code> domain in this line too (it can
-have multiply associated domains)<p class="paragraph"/>After that, you should configure your Grails app to use this domain, by adding following line into <code>Config.groovy</code>:
+&#125;</pre></div><p class="paragraph"/><h2>Client side authentication don't work on dev server</h2><p class="paragraph"/>Make sure that you're using a real domain name for your application. Not a <code>localhost</code>, because Facebook can't setup
+cookie for localhost, and avoid <code>.local</code> domains as well.<p class="paragraph"/>You can make a fake domain like <code>myapp.dev</code>, by putting into <code>/etc/hosts</code> the following line:
+<div class="code"><pre>127.0.0.1  myapp.dev</pre></div>
+If you already have line starting with <code>127.0.0.1</code>, just add your <code>myapp.dev</code> at the end of the line.<p class="paragraph"/>See more details about hosts file, and location of the file for different operation systems see: http://en.wikipedia.org/wiki/Hosts_(file)<p class="paragraph"/>After that, you should configure your Grails app to use this domain, by adding following line into <code>Config.groovy</code>:
 <div class="code"><pre>grails.serverURL = <span class="java&#45;quote">"http://myapp.dev:8080/$&#123;appName&#125;"</span></pre></div><p class="paragraph"/>Of course, you need to use this domain only for development, so put this configuration into <code>development</code>
 environment config:
 <div class="code"><pre>environments &#123;

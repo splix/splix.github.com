@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>6 Common Issues 0.14.4</title>
+    <title>6 Common Issues 0.14.5</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -78,7 +78,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov (igor@artamonov.ru)</p>
 
-                    <p><strong>Version:</strong> 0.14.4</p>
+                    <p><strong>Version:</strong> 0.14.5</p>
 
                     
                 </div>
@@ -91,11 +91,10 @@ function addJsClass() {
 <h2>Please enable logging</h2><p class="paragraph"/>If you have troubles with plugin, please enabled logging, so you can see what's happening:
 <div class="code"><pre>log4j = &#123;
   debug 'com.the6hours', 'grails.app.taglib.com.the6hours'
-&#125;</pre></div><p class="paragraph"/><h2>Can't find a cookie / user not authenticated by plugin (client side authentication)</h2><p class="paragraph"/>Make sure that you're using any domain name for you application. Not a <code>localhost</code>, because Facebook can't setup
-cookie for localhost. Avoid <code>.local</code> domains as well.<p class="paragraph"/>You can use domain like <code>myapp.dev</code>, that you should setup at file <code>/etc/hosts</code> (or
-<code>C:/Windows/system32/etc/hosts</code> on Windows), by adding following line:
-<div class="code"><pre>127.0.0.1  myapp.dev</pre></div><p class="paragraph"/>Notice: if you already have line starting with <code>127.0.0.1</code>, then put your <code>myapp.dev</code> domain in this line too (it can
-have multiply associated domains)<p class="paragraph"/>After that, you should configure your Grails app to use this domain, by adding following line into <code>Config.groovy</code>:
+&#125;</pre></div><p class="paragraph"/><h2>Client side authentication don't work on dev server</h2><p class="paragraph"/>Make sure that you're using a real domain name for your application. Not a <code>localhost</code>, because Facebook can't setup
+cookie for localhost, and avoid <code>.local</code> domains as well.<p class="paragraph"/>You can make a fake domain like <code>myapp.dev</code>, by putting into <code>/etc/hosts</code> the following line:
+<div class="code"><pre>127.0.0.1  myapp.dev</pre></div>
+If you already have line starting with <code>127.0.0.1</code>, just add your <code>myapp.dev</code> at the end of the line.<p class="paragraph"/>See more details about hosts file, and location of the file for different operation systems see: http://en.wikipedia.org/wiki/Hosts_(file)<p class="paragraph"/>After that, you should configure your Grails app to use this domain, by adding following line into <code>Config.groovy</code>:
 <div class="code"><pre>grails.serverURL = <span class="java&#45;quote">"http://myapp.dev:8080/$&#123;appName&#125;"</span></pre></div><p class="paragraph"/>Of course, you need to use this domain only for development, so put this configuration into <code>development</code>
 environment config:
 <div class="code"><pre>environments &#123;

@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>3.4 Client Side Authentication 0.14.4</title>
+    <title>3.4 Client Side Authentication 0.14.5</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -80,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov (igor@artamonov.ru)</p>
 
-                    <p><strong>Version:</strong> 0.14.4</p>
+                    <p><strong>Version:</strong> 0.14.5</p>
 
                     
                 </div>
@@ -95,7 +95,7 @@ when you need to use FB Javascript SDK on client side.<p class="paragraph"/>And 
 <ul class="star">
 <li>try authenticate user on each request, to any page - it's <code>transparent</code> filter</li>
 <li>authenticate only when user redirected to specified page, like a standard username/password authentication - it's <code>cookieDirect</code> filter</li>
-</ul><p class="paragraph"/>If you're using first way (<code>transparent</code> filter), your user will automatically authenticated whenever he has
+</ul><p class="paragraph"/>If you're using first way (<code>transparent</code> filter), your user will be automatically authenticated whenever he has
 Facebook cookie. Btw, don't forget that you should <strong class="bold">reload</strong> current page after you have successfully authenticated user
 on client side. Like:<p class="paragraph"/><div class="code"><pre>&#60;facebookAuth:init&#62;
    FB.Event.subscribe('auth.login', function() &#123;

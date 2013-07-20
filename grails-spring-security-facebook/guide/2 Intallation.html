@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>2 Intallation 0.14.4</title>
+    <title>2 Intallation 0.14.5</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -80,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov (igor@artamonov.ru)</p>
 
-                    <p><strong>Version:</strong> 0.14.4</p>
+                    <p><strong>Version:</strong> 0.14.5</p>
 
                     
                 </div>
@@ -106,11 +106,10 @@ function addJsClass() {
 
 <h2 id="2.1 Installation">2.1 Installation</h2>
 <h3>Install plugin</h3><p class="paragraph"/>Basically it's just adding dependency into `BuildConfig.groovy`:<p class="paragraph"/><div class="code"><pre>plugins &#123;
-        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;facebook:0.11"</span>
+        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;facebook:0.14.5"</span>
     &#125;</pre></div><p class="paragraph"/>and calling (optionaly) configuration wizards by:
 <div class="code"><pre>grails s2&#45;quickstart //configure Spring Security Core
-grails s2&#45;init&#45;facebook //configure Spring Security Facebook</pre></div><p class="paragraph"/>Instead of last step you can edit `Config.groovy` manually, you need to add Facebook App key/secret there,
-and other configuration options if you need (see <a href="../guide/single.html#4%20Configuration" class="guide">Configuration</a> section)<p class="paragraph"/>Follow <a href="../guide/single.html#3.1%20Basic%20Usage" class="guide">Basic Usage</a> guide for next steps.
+grails s2&#45;init&#45;facebook //configure Spring Security Facebook</pre></div><p class="paragraph"/>Or you can edit `Config.groovy` instead, see <a href="../guide/single.html#4%20Configuration" class="guide">Configuration</a> section.<p class="paragraph"/>Follow <a href="../guide/single.html#3.1%20Basic%20Usage" class="guide">Basic Usage</a> guide for next steps.
 
 
 <h2 id="2.2 Upgrade Notice">2.2 Upgrade Notice</h2>
