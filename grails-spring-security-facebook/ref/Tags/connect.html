@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>Facebook Authentication for Grails 0.15</title>
+    <title>Facebook Authentication for Grails 0.15.2</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -81,7 +81,7 @@ function addJsClass(el) {
 <li><code>text</code> - text to display on button, <strong class="bold">Login with Facebook</strong> by default</li>
 <li><code>skipInit</code> - force to skip Facebook Javascript SDK initialization. By default this tag calls <code>&#60;facebook:init /&#62;</code>, if it's not executed yet.</li>
 <li><code>lang</code> - locale, for Facebook <code>all.js</code> (like 'en_US', 'ru_RU', etc)</li>
-</ul><p class="paragraph"/><h2>Examples:</h2><p class="paragraph"/>Default:
+</ul><p class="paragraph"/>You can get official FB button image at <a href="../../ref/Httpsdevelopersfacebookcomdocsfacebookloginchecklist/https://developers.facebook.com/docs/facebook-login/checklist/.html" class="https://developers.facebook.com/docs/facebook-login/checklist/">https://developers.facebook.com/docs/facebook-login/checklist/</a><p class="paragraph"/><h2>Examples:</h2><p class="paragraph"/>Default:
 <div class="code"><pre>&#60;facebookAuth:connect /&#62;</pre></div><p class="paragraph"/>Use your image for connect button:
 <div class="code"><pre>&#60;facebookAuth:connect img=<span class="java&#45;quote">"$&#123;resource(dir: 'images', file: 'facebook&#45;connect.png')&#125;"</span> img&#45;alt=<span class="java&#45;quote">"Login to my site!"</span>/&#62;</pre></div><p class="paragraph"/>Ask for email:
 <div class="code"><pre>&#60;facebookAuth:connect permission=<span class="java&#45;quote">"email"</span>/&#62;</pre></div><p class="paragraph"/>
