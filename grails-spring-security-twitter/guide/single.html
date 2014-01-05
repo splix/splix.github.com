@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>Twitter Authentication for Spring Security 0.5.2</title>
+        <title>Twitter Authentication for Spring Security 0.6</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -60,7 +60,7 @@ function addJsClass(el) {
                         <div class="project">
                             <h1>Twitter Authentication for Spring Security - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Igor Artamonov</p>
-                            <p><strong>Version:</strong> 0.5.2</p>
+                            <p><strong>Version:</strong> 0.6</p>
                             
                         </div>
 
@@ -87,7 +87,7 @@ function addJsClass(el) {
 Grails plugin for Twitter Authentication, as extension to Grails Spring Security Core plugin.<p class="paragraph"/><h2>Requirements:</h2>
 <ul class="star">
 <li>grails 2.0+</li>
-<li>spring-security-core plugin 1.2.7.2</li>
+<li>spring-security-core plugin 2.0-RC2</li>
 </ul><p class="paragraph"/><h2>Links:</h2>
 <ul class="star">
 <li>Sources - <a href="https://github.com/splix/grails-spring-security-twitter" target="blank">https://github.com/splix/grails-spring-security-twitter</a></li>
@@ -98,25 +98,26 @@ Grails plugin for Twitter Authentication, as extension to Grails Spring Security
 
 <h1 id="2 Installation">2 Installation</h1>
 <h2>Install plugin</h2><p class="paragraph"/>Add dependency into `BuildConfig.groovy`:<p class="paragraph"/><div class="code"><pre>plugins &#123;
-        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;twitter:0.5"</span>
+        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;twitter:0.6"</span>
         // &#8230;
         // you need to have spring&#45;security&#45;core plugin installed
         // &#8230;
-    &#125;</pre></div><p class="paragraph"/>and put your Twitter API Consumer Key/Secret into `Config.groovy`:
-<div class="code"><pre>grails.plugins.springsecurity.twitter.consumerKey=&#8230;
-grails.plugins.springsecurity.twitter.consumerSecret=...</pre></div><p class="paragraph"/>It's very basic configuration, for other options (see <a href="../guide/single.html#4%20Configuration" class="guide">Configuration</a> section)<p class="paragraph"/>Follow <a href="../guide/single.html#3%20Usage" class="guide">Basic Usage</a> guide for full example.<p class="paragraph"/><h2>Upgrading from versions prior to 0.5</h2><p class="paragraph"/>Version 0.5 was completely rewritten, so you could expect some inconsistency after upgrade. Just follow this guide
-and <a href="../guide/single.html#4%20Configuration" class="guide">Configuration</a> section if you have any troubles.
+    &#125;</pre></div><p class="paragraph"/>and put your Twitter API Consumer Key/Secret into <code>Config.groovy</code>:
+<div class="code"><pre>grails.plugin.springsecurity.twitter.consumerKey= ..
+grails.plugin.springsecurity.twitter.consumerSecret= ..</pre></div><p class="paragraph"/>It's very basic configuration, for other options (see <a href="../guide/single.html#4%20Configuration" class="guide">Configuration</a> section)<p class="paragraph"/>Follow <a href="../guide/single.html#3%20Usage" class="guide">Basic Usage</a> guide for full example.<p class="paragraph"/><h2>Upgrading from versions prior to 0.5</h2><p class="paragraph"/>Version 0.5 was completely rewritten, so you could expect some inconsistency after upgrade. Just follow this guide
+and <a href="../guide/single.html#4%20Configuration" class="guide">Configuration</a> section if you have any troubles.<p class="paragraph"/><h2>Upgrading from versions prior to 0.6</h2><p class="paragraph"/>Version 0.6 is based on Spring Security Core 2 plugin. Follow upgrade notes from
+<a href="http://grails-plugins.github.io/grails-spring-security-core/docs/manual/guide/newInV2.html" target="blank">http://grails-plugins.github.io/grails-spring-security-core/docs/manual/guide/newInV2.html</a><p class="paragraph"/>
 
 
 <h1 id="3 Usage">3 Usage</h1>
 <h2>Example app</h2><p class="paragraph"/>You can take a look at <a href="https://github.com/splix/grails-twitter-authentication-example" target="blank">Example Application</a> , it's very
 basic app, that shows how to use the plugin. Just clone it, put your Twitter App credentials, and play with the code.<p class="paragraph"/><h2>Usage</h2>
 <h3>Install plugin</h3><p class="paragraph"/>Add dependencies into <code>BuildConfig.groovy</code>:<p class="paragraph"/><div class="code"><pre>plugins &#123;
-        runtime <span class="java&#45;quote">"org.grails.plugins:resources:1.1.6"</span>
-        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;core:1.2.7.2"</span><p class="paragraph"/>        compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;twitter:0.5"</span>
-    &#125;</pre></div><p class="paragraph"/><h3>Setup Twitter credentials</h3><p class="paragraph"/>Put your Twitter API Consumer Key/Secret into <code>Config.groovy</code>:
-<div class="code"><pre>grails.plugins.springsecurity.twitter.consumerKey=&#8230;
-grails.plugins.springsecurity.twitter.consumerSecret=...</pre></div><p class="paragraph"/><h3>Create domain class for your user</h3><p class="paragraph"/>Like <code>domain/TwitterUser.groovy</code>:<p class="paragraph"/><div class="code"><pre>class TwitterUser  &#123;<p class="paragraph"/>    /&#42;&#42;
+    runtime <span class="java&#45;quote">"org.grails.plugins:resources:1.1.6"</span>
+    compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;core:2.0&#45;RC2"</span><p class="paragraph"/>    compile <span class="java&#45;quote">"org.grails.plugins:spring&#45;security&#45;twitter:0.6"</span>
+&#125;</pre></div><p class="paragraph"/><h3>Setup Twitter credentials</h3><p class="paragraph"/>Put your Twitter API Consumer Key/Secret into <code>Config.groovy</code>:
+<div class="code"><pre>grails.plugin.springsecurity.twitter.consumerKey=..
+grails.plugin.springsecurity.twitter.consumerSecret=..</pre></div><p class="paragraph"/><h3>Create domain class for your user</h3><p class="paragraph"/>Like <code>domain/TwitterUser.groovy</code>:<p class="paragraph"/><div class="code"><pre>class TwitterUser  &#123;<p class="paragraph"/>    /&#42;&#42;
      &#42; Twitter Username (notice that it could be modified by user, Twitter allows that)
      &#42;/
     <span class="java&#45;object">String</span> username<p class="paragraph"/>    /&#42;&#42;
@@ -136,7 +137,7 @@ grails.plugins.springsecurity.twitter.consumerSecret=...</pre></div><p class="pa
         username(nullable: <span class="java&#45;keyword">false</span>, blank: <span class="java&#45;keyword">false</span>)
     &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>The plugin is configured for <code>TwitterUser</code> class name by default. But you could use different name (or use package) for domain class,
 for example <code>com.company.UserWithTwitter</code>, that you should configure at <code>Config.groovy</code> at this case:
-<div class="code"><pre>grails.plugins.springsecurity.twitter.domain.classname='com.company.UserWithTwitter'</pre></div><p class="paragraph"/>
+<div class="code"><pre>grails.plugin.springsecurity.twitter.domain.classname='com.company.UserWithTwitter'</pre></div><p class="paragraph"/>
 <h3>Put SignIn with Twitter button:</h3><p class="paragraph"/>Add into your GSP:
 <div class="code"><pre>&#60;twitterAuth:button /&#62;</pre></div><p class="paragraph"/><h3>Use Spring Security</h3><p class="paragraph"/>Now you could use all security tools provided by <a href="http://grails-plugins.github.io/grails-spring-security-core/docs/manual/" target="blank">Spring Security Core</a>.<p class="paragraph"/>For example, you could use taglib for checking user state:
 <div class="code"><pre>&#60;sec:ifLoggedIn&#62;
@@ -150,16 +151,16 @@ for example <code>com.company.UserWithTwitter</code>, that you should configure 
 
 <h1 id="4 Configuration">4 Configuration</h1>
 <h2>Twitter configuration</h2>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.twitter.consumerKey</td><td>must be specified</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.twitter.consumerSecret</td><td>must be specified</td></tr></table><p class="paragraph"/><h2>Domain configuration</h2>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.twitter.domain.classname</td><td>TwitterUser</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.twitter.domain.connectionPropertyName</td><td>user</td></tr></table>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugin.springsecurity.twitter.consumerKey</td><td>must be specified</td></tr><tr class="table-even"><td>grails.plugin.springsecurity.twitter.consumerSecret</td><td>must be specified</td></tr></table><p class="paragraph"/><h2>Domain configuration</h2>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugin.springsecurity.twitter.domain.classname</td><td>TwitterUser</td></tr><tr class="table-even"><td>grails.plugin.springsecurity.twitter.domain.connectionPropertyName</td><td>user</td></tr></table><p class="paragraph"/>Where:
 <ul class="star">
-<li>`.classname` - domain class name that will be used for authentication</li>
-<li>`.connectionPropertyName` - name of property that connects (`belongsTo`) to main app user (if you have two different domains, one for app user, one for twitter user)</li>
-</ul><p class="paragraph"/><h2>Authentication configuration</h2><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.twitter.autoCreate.active</td><td>true</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.twitter.autoCreate.roles</td><td>'ROLE_USER', 'ROLE_TWITTER'</td></tr><tr class="table-odd"><td>grails.plugins.springsecurity.twitter.filter.processUrl</td><td>'/j_spring_twitter_security_check'</td></tr></table>
+<li><code>.classname</code> - domain class name that will be used for authentication</li>
+<li><code>.connectionPropertyName</code> - name of property that connects (`belongsTo`) to main app user (if you have two different domains, one for app user, one for twitter user)</li>
+</ul><p class="paragraph"/><h2>Authentication configuration</h2><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugin.springsecurity.twitter.autoCreate.active</td><td>true</td></tr><tr class="table-even"><td>grails.plugin.springsecurity.twitter.autoCreate.roles</td><td>'ROLE_USER', 'ROLE_TWITTER'</td></tr><tr class="table-odd"><td>grails.plugin.springsecurity.twitter.filter.processUrl</td><td>'/j_spring_twitter_security_check'</td></tr></table><p class="paragraph"/>Where:
 <ul class="star">
-<li>`.autoCreate.active` - plugin will automatically create corresponding user for each new visitor authentication using Twitter</li>
-<li>`.autoCreate.roles` - default list of roles that will be assigned to create user</li>
-<li>`.filter.processUrl` - url that will be used for authentication</li>
+<li><code>.autoCreate.active</code> - plugin will automatically create corresponding user for each new visitor authentication using Twitter</li>
+<li><code>.autoCreate.roles</code> - default list of roles that will be assigned to create user</li>
+<li><code>.filter.processUrl</code> - url that will be used for authentication</li>
 </ul><p class="paragraph"/>
 
 

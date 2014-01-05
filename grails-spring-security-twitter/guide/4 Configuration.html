@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4 Configuration 0.5.2</title>
+    <title>4 Configuration 0.6</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -77,7 +77,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov</p>
 
-                    <p><strong>Version:</strong> 0.5.2</p>
+                    <p><strong>Version:</strong> 0.6</p>
 
                     
                 </div>
@@ -88,16 +88,16 @@ function addJsClass() {
 
 <h1 id="4 Configuration">4 Configuration</h1>
 <h2>Twitter configuration</h2>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.twitter.consumerKey</td><td>must be specified</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.twitter.consumerSecret</td><td>must be specified</td></tr></table><p class="paragraph"/><h2>Domain configuration</h2>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.twitter.domain.classname</td><td>TwitterUser</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.twitter.domain.connectionPropertyName</td><td>user</td></tr></table>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugin.springsecurity.twitter.consumerKey</td><td>must be specified</td></tr><tr class="table-even"><td>grails.plugin.springsecurity.twitter.consumerSecret</td><td>must be specified</td></tr></table><p class="paragraph"/><h2>Domain configuration</h2>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugin.springsecurity.twitter.domain.classname</td><td>TwitterUser</td></tr><tr class="table-even"><td>grails.plugin.springsecurity.twitter.domain.connectionPropertyName</td><td>user</td></tr></table><p class="paragraph"/>Where:
 <ul class="star">
-<li>`.classname` - domain class name that will be used for authentication</li>
-<li>`.connectionPropertyName` - name of property that connects (`belongsTo`) to main app user (if you have two different domains, one for app user, one for twitter user)</li>
-</ul><p class="paragraph"/><h2>Authentication configuration</h2><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.twitter.autoCreate.active</td><td>true</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.twitter.autoCreate.roles</td><td>'ROLE_USER', 'ROLE_TWITTER'</td></tr><tr class="table-odd"><td>grails.plugins.springsecurity.twitter.filter.processUrl</td><td>'/j_spring_twitter_security_check'</td></tr></table>
+<li><code>.classname</code> - domain class name that will be used for authentication</li>
+<li><code>.connectionPropertyName</code> - name of property that connects (`belongsTo`) to main app user (if you have two different domains, one for app user, one for twitter user)</li>
+</ul><p class="paragraph"/><h2>Authentication configuration</h2><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugin.springsecurity.twitter.autoCreate.active</td><td>true</td></tr><tr class="table-even"><td>grails.plugin.springsecurity.twitter.autoCreate.roles</td><td>'ROLE_USER', 'ROLE_TWITTER'</td></tr><tr class="table-odd"><td>grails.plugin.springsecurity.twitter.filter.processUrl</td><td>'/j_spring_twitter_security_check'</td></tr></table><p class="paragraph"/>Where:
 <ul class="star">
-<li>`.autoCreate.active` - plugin will automatically create corresponding user for each new visitor authentication using Twitter</li>
-<li>`.autoCreate.roles` - default list of roles that will be assigned to create user</li>
-<li>`.filter.processUrl` - url that will be used for authentication</li>
+<li><code>.autoCreate.active</code> - plugin will automatically create corresponding user for each new visitor authentication using Twitter</li>
+<li><code>.autoCreate.roles</code> - default list of roles that will be assigned to create user</li>
+<li><code>.filter.processUrl</code> - url that will be used for authentication</li>
 </ul><p class="paragraph"/>
 
 
