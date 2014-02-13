@@ -47,7 +47,7 @@
 
 <p>Garfa - is Groovy ActiveRecord for Google Appengine</p>
 
-<p>It&#39;s a tiny wrapper around Objectify 3, and should work with any Groovy project for Appengine. It&#39;s pretty
+<p>It&#39;s a tiny wrapper around Objectify 4, and should work with any Groovy project for Appengine. It&#39;s pretty
  safe to use Garfa in your project, because all underlying work is done by well-tested Objectify, and
  if you have something very specific you could always dig down to Objectify.</p>
 
@@ -59,7 +59,7 @@
 <div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>com.the6hours<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>garfa<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>0.5<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.7<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </pre></div><div class="highlight"><pre><span class="nt">&lt;repositories&gt;</span>
     <span class="nt">&lt;repository&gt;</span>
@@ -77,28 +77,6 @@
 <h2 id="toc_5">License</h2>
 
 <p>Project is licensed under Apache 2 license.</p>
-
-<hr>
-
-<p>Hi!</p>
-
-<p>I&#39;d like to introduce my project called Garfa: <a href="https://github.com/splix/garfa">https://github.com/splix/garfa</a></p>
-
-<p>Garfa is a Active Record for Groovy on Appengine, it extends your Groovy classes with methods for querying, storing and updating models for Appengine database.</p>
-
-<p>Basically it allows you to write code like:
-CarModel mustang = new CarModel(vendor: &#39;Ford&#39;, model: &#39;Mustang&#39;, year: 2012)
-mustang.save()
-Car redMustang = new Car(model: mustang.key, price: 22000, color: &#39;red&#39;)
-redMustang.save()</p>
-
-<p>Car blackMustang = Car.findFirstByModelAndColor(mustang.key, &#39;black&#39;)</p>
-
-<p>It&#39;s a tiny wrapper around Objectify 3.1, and should work with any Groovy project for Appengine. The project is in early stage of development, but it&#39;s pretty safe to use Garfa in your project, because all underlying work is done by well-tested Objectify, and if you have something very specific you could always dig down to Objectify.</p>
-
-<p>GitHub: <a href="https://github.com/splix/garfa">https://github.com/splix/garfa</a>
-Documentation: <a href="http://splix.github.io/garfa/">http://splix.github.io/garfa/</a>
-License: Apache 2.0</p>
 
 <h1 id="toc_6">How To Use</h1>
 
@@ -141,13 +119,17 @@ your Configuration class (for annotation based configuration). Like:</p>
 <h1 id="toc_10">Basic Samples</h1>
 
 <h2 id="toc_11">Models</h2>
-<div class="highlight"><pre><span class="kd">class</span> <span class="nc">CarModel</span> <span class="o">{</span>
+<div class="highlight"><pre><span class="nd">@Entity</span>
+<span class="kd">class</span> <span class="nc">CarModel</span> <span class="o">{</span>
 
     <span class="nd">@Id</span>
     <span class="n">Long</span> <span class="n">id</span>
 
+    <span class="nd">@Index</span>
     <span class="n">String</span> <span class="n">vendor</span>
+    <span class="nd">@Index</span>
     <span class="n">String</span> <span class="n">model</span>
+    <span class="nd">@Index</span>
     <span class="kt">int</span> <span class="n">year</span>
 
     <span class="kt">void</span> <span class="nf">beforeInsert</span><span class="o">()</span> <span class="o">{</span>
@@ -158,6 +140,7 @@ your Configuration class (for annotation based configuration). Like:</p>
 
 <span class="o">}</span>
 
+<span class="nd">@Entity</span>
 <span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
 
     <span class="nd">@Id</span>
@@ -165,7 +148,9 @@ your Configuration class (for annotation based configuration). Like:</p>
     <span class="nd">@Parent</span>
     <span class="n">Key</span><span class="o">&lt;</span><span class="n">CarModel</span><span class="o">&gt;</span> <span class="n">model</span>
 
+    <span class="nd">@Index</span>
     <span class="kt">int</span> <span class="n">price</span>
+    <span class="nd">@Index</span>
     <span class="n">String</span> <span class="n">color</span>
 <span class="o">}</span>
 </pre></div>
@@ -231,7 +216,20 @@ your Configuration class (for annotation based configuration). Like:</p>
 <p>Loads list of entities for specified ids:</p>
 <div class="highlight"><pre><span class="n">List</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="n">cars</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">getAll</span><span class="o">([</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">])</span>
 </pre></div>
-<h2 id="toc_20">Find Where</h2>
+<h2 id="toc_20">Get a Query for a Model</h2>
+
+<p>You could get a Objectify Query for a model:</p>
+<div class="highlight"><pre><span class="n">Query</span><span class="o">&lt;</span><span class="n">Model</span><span class="o">&gt;</span> <span class="n">query</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="na">queryWhere</span><span class="o">([&lt;</span><span class="n">fields</span><span class="o">&gt;],</span> <span class="o">[&lt;</span><span class="n">params</span><span class="o">&gt;])</span>
+</pre></div>
+<p>where:</p>
+
+<ul>
+<li>fields - list of field filters, where keys is or simple field names (that mean equality filter), or string
+as fieldname + operator. Like: <code>[model: &#39;Ford&#39;]</code> or <code>[&#39;model =&#39;: &#39;Ford&#39;]</code> or <code>[&#39;count &gt;&#39;: 5]</code>.</li>
+<li>optional query parameters - like <code>[limit: 4]</code> or <code>[order: &#39;-count&#39;]</code></li>
+</ul>
+
+<h2 id="toc_21">Find Where</h2>
 
 <p>There is an another method for querying:</p>
 <div class="highlight"><pre><span class="n">Clazz</span><span class="o">.</span><span class="na">findWhere</span><span class="o">([&lt;</span><span class="n">fields</span><span class="o">&gt;],</span> <span class="o">[&lt;</span><span class="n">params</span><span class="o">&gt;])</span> <span class="o">{</span>
@@ -249,11 +247,18 @@ equal filters</li>
 prepared Query. Like <code>Car.findWhere([], []) { limit(5) }</code> (btw, it&#39;s the same as <code>.findWhere([], [limit: 5])</code>)</li>
 </ul>
 
+<p>Possible query parameters:
+ * limit
+ * offset
+ * ancestor - key or parent entity
+ * order - in format <code>[order: &#39;model&#39;]</code> standard ascending order, or <code>[order: &#39;-year&#39;]</code> for descending order
+ * cursor - web-safe string for cursor, or <code>com.google.appengine.api.datastore.Cursor</code> instance</p>
+
 <p>For example:</p>
 <div class="highlight"><pre><span class="c1">//get maximum 20 cars where count &gt; 10, ordered by count field, descending</span>
 <span class="n">List</span> <span class="n">cars</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findWhere</span><span class="o">([</span><span class="s1">&#39;count &gt;&#39;</span><span class="o">:</span> <span class="mi">10</span><span class="o">],</span> <span class="o">[</span><span class="nl">order:</span> <span class="s1">&#39;-count&#39;</span><span class="o">,</span> <span class="nl">limit:</span> <span class="mi">20</span><span class="o">])</span>
 </pre></div>
-<h2 id="toc_21">Find by Ancestor</h2>
+<h2 id="toc_22">Find by Ancestor</h2>
 <div class="highlight"><pre><span class="c1">//a parent instance</span>
 <span class="n">CarModel</span> <span class="n">fordFocus</span>
 
@@ -263,9 +268,9 @@ prepared Query. Like <code>Car.findWhere([], []) { limit(5) }</code> (btw, it&#3
 <span class="c1">//or by a parent key:</span>
 <span class="n">List</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="n">cars</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findByAncestor</span><span class="o">(</span><span class="n">fordFocus</span><span class="o">.</span><span class="na">key</span><span class="o">)</span>
 </pre></div>
-<h1 id="toc_22">Save and Update</h1>
+<h1 id="toc_23">Save and Update</h1>
 
-<h2 id="toc_23">Create a new data object</h2>
+<h2 id="toc_24">Create a new data object</h2>
 
 <p>Use <code>.save()</code> method</p>
 <div class="highlight"><pre><span class="n">car</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span>
@@ -275,19 +280,19 @@ prepared Query. Like <code>Car.findWhere([], []) { limit(5) }</code> (btw, it&#3
 <span class="o">)</span>
 <span class="n">car</span><span class="o">.</span><span class="na">save</span><span class="o">()</span>
 </pre></div>
-<h2 id="toc_24">Update item in transaction</h2>
+<h2 id="toc_25">Update item in transaction</h2>
 
 <p>GAE uses optimistic-locking transactions, so, to update an item, Garfa tries to load fresh instance
 from DB and execute your code against this instance.</p>
 
 <p>If save of update instance is failed, Garfa retries this steps again, at least 3 times.</p>
 
-<h3 id="toc_25">model.update(Closure)</h3>
+<h3 id="toc_26">model.update(Closure)</h3>
 <div class="highlight"><pre><span class="n">car</span><span class="o">.</span><span class="na">update</span> <span class="o">{</span> <span class="n">Car</span> <span class="n">loaded</span> <span class="o">-&gt;</span>
   <span class="n">loaded</span><span class="o">.</span><span class="na">count</span><span class="o">++</span>
 <span class="o">}</span>
 </pre></div>
-<h3 id="toc_26">Model.update(id, Closure)</h3>
+<h3 id="toc_27">Model.update(id, Closure)</h3>
 <div class="highlight"><pre><span class="n">Car</span><span class="o">.</span><span class="na">update</span> <span class="n">idOrKey</span><span class="o">,</span> <span class="o">{</span> <span class="n">Car</span> <span class="n">loaded</span> <span class="o">-&gt;</span>
   <span class="n">loaded</span><span class="o">.</span><span class="na">count</span><span class="o">++</span>
 <span class="o">}</span>
@@ -300,18 +305,18 @@ from DB and execute your code against this instance.</p>
 <li><code>loaded</code> - instance loaded for update</li>
 </ul>
 
-<h1 id="toc_27">Delete</h1>
+<h1 id="toc_28">Delete</h1>
 
 <p>Just use <code>.delete()</code> method:</p>
 <div class="highlight"><pre><span class="n">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">15</span><span class="o">)</span>
 <span class="n">car</span><span class="o">.</span><span class="na">delete</span><span class="o">()</span>
 </pre></div>
-<h1 id="toc_28">Dynamic Finders</h1>
+<h1 id="toc_29">Dynamic Finders</h1>
 
 <p>Garfa supports dynamic finders like:</p>
 <div class="highlight"><pre><span class="n">Car</span><span class="o">.</span><span class="na">findByModelAndYear</span><span class="o">(</span><span class="s2">&quot;Mustang&quot;</span><span class="o">,</span> <span class="mi">2008</span><span class="o">)</span>
 </pre></div>
-<h2 id="toc_29">Model.findBy*(...), Model.findBy*(..., options)</h2>
+<h2 id="toc_30">Model.findBy*(...), Model.findBy*(..., options)</h2>
 
 <p>Return list of entries, filtered by specified fields</p>
 
@@ -326,20 +331,20 @@ Like <code>[sort: &#39;model</code>], <code>[sort: &#39;-year&#39;]</code></li>
 <li><code>cursor</code> - string value or <code>Cursor</code> instance to use for this query</li>
 </ul>
 
-<h2 id="toc_30">Model.findFirstBy*(...), Model.findFirstBy(..., options)</h2>
+<h2 id="toc_31">Model.findFirstBy*(...), Model.findFirstBy(..., options)</h2>
 
 <p>Same as <code>findBy</code>, but returns first element only. Or <code>null</code> if not found.</p>
 
-<h2 id="toc_31">Examples</h2>
+<h2 id="toc_32">Examples</h2>
 <div class="highlight"><pre><span class="n">Car</span> <span class="n">car1</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findFirstByVendor</span><span class="o">(</span><span class="s1">&#39;Vaz&#39;</span><span class="o">)</span>
 <span class="n">Car</span> <span class="n">cheapFord</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findFirstByVendor</span><span class="o">(</span><span class="s1">&#39;Ford&#39;</span><span class="o">,</span> <span class="o">[</span><span class="nl">sort:</span> <span class="s1">&#39;price&#39;</span><span class="o">])</span>
 
 <span class="n">List</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="n">allFords</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findByVendor</span><span class="o">(</span><span class="s1">&#39;Ford&#39;</span><span class="o">)</span>
 <span class="n">List</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="n">firstPageFords</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findByVendor</span><span class="o">(</span><span class="s1">&#39;Ford&#39;</span><span class="o">,</span> <span class="o">[</span><span class="nl">limit:</span> <span class="mi">10</span><span class="o">])</span>
 </pre></div>
-<h1 id="toc_32">Down to Objectify</h1>
+<h1 id="toc_33">Down to Objectify</h1>
 
-<h2 id="toc_33">Query</h2>
+<h2 id="toc_34">Query</h2>
 
 <p>You have direct access to Objectify&#39;s Query, by using two following methods:</p>
 
@@ -357,7 +362,7 @@ it&#39;s no a passed parameter, your code will operates directly against query i
   <span class="n">limit</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
 <span class="o">}</span>
 </pre></div>
-<h2 id="toc_34">More Objectify</h2>
+<h2 id="toc_35">More Objectify</h2>
 
 <p>Use method <code>.withObjectify {}</code> of a model, this Closure will be called agains Objectify instance, so you can
 do whatever you want:</p>
@@ -368,13 +373,13 @@ do whatever you want:</p>
   <span class="n">Driver</span> <span class="n">d</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="n">Driver</span><span class="o">,</span> <span class="s1">&#39;john&#39;</span><span class="o">)</span>
 <span class="o">}</span>
 </pre></div>
-<h1 id="toc_35">Validation</h1>
+<h1 id="toc_36">Validation</h1>
 
 <p>TO DO</p>
 
-<h1 id="toc_36">Events</h1>
+<h1 id="toc_37">Events</h1>
 
-<h2 id="toc_37">.beforeSave</h2>
+<h2 id="toc_38">.beforeSave</h2>
 
 <p>Called on both insert and update</p>
 <div class="highlight"><pre><span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
@@ -383,7 +388,7 @@ do whatever you want:</p>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-<h2 id="toc_38">.beforeInsert</h2>
+<h2 id="toc_39">.beforeInsert</h2>
 
 <p>Called before first save (when Id is null)</p>
 <div class="highlight"><pre><span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
@@ -392,7 +397,7 @@ do whatever you want:</p>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-<h2 id="toc_39">.beforeUpdate</h2>
+<h2 id="toc_40">.beforeUpdate</h2>
 
 <p>Called before object update</p>
 <div class="highlight"><pre><span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
@@ -401,24 +406,24 @@ do whatever you want:</p>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-<h1 id="toc_40">Links</h1>
+<h1 id="toc_41">Links</h1>
 
-<h2 id="toc_41">Project Links</h2>
+<h2 id="toc_42">Project Links</h2>
 
 <ul>
 <li>Sources - <a href="http://github.com/splix/garfa/">http://github.com/splix/garfa/</a></li>
 <li>Post issue - <a href="https://github.com/splix/garfa/issues">https://github.com/splix/garfa/issues</a></li>
 </ul>
 
-<h2 id="toc_42">Used technologies</h2>
+<h2 id="toc_43">Used technologies</h2>
 
 <ul>
-<li>Objectify 3 - <a href="http://code.google.com/p/objectify-appengine/">http://code.google.com/p/objectify-appengine/</a></li>
+<li>Objectify - <a href="http://code.google.com/p/objectify-appengine/">http://code.google.com/p/objectify-appengine/</a></li>
 <li>Google Appengine - <a href="https://developers.google.com/appengine/">https://developers.google.com/appengine/</a></li>
 <li>Groovy - <a href="http://groovy.codehaus.org/">http://groovy.codehaus.org/</a></li>
 </ul>
 
-<h2 id="toc_43">Author</h2>
+<h2 id="toc_44">Author</h2>
 
 <ul>
 <li>Igor Artamonov - <a href="http://igorartamonov.com">http://igorartamonov.com</a></li>

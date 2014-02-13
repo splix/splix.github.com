@@ -41,13 +41,13 @@
             <ul class="nav nav-list affix"></ul>
         </div>
         <div class="span9 main">
-            <h1 id="toc_44">Introduction</h1>
+            <h1 id="toc_45">Introduction</h1>
 
 <p>Hsoy Templates is a client- and server- side templating system for web and Java.</p>
 
 <p>Based on Google Closure Templates with adding HAML syntax.</p>
 
-<h2 id="toc_45">Features</h2>
+<h2 id="toc_46">Features</h2>
 
 <ul>
 <li>One template for both client and server</li>
@@ -61,13 +61,13 @@
 <li>Rich command system (based on Google Closure Templates)</li>
 </ul>
 
-<h2 id="toc_46">License</h2>
+<h2 id="toc_47">License</h2>
 
 <p>Licensed under Apache 2 license.</p>
 
-<h1 id="toc_47">Template Structure</h1>
+<h1 id="toc_48">Template Structure</h1>
 
-<h2 id="toc_48">Hsoy Template Example</h2>
+<h2 id="toc_49">Hsoy Template Example</h2>
 
 <p>This template:</p>
 <div class="highlight"><pre><span class="nn">!!! namespace tests</span>
@@ -100,9 +100,9 @@
  Privet Ivan!
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
-<h1 id="toc_49">Commands</h1>
+<h1 id="toc_50">Commands</h1>
 
-<h2 id="toc_50">General syntax</h2>
+<h2 id="toc_51">General syntax</h2>
 
 <ul>
 <li>Hsoy Templates uses braces <code>{}</code> for commands.</li>
@@ -114,15 +114,15 @@
 
 <p>If you need help for HAML syntax - see <a href="http://haml.info/">http://haml.info/</a></p>
 
-<h2 id="toc_51">Print value</h2>
+<h2 id="toc_52">Print value</h2>
 
 <p>For variable use just a <code>{$variable}</code> (notice that <code>$</code> is placed inside <code>{}</code>)</p>
 
-<h3 id="toc_52">General syntax:</h3>
+<h3 id="toc_53">General syntax:</h3>
 <div class="highlight"><pre>{&lt;expression&gt;}
 {print &lt;expression&gt;}
 </pre></div>
-<h3 id="toc_53">Print Options</h3>
+<h3 id="toc_54">Print Options</h3>
 
 <p>You can post process print</p>
 
@@ -157,12 +157,12 @@
  </tr>
 </table>
 
-<h3 id="toc_54">Example</h3>
+<h3 id="toc_55">Example</h3>
 <div class="highlight"><pre>{&lt;expression&gt; |noAutoescape}
 {print &lt;expression&gt; |noAutoescape}
 {&lt;expression&gt; |truncate:10,false}
 </pre></div>
-<h2 id="toc_55">If</h2>
+<h2 id="toc_56">If</h2>
 <div class="highlight"><pre>{if &lt;expression&gt;} .... {/if}
 
 {if &lt;expression&gt;}
@@ -188,7 +188,7 @@
 <li><code>{if $variable and $anotherVariable}</code></li>
 </ul>
 
-<h2 id="toc_56">Loops</h2>
+<h2 id="toc_57">Loops</h2>
 <div class="highlight"><pre>{foreach &lt;var&gt; in &lt;array&gt;}
   ...
 {ifempty}
@@ -204,15 +204,15 @@ the block, you can also use three built-in functions that only take foreach vari
 <li><code>index($var)</code> returns the current index in the list. List indices are 0-based.</li>
 </ul>
 
-<h1 id="toc_57">JavaScript Usage</h1>
+<h1 id="toc_58">JavaScript Usage</h1>
 
 <p>TO DO</p>
 
-<h1 id="toc_58">Java Usage</h1>
+<h1 id="toc_59">Java Usage</h1>
 
 <p>TO DO</p>
 
-<h1 id="toc_59">Modules</h1>
+<h1 id="toc_60">Modules</h1>
 
 <ul>
 <li><a href="https://github.com/splix/hsoy-templates">Hsoy Templates Core</a> - low-level library</li>
@@ -220,7 +220,7 @@ the block, you can also use three built-in functions that only take foreach vari
 <li><a href="https://github.com/splix/grails-hsoy-templates">Grails Plugin</a></li>
 </ul>
 
-<h2 id="toc_60">Maven</h2>
+<h2 id="toc_61">Maven</h2>
 <div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>com.the6hours<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>hsoy-templates<span class="nt">&lt;/artifactId&gt;</span>
@@ -239,7 +239,7 @@ the block, you can also use three built-in functions that only take foreach vari
     <span class="nt">&lt;/repository&gt;</span>
 <span class="nt">&lt;/repositories&gt;</span>
 </pre></div>
-<h1 id="toc_61">Links</h1>
+<h1 id="toc_62">Links</h1>
 
 <ul>
 <li><a href="https://developers.google.com/closure/templates/docs/">https://developers.google.com/closure/templates/docs/</a> - docs for Google Closure Templates (internal engine for Hsoy Templates)</li>
