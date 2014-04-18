@@ -47,21 +47,21 @@
 
 <p>Garfa - is Groovy ActiveRecord for Google Appengine</p>
 
-<p>It&#39;s a tiny wrapper around Objectify 4, and should work with any Groovy project for Appengine. It&#39;s pretty
- safe to use Garfa in your project, because all underlying work is done by well-tested Objectify, and
- if you have something very specific you could always dig down to Objectify.</p>
+<p>It&#39;s a tiny wrapper around Objectify 4, and should work with any Groovy project on Appengine. It&#39;s pretty
+ safe to use Garfa in your project, because all underlying work is done by Objectify, and
+ if you have something very specific you could always dig down to raw Objectify.</p>
 
-<p>Garfa extends your database models with methods for querying, storing and updating models for Appengine database.</p>
+<p>Garfa extends your database models with methods for querying, storing and updating models for Google Appengine Datastore.</p>
 
 <h2 id="toc_2">Download</h2>
 
 <h3 id="toc_3">Maven dependency</h3>
-<div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
+<div class="highlight"><pre><code class="xml language-xml" data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>com.the6hours<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>garfa<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>0.7<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</pre></div><div class="highlight"><pre><span class="nt">&lt;repositories&gt;</span>
+</code></pre></div><div class="highlight"><pre><code class="xml language-xml" data-lang="xml"><span class="nt">&lt;repositories&gt;</span>
     <span class="nt">&lt;repository&gt;</span>
         <span class="nt">&lt;id&gt;</span>the6hours-release<span class="nt">&lt;/id&gt;</span>
         <span class="nt">&lt;url&gt;</span>http://maven.the6hours.com/release<span class="nt">&lt;/url&gt;</span>
@@ -69,7 +69,7 @@
         <span class="nt">&lt;snapshots&gt;&lt;enabled&gt;</span>false<span class="nt">&lt;/enabled&gt;&lt;/snapshots&gt;</span>
     <span class="nt">&lt;/repository&gt;</span>
 <span class="nt">&lt;/repositories&gt;</span>
-</pre></div>
+</code></pre></div>
 <h3 id="toc_4">Sources</h3>
 
 <p><a href="https://github.com/splix/garfa/">https://github.com/splix/garfa/</a></p>
@@ -80,8 +80,10 @@
 
 <h1 id="toc_6">How To Use</h1>
 
-<h2 id="toc_7">Initialization code</h2>
-<div class="highlight"><pre><span class="n">ObjectifyFactory</span> <span class="n">objectifyFactory</span> <span class="o">=</span> <span class="c1">//... you have to init Objectify before Garfa</span>
+<h2 id="toc_7">Initialization</h2>
+
+<p>You need to register classes through Garfa on app start.</p>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">ObjectifyFactory</span> <span class="n">objectifyFactory</span> <span class="o">=</span> <span class="c1">//... you need to have Objectify already configured there</span>
 <span class="n">Garfa</span> <span class="n">garfa</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Garfa</span><span class="o">(</span><span class="n">objectifyFactory</span><span class="o">)</span>
 
 <span class="c1">// Car and Dealer is our models</span>
@@ -89,14 +91,12 @@
 
 <span class="c1">// add magic to our models </span>
 <span class="n">garfa</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">models</span><span class="o">)</span>
-</pre></div>
-<h2 id="toc_8">Use with Spring Framework</h2>
-
-<h3 id="toc_9">Init as a bean</h3>
+</code></pre></div>
+<h3 id="toc_8">Init as a Spring Framework bean</h3>
 
 <p>If you have a Spring Framework app, you could easily initialize Objectify and Garfa with
-your Configuration class (for annotation based configuration). Like:</p>
-<div class="highlight"><pre><span class="nd">@Configuration</span>
+your @Configuration class, like:</p>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="nd">@Configuration</span>
 <span class="kd">class</span> <span class="nc">StorageConfig</span> <span class="o">{</span>
 
     <span class="nd">@Bean</span>
@@ -115,11 +115,11 @@ your Configuration class (for annotation based configuration). Like:</p>
     <span class="o">}</span>
 
 <span class="o">}</span>
-</pre></div>
-<h1 id="toc_10">Basic Samples</h1>
+</code></pre></div>
+<h1 id="toc_9">Basic Samples</h1>
 
-<h2 id="toc_11">Models</h2>
-<div class="highlight"><pre><span class="nd">@Entity</span>
+<h2 id="toc_10">Models</h2>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="nd">@Entity</span>
 <span class="kd">class</span> <span class="nc">CarModel</span> <span class="o">{</span>
 
     <span class="nd">@Id</span>
@@ -153,36 +153,47 @@ your Configuration class (for annotation based configuration). Like:</p>
     <span class="nd">@Index</span>
     <span class="n">String</span> <span class="n">color</span>
 <span class="o">}</span>
-</pre></div>
-<h2 id="toc_12">Create entities</h2>
-<div class="highlight"><pre><span class="n">CarModel</span> <span class="n">mustang</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CarModel</span><span class="o">(</span><span class="nl">vendor:</span> <span class="s1">&#39;Ford&#39;</span><span class="o">,</span> <span class="nl">model:</span> <span class="s1">&#39;Mustang&#39;</span><span class="o">,</span> <span class="nl">year:</span> <span class="mi">2012</span><span class="o">)</span>
-<span class="n">mustang</span><span class="o">.</span><span class="na">save</span><span class="o">()</span>
+</code></pre></div>
+<h2 id="toc_11">Create entities</h2>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">CarModel</span> <span class="n">mustang</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CarModel</span><span class="o">(</span><span class="nl">vendor:</span> <span class="s1">&#39;Ford&#39;</span><span class="o">,</span> <span class="nl">model:</span> <span class="s1">&#39;Mustang&#39;</span><span class="o">,</span> <span class="nl">year:</span> <span class="mi">2012</span><span class="o">)</span>
+<span class="n">mustang</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="nl">flush:</span> <span class="kc">true</span><span class="o">)</span> <span class="c1">//sync save</span>
 <span class="n">Car</span> <span class="n">redMustang</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="nl">model:</span> <span class="n">mustang</span><span class="o">.</span><span class="na">key</span><span class="o">,</span> <span class="nl">price:</span> <span class="mi">22000</span><span class="o">,</span> <span class="nl">color:</span> <span class="s1">&#39;red&#39;</span><span class="o">)</span>
-<span class="n">redMustang</span><span class="o">.</span><span class="na">save</span><span class="o">()</span>
-</pre></div>
-<h2 id="toc_13">Update</h2>
+<span class="n">redMustang</span><span class="o">.</span><span class="na">save</span><span class="o">()</span> <span class="c1">//async save</span>
+</code></pre></div>
+<h2 id="toc_12">Update</h2>
 
-<p>Make a discount!!! $22000 -&gt; $21000:</p>
-<div class="highlight"><pre><span class="n">redMustang</span><span class="o">.</span><span class="na">update</span> <span class="o">{</span>
+<p>Current instance of entity have <code>.update</code> method, that accept a Closure that will update db. Notice, that this
+method will load a fresh version from DB, and try to update. Also it will try to perform this operation up to 3 times
+if fail (for the situation when you&#39;re updating same entity from different threads)</p>
+
+<p>Ok, lets make a discount!!! $22000 -&gt; $21000:</p>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">Car</span> <span class="n">withDiscount</span> <span class="o">=</span> <span class="n">redMustang</span><span class="o">.</span><span class="na">update</span> <span class="o">{</span>
   <span class="n">price</span> <span class="o">=</span> <span class="mi">21000</span>
 <span class="o">}</span>
-</pre></div>
-<h2 id="toc_14">Find</h2>
-<div class="highlight"><pre><span class="n">Car</span> <span class="n">blackMustang</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findFirstByModelAndColor</span><span class="o">(</span><span class="n">mustang</span><span class="o">.</span><span class="na">key</span><span class="o">,</span> <span class="s1">&#39;black&#39;</span><span class="o">)</span>
+</code></pre></div>
+<p><code>.update</code> method also return updated instance. Or throw exception if failed to update (only when all
+3 tries are failed).</p>
+
+<h2 id="toc_13">Find</h2>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">Car</span> <span class="n">blackMustang</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findFirstByModelAndColor</span><span class="o">(</span><span class="n">mustang</span><span class="o">.</span><span class="na">key</span><span class="o">,</span> <span class="s1">&#39;black&#39;</span><span class="o">)</span>
 
 <span class="c1">// load model with ID 5161</span>
 <span class="n">CarModel</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">CarModel</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="mi">5161</span><span class="o">)</span>
-</pre></div>
-<h1 id="toc_15">Load</h1>
 
-<h2 id="toc_16">Get item by ID</h2>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="n">allYellow</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findAllByColor</span><span class="o">(</span><span class="s1">&#39;yellow&#39;</span><span class="o">)</span>
+</code></pre></div>
+<p><code>Model</code>, <code>Color</code>, etc is a entity fields to filter.</p>
+
+<h1 id="toc_14">Load</h1>
+
+<h2 id="toc_15">Get item by ID</h2>
 
 <p>There is two method for loading data from database:</p>
 
-<h3 id="toc_17">Model.get(id or key)</h3>
+<h3 id="toc_16">Model.get(id or key)</h3>
 
 <p>Will throw error if there is no entity with specified ID</p>
-<div class="highlight"><pre><span class="n">Long</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">Long</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">try</span> <span class="o">{</span>
   <span class="n">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">id</span><span class="o">)</span>
 <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
@@ -195,11 +206,11 @@ your Configuration class (for annotation based configuration). Like:</p>
 <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
   <span class="o">...</span>
 <span class="o">}</span>
-</pre></div>
-<h3 id="toc_18">Model.load(id or key)</h3>
+</code></pre></div>
+<h3 id="toc_17">Model.load(id or key)</h3>
 
 <p>Will returns <code>null</code> if there are no entity with specified ID.</p>
-<div class="highlight"><pre><span class="n">Long</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">Long</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="n">id</span><span class="o">)</span>
 <span class="k">if</span> <span class="o">(</span><span class="n">car</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
    <span class="o">...</span> <span class="n">not</span> <span class="n">found</span>
@@ -210,17 +221,17 @@ your Configuration class (for annotation based configuration). Like:</p>
 <span class="k">if</span> <span class="o">(</span><span class="n">car2</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
    <span class="o">...</span> <span class="n">not</span> <span class="n">found</span>
 <span class="o">}</span>
-</pre></div>
-<h3 id="toc_19">Model.getAll(list of ids or keys)</h3>
+</code></pre></div>
+<h3 id="toc_18">Model.getAll(list of ids or keys)</h3>
 
 <p>Loads list of entities for specified ids:</p>
-<div class="highlight"><pre><span class="n">List</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="n">cars</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">getAll</span><span class="o">([</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">])</span>
-</pre></div>
-<h2 id="toc_20">Get a Query for a Model</h2>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">List</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="n">cars</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">getAll</span><span class="o">([</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">])</span>
+</code></pre></div>
+<h2 id="toc_19">Get a Query for a Model</h2>
 
 <p>You could get a Objectify Query for a model:</p>
-<div class="highlight"><pre><span class="n">Query</span><span class="o">&lt;</span><span class="n">Model</span><span class="o">&gt;</span> <span class="n">query</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="na">queryWhere</span><span class="o">([&lt;</span><span class="n">fields</span><span class="o">&gt;],</span> <span class="o">[&lt;</span><span class="n">params</span><span class="o">&gt;])</span>
-</pre></div>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">Query</span><span class="o">&lt;</span><span class="n">Model</span><span class="o">&gt;</span> <span class="n">query</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="na">queryWhere</span><span class="o">([&lt;</span><span class="n">fields</span><span class="o">&gt;],</span> <span class="o">[&lt;</span><span class="n">params</span><span class="o">&gt;])</span>
+</code></pre></div>
 <p>where:</p>
 
 <ul>
@@ -229,13 +240,13 @@ as fieldname + operator. Like: <code>[model: &#39;Ford&#39;]</code> or <code>[&#
 <li>optional query parameters - like <code>[limit: 4]</code> or <code>[order: &#39;-count&#39;]</code></li>
 </ul>
 
-<h2 id="toc_21">Find Where</h2>
+<h2 id="toc_20">Find Where</h2>
 
 <p>There is an another method for querying:</p>
-<div class="highlight"><pre><span class="n">Clazz</span><span class="o">.</span><span class="na">findWhere</span><span class="o">([&lt;</span><span class="n">fields</span><span class="o">&gt;],</span> <span class="o">[&lt;</span><span class="n">params</span><span class="o">&gt;])</span> <span class="o">{</span>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">Clazz</span><span class="o">.</span><span class="na">findWhere</span><span class="o">([&lt;</span><span class="n">fields</span><span class="o">&gt;],</span> <span class="o">[&lt;</span><span class="n">params</span><span class="o">&gt;])</span> <span class="o">{</span>
   <span class="c1">// code executed against Query</span>
 <span class="o">}</span>
-</pre></div>
+</code></pre></div>
 <p>where:</p>
 
 <ul>
@@ -255,11 +266,11 @@ prepared Query. Like <code>Car.findWhere([], []) { limit(5) }</code> (btw, it&#3
  * cursor - web-safe string for cursor, or <code>com.google.appengine.api.datastore.Cursor</code> instance</p>
 
 <p>For example:</p>
-<div class="highlight"><pre><span class="c1">//get maximum 20 cars where count &gt; 10, ordered by count field, descending</span>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="c1">//get maximum 20 cars where count &gt; 10, ordered by count field, descending</span>
 <span class="n">List</span> <span class="n">cars</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findWhere</span><span class="o">([</span><span class="s1">&#39;count &gt;&#39;</span><span class="o">:</span> <span class="mi">10</span><span class="o">],</span> <span class="o">[</span><span class="nl">order:</span> <span class="s1">&#39;-count&#39;</span><span class="o">,</span> <span class="nl">limit:</span> <span class="mi">20</span><span class="o">])</span>
-</pre></div>
-<h2 id="toc_22">Find by Ancestor</h2>
-<div class="highlight"><pre><span class="c1">//a parent instance</span>
+</code></pre></div>
+<h2 id="toc_21">Find by Ancestor</h2>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="c1">//a parent instance</span>
 <span class="n">CarModel</span> <span class="n">fordFocus</span>
 
 <span class="c1">//find by parent:</span>
@@ -267,36 +278,36 @@ prepared Query. Like <code>Car.findWhere([], []) { limit(5) }</code> (btw, it&#3
 
 <span class="c1">//or by a parent key:</span>
 <span class="n">List</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="n">cars</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findByAncestor</span><span class="o">(</span><span class="n">fordFocus</span><span class="o">.</span><span class="na">key</span><span class="o">)</span>
-</pre></div>
-<h1 id="toc_23">Save and Update</h1>
+</code></pre></div>
+<h1 id="toc_22">Save and Update</h1>
 
-<h2 id="toc_24">Create a new data object</h2>
+<h2 id="toc_23">Create a new data object</h2>
 
 <p>Use <code>.save()</code> method</p>
-<div class="highlight"><pre><span class="n">car</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">car</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span>
     <span class="nl">brand:</span> <span class="s1">&#39;Ford&#39;</span><span class="o">,</span>
     <span class="nl">model:</span> <span class="s1">&#39;Mustang&#39;</span><span class="o">,</span>
     <span class="nl">count:</span> <span class="mi">0</span>
 <span class="o">)</span>
 <span class="n">car</span><span class="o">.</span><span class="na">save</span><span class="o">()</span>
-</pre></div>
-<h2 id="toc_25">Update item in transaction</h2>
+</code></pre></div>
+<h2 id="toc_24">Update item in transaction</h2>
 
 <p>GAE uses optimistic-locking transactions, so, to update an item, Garfa tries to load fresh instance
 from DB and execute your code against this instance.</p>
 
 <p>If save of update instance is failed, Garfa retries this steps again, at least 3 times.</p>
 
-<h3 id="toc_26">model.update(Closure)</h3>
-<div class="highlight"><pre><span class="n">car</span><span class="o">.</span><span class="na">update</span> <span class="o">{</span> <span class="n">Car</span> <span class="n">loaded</span> <span class="o">-&gt;</span>
+<h3 id="toc_25">model.update(Closure)</h3>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">car</span><span class="o">.</span><span class="na">update</span> <span class="o">{</span> <span class="n">Car</span> <span class="n">loaded</span> <span class="o">-&gt;</span>
   <span class="n">loaded</span><span class="o">.</span><span class="na">count</span><span class="o">++</span>
 <span class="o">}</span>
-</pre></div>
-<h3 id="toc_27">Model.update(id, Closure)</h3>
-<div class="highlight"><pre><span class="n">Car</span><span class="o">.</span><span class="na">update</span> <span class="n">idOrKey</span><span class="o">,</span> <span class="o">{</span> <span class="n">Car</span> <span class="n">loaded</span> <span class="o">-&gt;</span>
+</code></pre></div>
+<h3 id="toc_26">Model.update(id, Closure)</h3>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">Car</span><span class="o">.</span><span class="na">update</span> <span class="n">idOrKey</span><span class="o">,</span> <span class="o">{</span> <span class="n">Car</span> <span class="n">loaded</span> <span class="o">-&gt;</span>
   <span class="n">loaded</span><span class="o">.</span><span class="na">count</span><span class="o">++</span>
 <span class="o">}</span>
-</pre></div>
+</code></pre></div>
 <p>Where:</p>
 
 <ul>
@@ -305,18 +316,18 @@ from DB and execute your code against this instance.</p>
 <li><code>loaded</code> - instance loaded for update</li>
 </ul>
 
-<h1 id="toc_28">Delete</h1>
+<h1 id="toc_27">Delete</h1>
 
 <p>Just use <code>.delete()</code> method:</p>
-<div class="highlight"><pre><span class="n">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">15</span><span class="o">)</span>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">15</span><span class="o">)</span>
 <span class="n">car</span><span class="o">.</span><span class="na">delete</span><span class="o">()</span>
-</pre></div>
-<h1 id="toc_29">Dynamic Finders</h1>
+</code></pre></div>
+<h1 id="toc_28">Dynamic Finders</h1>
 
 <p>Garfa supports dynamic finders like:</p>
-<div class="highlight"><pre><span class="n">Car</span><span class="o">.</span><span class="na">findByModelAndYear</span><span class="o">(</span><span class="s2">&quot;Mustang&quot;</span><span class="o">,</span> <span class="mi">2008</span><span class="o">)</span>
-</pre></div>
-<h2 id="toc_30">Model.findBy*(...), Model.findBy*(..., options)</h2>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">Car</span><span class="o">.</span><span class="na">findByModelAndYear</span><span class="o">(</span><span class="s2">&quot;Mustang&quot;</span><span class="o">,</span> <span class="mi">2008</span><span class="o">)</span>
+</code></pre></div>
+<h2 id="toc_29">Model.findBy*(...), Model.findBy*(..., options)</h2>
 
 <p>Return list of entries, filtered by specified fields</p>
 
@@ -331,20 +342,20 @@ Like <code>[sort: &#39;model</code>], <code>[sort: &#39;-year&#39;]</code></li>
 <li><code>cursor</code> - string value or <code>Cursor</code> instance to use for this query</li>
 </ul>
 
-<h2 id="toc_31">Model.findFirstBy*(...), Model.findFirstBy(..., options)</h2>
+<h2 id="toc_30">Model.findFirstBy*(...), Model.findFirstBy(..., options)</h2>
 
 <p>Same as <code>findBy</code>, but returns first element only. Or <code>null</code> if not found.</p>
 
-<h2 id="toc_32">Examples</h2>
-<div class="highlight"><pre><span class="n">Car</span> <span class="n">car1</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findFirstByVendor</span><span class="o">(</span><span class="s1">&#39;Vaz&#39;</span><span class="o">)</span>
+<h2 id="toc_31">Examples</h2>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">Car</span> <span class="n">car1</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findFirstByVendor</span><span class="o">(</span><span class="s1">&#39;Vaz&#39;</span><span class="o">)</span>
 <span class="n">Car</span> <span class="n">cheapFord</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findFirstByVendor</span><span class="o">(</span><span class="s1">&#39;Ford&#39;</span><span class="o">,</span> <span class="o">[</span><span class="nl">sort:</span> <span class="s1">&#39;price&#39;</span><span class="o">])</span>
 
 <span class="n">List</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="n">allFords</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findByVendor</span><span class="o">(</span><span class="s1">&#39;Ford&#39;</span><span class="o">)</span>
 <span class="n">List</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="n">firstPageFords</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">findByVendor</span><span class="o">(</span><span class="s1">&#39;Ford&#39;</span><span class="o">,</span> <span class="o">[</span><span class="nl">limit:</span> <span class="mi">10</span><span class="o">])</span>
-</pre></div>
-<h1 id="toc_33">Down to Objectify</h1>
+</code></pre></div>
+<h1 id="toc_32">Down to Objectify</h1>
 
-<h2 id="toc_34">Query</h2>
+<h2 id="toc_33">Query</h2>
 
 <p>You have direct access to Objectify&#39;s Query, by using two following methods:</p>
 
@@ -357,65 +368,64 @@ Like <code>[sort: &#39;model</code>], <code>[sort: &#39;-year&#39;]</code></li>
 it&#39;s no a passed parameter, your code will operates directly against query instance, as an DSL.</p>
 
 <p>For example:</p>
-<div class="highlight"><pre><span class="n">Car</span><span class="o">.</span><span class="na">findAll</span> <span class="o">{</span>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">Car</span><span class="o">.</span><span class="na">findAll</span> <span class="o">{</span>
   <span class="n">filter</span><span class="o">(</span><span class="s1">&#39;vendor =&#39;</span><span class="o">,</span> <span class="s1">&#39;Ford&#39;</span><span class="o">)</span>
   <span class="n">limit</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
 <span class="o">}</span>
-</pre></div>
-<h2 id="toc_35">More Objectify</h2>
+</code></pre></div>
+<h2 id="toc_34">More Objectify</h2>
 
 <p>Use method <code>.withObjectify {}</code> of a model, this Closure will be called agains Objectify instance, so you can
 do whatever you want:</p>
-<div class="highlight"><pre><span class="n">CarModel</span><span class="o">.</span><span class="na">withObjectify</span> <span class="o">{</span>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="n">Key</span> <span class="n">key</span> <span class="o">=</span> <span class="o">....</span>
+<span class="kt">boolean</span> <span class="n">loaded</span> <span class="o">=</span> <span class="n">CarModel</span><span class="o">.</span><span class="na">withObjectify</span> <span class="o">{</span>
   <span class="c1">//all methods here are delegated directly to Objectify instance</span>
-
-  <span class="c1">//for example method get(...) going to be like ofy.get(...)</span>
-  <span class="n">Driver</span> <span class="n">d</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="n">Driver</span><span class="o">,</span> <span class="s1">&#39;john&#39;</span><span class="o">)</span>
+   <span class="n">isLoaded</span><span class="o">(</span><span class="n">key</span><span class="o">)</span>
 <span class="o">}</span>
-</pre></div>
-<h1 id="toc_36">Validation</h1>
+</code></pre></div>
+<h1 id="toc_35">Validation</h1>
 
 <p>TO DO</p>
 
-<h1 id="toc_37">Events</h1>
+<h1 id="toc_36">Events</h1>
 
-<h2 id="toc_38">.beforeSave</h2>
+<h2 id="toc_37">.beforeSave</h2>
 
 <p>Called on both insert and update</p>
-<div class="highlight"><pre><span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
   <span class="kt">void</span> <span class="nf">beforeSave</span><span class="o">()</span> <span class="o">{</span>
     <span class="o">...</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</pre></div>
-<h2 id="toc_39">.beforeInsert</h2>
+</code></pre></div>
+<h2 id="toc_38">.beforeInsert</h2>
 
 <p>Called before first save (when Id is null)</p>
-<div class="highlight"><pre><span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
   <span class="kt">void</span> <span class="nf">beforeInsert</span><span class="o">()</span> <span class="o">{</span>
     <span class="o">...</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</pre></div>
-<h2 id="toc_40">.beforeUpdate</h2>
+</code></pre></div>
+<h2 id="toc_39">.beforeUpdate</h2>
 
 <p>Called before object update</p>
-<div class="highlight"><pre><span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+<div class="highlight"><pre><code class="groovy language-groovy" data-lang="groovy"><span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
   <span class="kt">void</span> <span class="nf">beforeUpdate</span><span class="o">()</span> <span class="o">{</span>
     <span class="o">...</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</pre></div>
-<h1 id="toc_41">Links</h1>
+</code></pre></div>
+<h1 id="toc_40">Links</h1>
 
-<h2 id="toc_42">Project Links</h2>
+<h2 id="toc_41">Project Links</h2>
 
 <ul>
 <li>Sources - <a href="http://github.com/splix/garfa/">http://github.com/splix/garfa/</a></li>
 <li>Post issue - <a href="https://github.com/splix/garfa/issues">https://github.com/splix/garfa/issues</a></li>
 </ul>
 
-<h2 id="toc_43">Used technologies</h2>
+<h2 id="toc_42">Used technologies</h2>
 
 <ul>
 <li>Objectify - <a href="http://code.google.com/p/objectify-appengine/">http://code.google.com/p/objectify-appengine/</a></li>
@@ -423,7 +433,7 @@ do whatever you want:</p>
 <li>Groovy - <a href="http://groovy.codehaus.org/">http://groovy.codehaus.org/</a></li>
 </ul>
 
-<h2 id="toc_44">Author</h2>
+<h2 id="toc_43">Author</h2>
 
 <ul>
 <li>Igor Artamonov - <a href="http://igorartamonov.com">http://igorartamonov.com</a></li>
