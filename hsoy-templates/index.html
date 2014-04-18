@@ -41,13 +41,13 @@
             <ul class="nav nav-list affix"></ul>
         </div>
         <div class="span9 main">
-            <h1 id="toc_45">Introduction</h1>
+            <h1 id="toc_0">Introduction</h1>
 
 <p>Hsoy Templates is a client- and server- side templating system for web and Java.</p>
 
 <p>Based on Google Closure Templates with adding HAML syntax.</p>
 
-<h2 id="toc_46">Features</h2>
+<h2 id="toc_1">Features</h2>
 
 <ul>
 <li>One template for both client and server</li>
@@ -61,16 +61,16 @@
 <li>Rich command system (based on Google Closure Templates)</li>
 </ul>
 
-<h2 id="toc_47">License</h2>
+<h2 id="toc_2">License</h2>
 
 <p>Licensed under Apache 2 license.</p>
 
-<h1 id="toc_48">Template Structure</h1>
+<h1 id="toc_3">Template Structure</h1>
 
-<h2 id="toc_49">Hsoy Template Example</h2>
+<h2 id="toc_4">Hsoy Template Example</h2>
 
 <p>This template:</p>
-<div class="highlight"><pre><span class="nn">!!! namespace tests</span>
+<div class="highlight"><pre><code class="haml language-haml" data-lang="haml"><span class="nn">!!! namespace tests</span>
 
 <span class="c">/</span>
   <span class="c">Greets a person using &quot;Hello&quot; by default.</span>
@@ -87,22 +87,22 @@
     <span class="nc">.special</span>
       {$greetingWord} {$name}!
   {/if}
-</pre></div>
+</code></pre></div>
 <p>will generate for <code>{name: &#39;John&#39;}</code>:</p>
-<div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>A Greeting<span class="nt">&lt;/h2&gt;</span>
+<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="nt">&lt;h1&gt;</span>A Greeting<span class="nt">&lt;/h2&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;default&quot;</span><span class="nt">&gt;</span>
  Hello John!
 <span class="nt">&lt;/div&gt;</span>
-</pre></div>
+</code></pre></div>
 <p>and for <code>{name: &#39;Ivan&#39;, greetingWord: &#39;Privet&#39;}</code>:</p>
-<div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>A Greeting<span class="nt">&lt;/h2&gt;</span>
+<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="nt">&lt;h1&gt;</span>A Greeting<span class="nt">&lt;/h2&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;special&quot;</span><span class="nt">&gt;</span>
  Privet Ivan!
 <span class="nt">&lt;/div&gt;</span>
-</pre></div>
-<h1 id="toc_50">Commands</h1>
+</code></pre></div>
+<h1 id="toc_5">Commands</h1>
 
-<h2 id="toc_51">General syntax</h2>
+<h2 id="toc_6">General syntax</h2>
 
 <ul>
 <li>Hsoy Templates uses braces <code>{}</code> for commands.</li>
@@ -114,15 +114,15 @@
 
 <p>If you need help for HAML syntax - see <a href="http://haml.info/">http://haml.info/</a></p>
 
-<h2 id="toc_52">Print value</h2>
+<h2 id="toc_7">Print value</h2>
 
 <p>For variable use just a <code>{$variable}</code> (notice that <code>$</code> is placed inside <code>{}</code>)</p>
 
-<h3 id="toc_53">General syntax:</h3>
-<div class="highlight"><pre>{&lt;expression&gt;}
+<h3 id="toc_8">General syntax:</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{&lt;expression&gt;}
 {print &lt;expression&gt;}
-</pre></div>
-<h3 id="toc_54">Print Options</h3>
+</code></pre></div>
+<h3 id="toc_9">Print Options</h3>
 
 <p>You can post process print</p>
 
@@ -157,13 +157,13 @@
  </tr>
 </table>
 
-<h3 id="toc_55">Example</h3>
-<div class="highlight"><pre>{&lt;expression&gt; |noAutoescape}
+<h3 id="toc_10">Example</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{&lt;expression&gt; |noAutoescape}
 {print &lt;expression&gt; |noAutoescape}
 {&lt;expression&gt; |truncate:10,false}
-</pre></div>
-<h2 id="toc_56">If</h2>
-<div class="highlight"><pre>{if &lt;expression&gt;} .... {/if}
+</code></pre></div>
+<h2 id="toc_11">If</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{if &lt;expression&gt;} .... {/if}
 
 {if &lt;expression&gt;}
   .hello
@@ -177,7 +177,7 @@
 {else}
   %span.error hey?!
 {/if}
-</pre></div>
+</code></pre></div>
 <p>where <code>&lt;expression&gt;</code> could be:</p>
 
 <ul>
@@ -188,13 +188,13 @@
 <li><code>{if $variable and $anotherVariable}</code></li>
 </ul>
 
-<h2 id="toc_57">Loops</h2>
-<div class="highlight"><pre>{foreach &lt;var&gt; in &lt;array&gt;}
+<h2 id="toc_12">Loops</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{foreach &lt;var&gt; in &lt;array&gt;}
   ...
 {ifempty}
   ...
 {/foreach}
-</pre></div>
+</code></pre></div>
 <p>The iterator <code>var</code> is a local variable that is defined only in the block. Within
 the block, you can also use three built-in functions that only take foreach variables as arguments:</p>
 
@@ -204,15 +204,15 @@ the block, you can also use three built-in functions that only take foreach vari
 <li><code>index($var)</code> returns the current index in the list. List indices are 0-based.</li>
 </ul>
 
-<h1 id="toc_58">JavaScript Usage</h1>
+<h1 id="toc_13">JavaScript Usage</h1>
 
 <p>TO DO</p>
 
-<h1 id="toc_59">Java Usage</h1>
+<h1 id="toc_14">Java Usage</h1>
 
 <p>TO DO</p>
 
-<h1 id="toc_60">Modules</h1>
+<h1 id="toc_15">Modules</h1>
 
 <ul>
 <li><a href="https://github.com/splix/hsoy-templates">Hsoy Templates Core</a> - low-level library</li>
@@ -220,17 +220,17 @@ the block, you can also use three built-in functions that only take foreach vari
 <li><a href="https://github.com/splix/grails-hsoy-templates">Grails Plugin</a></li>
 </ul>
 
-<h2 id="toc_61">Maven</h2>
-<div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
+<h2 id="toc_16">Maven</h2>
+<div class="highlight"><pre><code class="xml language-xml" data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>com.the6hours<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>hsoy-templates<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>0.4<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</pre></div>
+</code></pre></div>
 <ul>
 <li>you need extra repository:</li>
 </ul>
-<div class="highlight"><pre><span class="nt">&lt;repositories&gt;</span>
+<div class="highlight"><pre><code class="xml language-xml" data-lang="xml"><span class="nt">&lt;repositories&gt;</span>
     <span class="nt">&lt;repository&gt;</span>
         <span class="nt">&lt;id&gt;</span>the6hours-release<span class="nt">&lt;/id&gt;</span>
         <span class="nt">&lt;url&gt;</span>http://maven.the6hours.com/release<span class="nt">&lt;/url&gt;</span>
@@ -238,8 +238,8 @@ the block, you can also use three built-in functions that only take foreach vari
         <span class="nt">&lt;snapshots&gt;&lt;enabled&gt;</span>false<span class="nt">&lt;/enabled&gt;&lt;/snapshots&gt;</span>
     <span class="nt">&lt;/repository&gt;</span>
 <span class="nt">&lt;/repositories&gt;</span>
-</pre></div>
-<h1 id="toc_62">Links</h1>
+</code></pre></div>
+<h1 id="toc_17">Links</h1>
 
 <ul>
 <li><a href="https://developers.google.com/closure/templates/docs/">https://developers.google.com/closure/templates/docs/</a> - docs for Google Closure Templates (internal engine for Hsoy Templates)</li>
