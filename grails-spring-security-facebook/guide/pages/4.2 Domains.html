@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4.2 Domains 0.15.2</title>
+    <title>4.2 Domains 0.15.4-CORE2</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -80,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov (igor@artamonov.ru)</p>
 
-                    <p><strong>Version:</strong> 0.15.2</p>
+                    <p><strong>Version:</strong> 0.15.4-CORE2</p>
 
                     
                 </div>
@@ -90,13 +90,13 @@ function addJsClass() {
                 
 
 <h2 id="4.2 Domains">4.2 Domains</h2>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th><th><strong class="bold">Values</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.domain.classname</td><td>'FacebookUser'</td><td>&#160;</td></tr><tr class="table-even"><td>grails.plugins.springsecurity.facebook.domain.appUserConnectionPropertyName</td><td>'user'</td><td>&#160;</td></tr></table>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th><th><strong class="bold">Values</strong></th></tr><tr class="table-odd"><td>grails.plugin.springsecurity.facebook.domain.classname</td><td>'FacebookUser'</td><td>&#160;</td></tr><tr class="table-even"><td>grails.plugin.springsecurity.facebook.domain.appUserConnectionPropertyName</td><td>'user'</td><td>&#160;</td></tr></table>
 <ul class="star">
 <li><code>domain.classname</code> - name of your domain class, used to store Facebook User details (uid, access_token, etc). Could be same as configured for Spring Security Core, or a own domain, just for Facebook User details.</li>
 </ul><p class="paragraph"/>If you're using own domain for Facebook user (a joined to main User) you should
 specify <code>domain.appUserConnectionPropertyName</code>: it's how your domain class is related
 to main (used by Spring Security Core) user domain. It's the name
-of the property, usually defined as <code>static belongsTo = user: User</code> in your Facebook User domain class.<p class="paragraph"/><h4>User creation/initialization</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugins.springsecurity.facebook.autoCreate.roles</td><td>'ROLE_USER', 'ROLE_FACEBOOK'</td></tr></table><p class="paragraph"/>List of roles for user created by the plugin.
+of the property, usually defined as <code>static belongsTo = user: User</code> in your Facebook User domain class.<p class="paragraph"/><h4>User creation/initialization</h4><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name</strong></th><th><strong class="bold">Default Value</strong></th></tr><tr class="table-odd"><td>grails.plugin.springsecurity.facebook.autoCreate.roles</td><td>'ROLE_USER', 'ROLE_FACEBOOK'</td></tr></table><p class="paragraph"/>List of roles for user created by the plugin.
 
 
 

@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>3.3 Server Side Authentication 0.15.2</title>
+    <title>3.3 Server Side Authentication 0.15.4-CORE2</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -80,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov (igor@artamonov.ru)</p>
 
-                    <p><strong>Version:</strong> 0.15.2</p>
+                    <p><strong>Version:</strong> 0.15.4-CORE2</p>
 
                     
                 </div>
@@ -90,7 +90,7 @@ function addJsClass() {
                 
 
 <h2 id="3.3 Server Side Authentication">3.3 Server Side Authentication</h2>
-It's the `FacebookAuthRedirectFilter`, enabled by default.<p class="paragraph"/>It's preferred and a standard <a href="../ref/Httpsdevelopersfacebookcomdocshowtosloginserversidelogin/Login for Server-side Apps.html" class="https://developers.facebook.com/docs/howtos/login/server-side-login/">Login for Server-side Apps</a>.
+It's the `FacebookAuthRedirectFilter`, enabled by default.<p class="paragraph"/>It's preferred and a standard <a href="https://developers.facebook.com/docs/howtos/login/server-side-login/" target="blank">Login for Server-side Apps</a>.
 After clicking on 'connect button' user gets redirected to special Facebook page, for authentication, and then
 redirected back to your app.<p class="paragraph"/><blockquote class="note">
 User going to see Facebook Authentication screen only at the first time. Next time user will be redirected
@@ -102,7 +102,7 @@ show a page (a GSP view), you can use standard <code>SimpleUrlAuthenticationFail
 failed authentication to specified URL.<p class="paragraph"/>For example you can create bean at <code>resources.groovy</code>:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler<p class="paragraph"/>// Place your Spring DSL code here
 beans = &#123;<p class="paragraph"/>    redirectFailureHandlerExample(SimpleUrlAuthenticationFailureHandler) &#123;
         defaultFailureUrl = '/failed' //redirect to <span class="java&#45;keyword">this</span> URL when authentication fails
-    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>and setup this bean for 'redirect' filter at <code>Config.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.plugins.springsecurity.facebook.filter.redirect.failureHandler='redirectFailureHandlerExample'</pre></div><p class="paragraph"/>Same way for configuring Success Handler.
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>and setup this bean for 'redirect' filter at <code>Config.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.plugin.springsecurity.facebook.filter.redirect.failureHandler='redirectFailureHandlerExample'</pre></div><p class="paragraph"/>Same way for configuring Success Handler.
 
 
 

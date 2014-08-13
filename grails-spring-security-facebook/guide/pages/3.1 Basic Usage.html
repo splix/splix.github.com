@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>3.1 Basic Usage 0.15.2</title>
+    <title>3.1 Basic Usage 0.15.4-CORE2</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -80,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov (igor@artamonov.ru)</p>
 
-                    <p><strong>Version:</strong> 0.15.2</p>
+                    <p><strong>Version:</strong> 0.15.4-CORE2</p>
 
                     
                 </div>
@@ -90,7 +90,7 @@ function addJsClass() {
                 
 
 <h2 id="3.1 Basic Usage">3.1 Basic Usage</h2>
-<h2>Example app</h2><p class="paragraph"/>You can take a look at <a href="../ref/Httpsgithubcomsplixgrailsfacebookauthenticationexample/Example Application.html" class="https://github.com/splix/grails-facebook-authentication-example">Example Application</a>, it's very
+<h2>Example app</h2><p class="paragraph"/>You can take a look at <a href="https://github.com/splix/grails-facebook-authentication-example" target="blank">Example Application</a>, it's very
 basic app, that have only one page, with 'Facebook Connect' button. Just clone it, put your FB App credentials, and play with it.<p class="paragraph"/><h2>How to add Facebook Authentication into your existing application</h2><p class="paragraph"/><h3>Initial plugin config</h3><p class="paragraph"/><h4>Domain Class</h4><p class="paragraph"/>Create domain class for your facebook user:
 <div class="code"><pre>class FacebookUser &#123;
   <span class="java&#45;object">long</span> uid
@@ -98,9 +98,9 @@ basic app, that have only one page, with 'Facebook Connect' button. Just clone i
   Date accessTokenExpires<p class="paragraph"/>  <span class="java&#45;keyword">static</span> belongsTo = &#91;user: User&#93; //connected to main Spring Security domain<p class="paragraph"/>  <span class="java&#45;keyword">static</span> constraints = &#123;
     uid unique: <span class="java&#45;keyword">true</span>
   &#125;
-&#125;</pre></div><p class="paragraph"/>At <code>Config.groovy</code> setup full name (including package name, if used) of just created Facebook user domain, like:<p class="paragraph"/><div class="code"><pre>grails.plugins.springsecurity.facebook.domain.classname='FacebookUser'</pre></div><p class="paragraph"/><h3>Add FB App credentials</h3><p class="paragraph"/>You should create a Facebook App and copy App ID and Secret:<p class="paragraph"/><img border="0" class="center" src="../img/create_app.png"></img><p class="paragraph"/>into <code>Config.groovy</code>:
-<div class="code"><pre>grails.plugins.springsecurity.facebook.appId=12345678900000
-grails.plugins.springsecurity.facebook.secret=76c2279743c99da3715e3d00f29a1234</pre></div><p class="paragraph"/>PS it's just example, you should use your own `appId` and `secret`.<p class="paragraph"/><h3>Add Facebook Connect button</h3><p class="paragraph"/>There is special taglib (<code>&#60;facebookAuth:</code>) that can be used at your view (any GSP page) to add Facebook Connect button.<p class="paragraph"/>Following code displays connect button for not authorized user, or show a welcome message to logged in user:
+&#125;</pre></div><p class="paragraph"/>At <code>Config.groovy</code> setup full name (including package name, if used) of just created Facebook user domain, like:<p class="paragraph"/><div class="code"><pre>grails.plugin.springsecurity.facebook.domain.classname='FacebookUser'</pre></div><p class="paragraph"/><h3>Add FB App credentials</h3><p class="paragraph"/>You should create a Facebook App and copy App ID and Secret:<p class="paragraph"/><img border="0" class="center" src="../img/create_app.png"></img><p class="paragraph"/>into <code>Config.groovy</code>:
+<div class="code"><pre>grails.plugin.springsecurity.facebook.appId=12345678900000
+grails.plugin.springsecurity.facebook.secret=76c2279743c99da3715e3d00f29a1234</pre></div><p class="paragraph"/>PS it's just example, you should use your own `appId` and `secret`.<p class="paragraph"/><h3>Add Facebook Connect button</h3><p class="paragraph"/>There is special taglib (<code>&#60;facebookAuth:</code>) that can be used at your view (any GSP page) to add Facebook Connect button.<p class="paragraph"/>Following code displays connect button for not authorized user, or show a welcome message to logged in user:
 <div class="code"><pre>&#60;sec:ifNotGranted roles=<span class="java&#45;quote">"ROLE_USER"</span>&#62;
   &#60;facebookAuth:connect /&#62;
 &#60;/sec:ifNotGranted&#62;

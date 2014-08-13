@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>6 Common Issues 0.15.2</title>
+    <title>6 Common Issues 0.15.4-CORE2</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -78,7 +78,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov (igor@artamonov.ru)</p>
 
-                    <p><strong>Version:</strong> 0.15.2</p>
+                    <p><strong>Version:</strong> 0.15.4-CORE2</p>
 
                     
                 </div>
@@ -101,7 +101,9 @@ environment config:
     development &#123;
       grails.serverURL = <span class="java&#45;quote">"http://myapp.dev:8080/$&#123;appName&#125;"</span>
     &#125;
-&#125;</pre></div>
+&#125;</pre></div><p class="paragraph"/><h2>Logout doesn't work for Transparent filter</h2><p class="paragraph"/>"transparent" filter always authorize request that contains FB cookie. If you need to log out current user when using
+this type of filter, you need to log out user on client side, call <code>FB.logout()</code> (will logout user from Facebook
+as well) and reload the page.
 
 
                 <div style="clear:both;margin-top:15px;"></div>

@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>3.4 Client Side Authentication 0.15.2</title>
+    <title>3.4 Client Side Authentication 0.15.4-CORE2</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -80,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov (igor@artamonov.ru)</p>
 
-                    <p><strong>Version:</strong> 0.15.2</p>
+                    <p><strong>Version:</strong> 0.15.4-CORE2</p>
 
                     
                 </div>
@@ -90,18 +90,18 @@ function addJsClass() {
                 
 
 <h2 id="3.4 Client Side Authentication">3.4 Client Side Authentication</h2>
-Based on <a href="../ref/Httpsdevelopersfacebookcomdocsreferencejavascript/Facebook Javascript SDK.html" class="https://developers.facebook.com/docs/reference/javascript/">Facebook Javascript SDK</a> authorization. Useful
+Based on <a href="https://developers.facebook.com/docs/javascript" target="blank">Facebook Javascript SDK</a> authorization. Useful
 when you need to use FB Javascript SDK on client side.<p class="paragraph"/>And there are two ways:
 <ul class="star">
 <li>try authenticate user on each request, to any page - it's <code>transparent</code> filter</li>
 <li>authenticate only when user redirected to specified page, like a standard username/password authentication - it's <code>cookieDirect</code> filter</li>
-</ul><p class="paragraph"/>If you're using first way (<code>transparent</code> filter), your user will be automatically authenticated whenever he has
+</ul><p class="paragraph"/><h4>Transparent filter</h4><p class="paragraph"/>If you're using first way (<code>transparent</code> filter), your user will be automatically authenticated whenever he has
 Facebook cookie. Btw, don't forget that you should <strong class="bold">reload</strong> current page after you have successfully authenticated user
 on client side. Like:<p class="paragraph"/><div class="code"><pre>&#60;facebookAuth:init&#62;
    FB.Event.subscribe('auth.login', function() &#123;
       window.location.reload();
    &#125;);
-&#60;/facebookAuth:init&#62;</pre></div><p class="paragraph"/>If you're using second way (<code>cookieDirect</code> filter), you could configure URL that will be used for authentication at <code>Config.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.plugins.springsecurity.facebook.filter.processUrl = '/j_spring_security_facebook_check' //it's <span class="java&#45;keyword">default</span> value</pre></div><p class="paragraph"/>And after authorization redirect user to /j_spring_security_facebook_check, like:<p class="paragraph"/><div class="code"><pre>&#60;facebookAuth:init&#62;
+&#60;/facebookAuth:init&#62;</pre></div><p class="paragraph"/>To logout user, simply call <code>FB.logout()</code> (using Javascript) on client side.<p class="paragraph"/><h4>CookieDirect filter</h4><p class="paragraph"/>If you're using second way (<code>cookieDirect</code> filter), you could configure URL that will be used for authentication at <code>Config.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.plugin.springsecurity.facebook.filter.processUrl = '/j_spring_security_facebook_check' //it's <span class="java&#45;keyword">default</span> value</pre></div><p class="paragraph"/>And after authorization redirect user to /j_spring_security_facebook_check, like:<p class="paragraph"/><div class="code"><pre>&#60;facebookAuth:init&#62;
    FB.Event.subscribe('auth.login', function() &#123;
       window.location.href = '/j_spring_security_facebook_check'
    &#125;);
