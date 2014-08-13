@@ -13,11 +13,11 @@ About Garfa
 
 Garfa - is Groovy ActiveRecord for Google Appengine
 
-It's a tiny wrapper around Objectify 3, and should work with any Groovy project for Appengine. It's pretty
- safe to use Garfa in your project, because all underlying work is done by well-tested Objectify, and
- if you have something very specific you could always dig down to Objectify.
+It's a tiny wrapper around Objectify 4, and should work with any Groovy project on Appengine. It's pretty
+ safe to use Garfa in your project, because all underlying work is done by Objectify, and
+ if you have something very specific you could always dig down to raw Objectify.
 
-Garfa extends your database models with methods for querying, storing and updating models for Appengine database.
+Garfa extends your database models with methods for querying, storing and updating models for Google Appengine Datastore.
 
 Download
 --------
@@ -28,7 +28,7 @@ Download
 <dependency>
     <groupId>com.the6hours</groupId>
     <artifactId>garfa</artifactId>
-    <version>0.5</version>
+    <version>0.7</version>
 </dependency>
 ```
 
@@ -52,40 +52,16 @@ License
 
 Project is licensed under Apache 2 license.
 
-
-
-----
-
-
-Hi!
-
-I'd like to introduce my project called Garfa: https://github.com/splix/garfa
-
-Garfa is a Active Record for Groovy on Appengine, it extends your Groovy classes with methods for querying, storing and updating models for Appengine database.
-
-Basically it allows you to write code like:
-CarModel mustang = new CarModel(vendor: 'Ford', model: 'Mustang', year: 2012)
-mustang.save()
-Car redMustang = new Car(model: mustang.key, price: 22000, color: 'red')
-redMustang.save()
-
-Car blackMustang = Car.findFirstByModelAndColor(mustang.key, 'black')
-
-
-It's a tiny wrapper around Objectify 3.1, and should work with any Groovy project for Appengine. The project is in early stage of development, but it's pretty safe to use Garfa in your project, because all underlying work is done by well-tested Objectify, and if you have something very specific you could always dig down to Objectify.
-
-GitHub: https://github.com/splix/garfa
-Documentation: http://splix.github.io/garfa/
-License: Apache 2.0
-
 How To Use
 ==============
 
-Initialization code
--------------------
+Initialization
+--------------
+
+You need to register classes through Garfa on app start.
 
 ```groovy
-ObjectifyFactory objectifyFactory = //... you have to init Objectify before Garfa
+ObjectifyFactory objectifyFactory = //... you need to have Objectify already configured there
 Garfa garfa = new Garfa(objectifyFactory)
 
 // Car and Dealer is our models
@@ -95,13 +71,10 @@ List<Class> models = [Car, Dealer]
 garfa.register(models)
 ```
 
-Use with Spring Framework
--------------------------
-
-### Init as a bean
+### Init as a Spring Framework bean
 
 If you have a Spring Framework app, you could easily initialize Objectify and Garfa with
-your Configuration class (for annotation based configuration). Like:
+your @Configuration class, like:
 
 ```groovy
 @Configuration
@@ -132,13 +105,17 @@ Models
 -------
 ```groovy
 
+@Entity
 class CarModel {
 
     @Id
     Long id
 
+    @Index
     String vendor
+    @Index
     String model
+    @Index
     int year
 
     void beforeInsert() {
@@ -149,6 +126,7 @@ class CarModel {
 
 }
 
+@Entity
 class Car {
 
     @Id
@@ -156,7 +134,9 @@ class Car {
     @Parent
     Key<CarModel> model
 
+    @Index
     int price
+    @Index
     String color
 }
 ```
@@ -166,21 +146,28 @@ Create entities
 
 ```groovy
 CarModel mustang = new CarModel(vendor: 'Ford', model: 'Mustang', year: 2012)
-mustang.save()
+mustang.save(flush: true) //sync save
 Car redMustang = new Car(model: mustang.key, price: 22000, color: 'red')
-redMustang.save()
+redMustang.save() //async save
 ```
 
 Update
 ------
 
-Make a discount!!! $22000 -> $21000:
+Current instance of entity have `.update` method, that accept a Closure that will update db. Notice, that this
+method will load a fresh version from DB, and try to update. Also it will try to perform this operation up to 3 times
+if fail (for the situation when you're updating same entity from different threads)
+
+Ok, lets make a discount!!! $22000 -> $21000:
 
 ```groovy
-redMustang.update {
+Car withDiscount = redMustang.update {
   price = 21000
 }
 ```
+
+`.update` method also return updated instance. Or throw exception if failed to update (only when all
+3 tries are failed).
 
 Find
 ----
@@ -190,7 +177,12 @@ Car blackMustang = Car.findFirstByModelAndColor(mustang.key, 'black')
 
 // load model with ID 5161
 CarModel foo = CarModel.load(5161)
+
+List<Car> allYellow = Car.findAllByColor('yellow')
 ```
+
+`Model`, `Color`, etc is a entity fields to filter.
+
 
 Load
 ==============
@@ -246,6 +238,22 @@ Loads list of entities for specified ids:
 List<Car> cars = Car.getAll([1, 2, 3])
 ```
 
+Get a Query for a Model
+-----------------------
+
+You could get a Objectify Query for a model:
+
+```groovy
+Query<Model> query = Model.queryWhere([<fields>], [<params>])
+```
+
+where:
+
+ * fields - list of field filters, where keys is or simple field names (that mean equality filter), or string
+    as fieldname + operator. Like: `[model: 'Ford']` or `['model =': 'Ford']` or `['count >': 5]`.
+ * optional query parameters - like `[limit: 4]` or `[order: '-count']`
+
+
 Find Where
 ----------
 
@@ -265,6 +273,13 @@ where:
  * optional query parameters - like `[limit: 4]` or `[order: '-count']`
  * closure - more flexibility when you need something specific. It's your code block that will be executed against
     prepared Query. Like `Car.findWhere([], []) { limit(5) }` (btw, it's the same as `.findWhere([], [limit: 5])`)
+
+Possible query parameters:
+ * limit
+ * offset
+ * ancestor - key or parent entity
+ * order - in format `[order: 'model']` standard ascending order, or `[order: '-year']` for descending order
+ * cursor - web-safe string for cursor, or `com.google.appengine.api.datastore.Cursor` instance
 
 For example:
 
@@ -417,11 +432,10 @@ Use method `.withObjectify {}` of a model, this Closure will be called agains Ob
 do whatever you want:
 
 ```groovy
-CarModel.withObjectify {
+Key key = ....
+boolean loaded = CarModel.withObjectify {
   //all methods here are delegated directly to Objectify instance
-
-  //for example method get(...) going to be like ofy.get(...)
-  Driver d = get(Driver, 'john')
+   isLoaded(key)
 }
 ```
 
@@ -487,7 +501,7 @@ Project Links
 Used technologies
 -----------------
 
-  * Objectify 3 - http://code.google.com/p/objectify-appengine/
+  * Objectify - http://code.google.com/p/objectify-appengine/
   * Google Appengine - https://developers.google.com/appengine/
   * Groovy - http://groovy.codehaus.org/
 
