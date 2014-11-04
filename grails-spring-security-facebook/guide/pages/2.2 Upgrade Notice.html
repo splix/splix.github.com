@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>2.2 Upgrade Notice 0.15.4-CORE2</title>
+    <title>2.2 Upgrade Notice 0.16</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -80,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov (igor@artamonov.ru)</p>
 
-                    <p><strong>Version:</strong> 0.15.4-CORE2</p>
+                    <p><strong>Version:</strong> 0.16</p>
 
                     
                 </div>
@@ -92,7 +92,7 @@ function addJsClass() {
 <h2 id="2.2 Upgrade Notice">2.2 Upgrade Notice</h2>
 <h3>Upgrading from version 0.9</h3><p class="paragraph"/>Since version 0.10 plugin have started to use Server Side authentication by default, instead of
 Client Side authentication (based on Facebook JS SDK) that was default implementation for version 0.9 and earlier.<p class="paragraph"/>If you want to continue using Client Side authentication, you should add following configuration into <code>Config.groovy</code>:
-<div class="code"><pre>grails.plugin.springsecurity.facebook.filter.type='transparent,cookieDirect'</pre></div><p class="paragraph"/>See <a href="../guide/single.html#3.2%20Filters" class="guide">Filters guide</a> for details.
+<div class="code"><pre>grails.plugin.springsecurity.facebook.filter.type='transparent,cookieDirect'</pre></div><p class="paragraph"/><h3>Upgrading from version 0.15.x</h3><p class="paragraph"/>Version 0.16 requires a Spring Security Core 2.0, you need to upgrade to it first.<p class="paragraph"/>See <a href="../guide/single.html#3.2%20Filters" class="guide">Filters guide</a> for details.
 
 
 

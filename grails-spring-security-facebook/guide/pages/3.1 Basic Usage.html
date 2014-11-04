@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>3.1 Basic Usage 0.15.4-CORE2</title>
+    <title>3.1 Basic Usage 0.16</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -80,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov (igor@artamonov.ru)</p>
 
-                    <p><strong>Version:</strong> 0.15.4-CORE2</p>
+                    <p><strong>Version:</strong> 0.16</p>
 
                     
                 </div>
@@ -93,7 +93,7 @@ function addJsClass() {
 <h2>Example app</h2><p class="paragraph"/>You can take a look at <a href="https://github.com/splix/grails-facebook-authentication-example" target="blank">Example Application</a>, it's very
 basic app, that have only one page, with 'Facebook Connect' button. Just clone it, put your FB App credentials, and play with it.<p class="paragraph"/><h2>How to add Facebook Authentication into your existing application</h2><p class="paragraph"/><h3>Initial plugin config</h3><p class="paragraph"/><h4>Domain Class</h4><p class="paragraph"/>Create domain class for your facebook user:
 <div class="code"><pre>class FacebookUser &#123;
-  <span class="java&#45;object">long</span> uid
+  <span class="java&#45;object">Long</span> uid
   <span class="java&#45;object">String</span> accessToken
   Date accessTokenExpires<p class="paragraph"/>  <span class="java&#45;keyword">static</span> belongsTo = &#91;user: User&#93; //connected to main Spring Security domain<p class="paragraph"/>  <span class="java&#45;keyword">static</span> constraints = &#123;
     uid unique: <span class="java&#45;keyword">true</span>

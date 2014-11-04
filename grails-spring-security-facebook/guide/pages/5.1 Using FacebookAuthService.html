@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>5.1 Using FacebookAuthService 0.15.4-CORE2</title>
+    <title>5.1 Using FacebookAuthService 0.16</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -80,7 +80,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Igor Artamonov (igor@artamonov.ru)</p>
 
-                    <p><strong>Version:</strong> 0.15.4-CORE2</p>
+                    <p><strong>Version:</strong> 0.16</p>
 
                     
                 </div>
@@ -108,7 +108,7 @@ with some extra values.<p class="paragraph"/>Not called if you have implemented 
 <ul class="star">
 <li>user - your domain for Facebook User</li>
 <li>token - com.the6hours.grails.springsecurity.facebook.FacebookAuthToken</li>
-</ul><p class="paragraph"/><h3>&#60;FacebookUser&#62; findUser(Long uid)</h3><p class="paragraph"/>Called when facebook user is authenticated (on every request), must return existing instance
+</ul><p class="paragraph"/><h3>&#60;FacebookUser&#62; findUser(long uid)</h3><p class="paragraph"/>Called when facebook user is authenticated (on every request), must return existing instance
 for specified facebook uid, if exits. If doesn't - return null<p class="paragraph"/>Where:
 <ul class="star">
 <li>uid - facebook user id</li>
@@ -134,10 +134,10 @@ we store Facebook User details in different domain).<p class="paragraph"/>Not ca
 </ul><p class="paragraph"/><h3>def getPrincipal(&#60;FacebookUser&#62; user)</h3><p class="paragraph"/>Must return object to store in security context for specified facebook user (can return itself)<p class="paragraph"/>Where:
 <ul class="star">
 <li>user - your domain for Facebook User</li>
-</ul><p class="paragraph"/><h3>&#60;FacebookUser&#62; get&#60;FacebookUser&#62;(&#60;Person&#62; person)</h3><p class="paragraph"/>Must return instance of your domain object for facebook user for specified person (if it's not a same object)<p class="paragraph"/>Where:
+</ul><p class="paragraph"/><h3>&#60;FacebookUser&#62; getFacebookUser(&#60;Person&#62; person)</h3><p class="paragraph"/>Must return instance of your domain object for facebook user for specified person (if it's not a same object)<p class="paragraph"/>Where:
 <ul class="star">
 <li>person - your domain for &#60;Person&#62;</li>
-</ul><p class="paragraph"/><h3>Collection&#60;GrantedAuthority&#62; getRoles(&#60;FacebookUser&#62; user)</h3><p class="paragraph"/>Must return roles list for specified facebook user<p class="paragraph"/>Where:
+</ul><p class="paragraph"/><h3>Collection&#60;GrantedAuthority&#62; getRoles(&#60;Person&#62; user)</h3><p class="paragraph"/>Must return roles list for specified user<p class="paragraph"/>Where:
 <ul class="star">
 <li>user - your domain for Facebook User</li>
 </ul><p class="paragraph"/><h3>void prepopulateAppUser(&#60;Person&#62; person, FacebookAuthToken token)</h3><p class="paragraph"/>Must return roles list for specified facebook user<p class="paragraph"/>Where:
