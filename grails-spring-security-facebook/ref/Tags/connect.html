@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>Facebook Authentication for Grails 0.16</title>
+    <title>Facebook Authentication for Grails 0.17</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -75,6 +75,7 @@ function addJsClass(el) {
 <ul class="star">
 <li><code>img</code> - url to image for connect button (for server-side authentication only)</li>
 <li><code>img-*</code> - a attribute for &#60;img&#62; tag, like <code>img-id</code> or <code>img-style</code></li>
+<li><code>startUrl</code> - a local url that will prepare valid redirect to Facebook API, instead of default one provided by the plugin. At most cases you don't need to specify this, do it only if you know what you're doing and default implementation is not enough for your case.</li>
 </ul><p class="paragraph"/>Optional attributes for <code>client</code> button (client-side authentication):
 <ul class="star">
 <li><code>permission</code> - list of <a href="https://developers.facebook.com/docs/reference/login/" target="blank">Facebook Permission</a> as a String or List</li>
